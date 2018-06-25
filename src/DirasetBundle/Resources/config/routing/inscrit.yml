@@ -1,0 +1,51 @@
+inscrit_index:
+    path:     /
+    defaults: { _controller: "DirasetBundle:Default:index" }
+    methods:  GET
+
+inscrit_show:
+    path:     /show
+    defaults: { _controller: "DirasetBundle:Inscrit:show" }
+    methods:  [GET, POST]
+
+inscrit_show_public:
+    path:     /show_public
+    defaults: { _controller: "DirasetBundle:Inscrit:showPublic" }
+    methods:  [GET, POST]
+
+inscrit_new:
+    path:     /new
+    defaults: { _controller: "DirasetBundle:Inscrit:new" }
+    methods:  [GET, POST]
+    
+inscrit_Dawra:
+    path:     /DawraList
+    defaults: { _controller: "DirasetBundle:Inscrit:dawra" }
+    methods:  [GET, POST]
+    
+adminInscrit_presence:
+    path:     /presence
+    defaults: { _controller: "DirasetBundle:adminInscrit:presence" }
+    methods:  [GET, POST]
+    
+adminInscrit_reselt:
+    path:     /reselt
+    defaults: { _controller: "DirasetBundle:adminInscrit:tahil" }
+    methods:  [GET, POST]
+    
+inscrit_Kesm:
+    path:     /kesmList
+    defaults: { _controller: "DirasetBundle:Inscrit:kesm" }
+    methods:  [GET, POST]
+
+
+inscrit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DirasetBundle:Inscrit:edit" }
+    methods:  [GET, POST]
+    
+
+inscrit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DirasetBundle:Inscrit:delete" }
+    methods:  DELETE

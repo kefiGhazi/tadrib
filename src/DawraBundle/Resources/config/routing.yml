@@ -1,0 +1,6 @@
+dawra_dawra:
+    resource: "@DawraBundle/Resources/config/routing/dawra.yml"
+    prefix:   /
+dawra_homepage:
+    path:     /
+    defaults: { _controller: DawraBundle:Default:index }

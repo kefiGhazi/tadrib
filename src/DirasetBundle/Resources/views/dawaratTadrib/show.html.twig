@@ -1,0 +1,217 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">الدراسات التدريبية ديسمبر  2017  </h1>
+                        <h4 class="text-center"> اللجنةالوطنية لتنمية القيادات -- لجنةالثقافة الرقمية</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="content" style="margin-top: 0px;">
+                <!-- Start content -->
+                <div class="row">
+                    {{ form_start(form) }}
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6 col-xs-12">
+                                <div class="widget-simple card-box ">
+                                    <div class="row" style="margin: 0px;">
+                                        <h2 class="text-center"> معلومات شخصية </h2>
+                                        <hr>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الإســم </label>
+                                                {{ form_widget(form.nom ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>اللّقب </label>
+                                                {{ form_widget(form.prenom ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>تاريخ الولادة </label>
+                                                {{ form_widget(form.dateNaissance ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>المستوى العلمي </label>
+                                                {{ form_widget(form.niveau ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>المهنة </label>
+                                                {{ form_widget(form.travail ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الهاتف </label>
+                                                {{ form_widget(form.tel ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>البريد الإلكتروني </label>
+                                                {{ form_widget(form.email ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>العنوان </label>
+                                                {{ form_widget(form.adress ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+
+
+                                        <h2 class="text-center"> بطاقة التعريف الوطنية </h2>
+                                        <hr>
+
+
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>رقم بطاقة التعريف الوطنية </label>
+                                                {{ form_widget(form.cin ,{'attr': {'class': 'form-control' ,'value': cin , 'readonly':'readonly'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الوجه الأول </label>
+                                                {{ form_widget(form.imageCinFace ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الوجه الأول </label>
+                                                {{ form_widget(form.imageCinPile ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div> 
+
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="col-sm-6 col-lg-6 col-xs-12">
+                                <div class="widget-simple card-box ">
+                                    <div class="row" style="margin: 0px;">
+                                        <h2 class="text-center"> المعلومات الكشفية </h2>
+                                        <hr>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>المعرف الكشقي </label>
+                                                {{ form_widget(form.numeroInscrit ,{'attr': {'class': 'form-control','value': num , 'readonly':'readonly'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الدراسة </label>
+                                                <select name="dirassa" class="form-control" required="">
+                                                    {% for va in valeurAtributs%}
+                                                        {%if va.id == D %}
+                                                            <option value="{{va.id}}">{{va.nom}}</option>
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>القسم </label>
+                                                <select name="kesm" class="form-control">
+                                                    {% for kesm in kesms%}
+                                                        <option value="{{kesm.id}}">{{kesm.nom}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الجهة </label>
+                                                {{ form_widget(form.idJiha ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الفوج </label>
+                                                {{ form_widget(form.fawj ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الوحدة </label>
+                                                {{ form_widget(form.wehda ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <h2 class="text-center col-sm-12 col-lg-12 col-xs-12"> أخر دراسة تدريبية </h2>
+                                        <hr>   
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الدراسة </label>
+                                                <select name="lastDirassa" class="form-control">
+                                                    {% for va in valeurAtributs%}
+                                                        <option value="{{va.id}}">{{va.nom}}</option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>قائدها </label>
+                                                {{ form_widget(form.chefLastDirassa ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>مكانها </label>
+                                                {{ form_widget(form.lieuxLastDirassa ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>الشهر </label>
+                                                {{ form_widget(form.moisLastDirassa ,{'attr': {'class': 'form-control'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <label>السنة </label>
+                                                {{ form_widget(form.yearLastDirassa ,{'attr': {'class': 'form-control','type':'number', 'min' : '1900' , 'max':'2017' , 'value':'2016'} }) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 col-lg-6 col-xs-12">
+                                            <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="تسجيل" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{ form_end(form) }}
+
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer text-right" style="right: 0px">
+            <img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"> <span style="font-size: 20px;">الكشافة التونسية</span> 
+        </footer>
+
+    {% endblock %}
+
+

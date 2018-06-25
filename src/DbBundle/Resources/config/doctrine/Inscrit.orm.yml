@@ -1,0 +1,147 @@
+DbBundle\Entity\Inscrit:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\InscritRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        prenom:
+            type: string
+            length: 255
+        dateNaissance:
+            type: date
+        niveau:
+            type: string
+            length: 255
+        travail:
+            type: string
+            length: 255
+        tel:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        adress:
+            type: text
+        chefLastDirassa:
+            type: string
+            length: 255
+        lieuxLastDirassa:
+            type: string
+            length: 255
+        moisLastDirassa:
+            type: string
+            length: 255
+        yearLastDirassa:
+            type: string
+            length: 255
+        cin:
+            type: string
+            length: 255
+            unique: true
+        numeroInscrit:
+            type: string
+            length: 255
+            unique: true
+        imageCinFace:
+            type: text
+        imageCinPile:
+            type: text
+        fawj:
+            type: string
+            length: 255
+            nullable: true
+        wehda:
+            type: string
+            length: 255
+            nullable: true
+        accepteW:
+            type: integer
+            nullable: true
+        accepteJ:
+            type: integer
+            nullable: true
+        paye:
+            type: integer
+            nullable: true
+        sex:
+            type: integer
+            nullable: true
+        presence:
+            type: integer
+            nullable: true
+        result:
+            type: integer
+            nullable: true
+        accepteMessageW:
+            type: text 
+            nullable: true
+        accepteMessageJ:
+            type: text   
+            nullable: true
+    manyToOne:
+        idJiha:
+            targetEntity: Jiha
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_jiha:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idKesm:
+            targetEntity: Kesm
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_kesm:
+                    referencedColumnName: id
+            orphanRemoval: false
+        lastDirassa:
+            targetEntity: AtributType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                last_dirassa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idDirassa:
+            targetEntity: AtributType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_dirassa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idMarkez:
+            targetEntity: MarkezTadrib
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            nullable: true
+            joinColumns:
+                id_markez:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idDirassaA:
+            targetEntity: DawraTadrib
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            nullable: true
+            joinColumns:
+                id_dirassa_a:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

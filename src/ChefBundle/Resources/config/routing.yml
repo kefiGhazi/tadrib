@@ -1,0 +1,38 @@
+#chef_homepage:
+#    path:     /
+#    defaults: { _controller: ChefBundle:Default:index }
+#    
+chef_index:
+    path:     /
+    defaults: { _controller: "ChefBundle:Chef:index" }
+    methods:  GET
+
+chef_show:
+    path:     /{id}/show
+    defaults: { _controller: "ChefBundle:Chef:show" }
+    methods:  GET
+    
+
+chef_new:
+    path:     /new
+    defaults: { _controller: "ChefBundle:Chef:new" }
+    methods:  [GET, POST]
+
+chef_update:
+    path:     /update
+    defaults: { _controller: "ChefBundle:Chef:update" }
+    methods:  [GET, POST]
+    
+chef_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ChefBundle:Chef:edit" }
+    methods:  [GET, POST]
+
+chef_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ChefBundle:Chef:delete" }
+    methods:  [GET, POST, DELETE]
+    
+admin_inscrit:
+    resource: "@ChefBundle/Resources/config/routing/adminInscrit.yml"
+    prefix:   /AdminInscrit

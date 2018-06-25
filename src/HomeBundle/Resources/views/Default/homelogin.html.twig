@@ -1,0 +1,59 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid" >
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <!-- Start content -->
+            <div class="content" style="margin-top: 0px;">
+                <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">المنظومة الرقمية لتنمية القيادات  </h1>
+                        <img  src="{{ asset('bundles/home/images/tadrib.png')}}" width="50px" style="top: 8px;position:  absolute;right: 300px;width: 100px;">
+                    </div>
+
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6 col-xs-6">
+                        <div class="card-box text-center">
+                            <h1>رئيس لجنة وطنية / جهوية</h1>
+                            <a href="{{path('fos_user_security_login')}}" class="btn btn-bg btn-success"> دخول</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xs-6">
+                        <div class="card-box text-center">
+                            <h1>قائد(ة) قسم</h1>
+{#                            <a href="#" class="btn btn-bg btn-success disabled"> دخول</a>
+#}                            <a href="{{path('home_loginDawra',{'target':'kesem'})}}" class="btn btn-bg btn-success"> دخول</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xs-6">
+                        <div class="card-box text-center">
+                            <h1>قائد(ة) دورة تدريبية</h1>
+                            <a href="#" class="btn btn-bg btn-success disabled"> دخول</a>
+{#                            <a href="{{path('home_loginDawra',{'target':'dawra'})}}" class="btn btn-bg btn-success"> دخول</a>
+#}                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-6 col-xs-6">
+                        <div class="card-box text-center">
+                            <h1>قائد (ة)</h1>
+                            <a href="{{path('inscrit_index')}}" class="btn btn-bg btn--md btn-success"> دخول</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer" style="right: 0px">
+            <div class="row">
+                <div class="col-md-5"><span style="font-size: 20px;" class="pull-left">الكشافة التونسية</span></div>
+                <div class="col-md-2"><img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"></div>
+                <div class="col-md-5"><span class="pull-right" style="font-size: 20px;">اللجنة الوطنية لتنمية القيادات -- لجة الثقافة الرقمية</span> </div>
+            </div>
+            
+        </footer>
+    {% endblock %}

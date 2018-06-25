@@ -1,0 +1,29 @@
+dawra_index:
+    path:     /all
+    defaults: { _controller: "DawraBundle:Dawra:index" }
+    methods:  GET
+
+dawra_show:
+    path:     /{id}/show
+    defaults: { _controller: "DawraBundle:Dawra:show" }
+    methods:  GET
+
+dawra_new:
+    path:     /new
+    defaults: { _controller: "DawraBundle:Dawra:new" }
+    methods:  [GET, POST]
+    
+dawra_addMenbre:
+    path:     /addMenbre
+    defaults: { _controller: "DawraBundle:Dawra:addMenbre" }
+    methods:  [GET, POST]
+
+dawra_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DawraBundle:Dawra:edit" }
+    methods:  [GET, POST]
+
+dawra_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DawraBundle:Dawra:delete" }
+    methods:  DELETE

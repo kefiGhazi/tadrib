@@ -1,0 +1,77 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid" >
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <!-- Start content -->
+             <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">الدراسات التدريبية ديسمبر  2017  </h1>
+                        <h4 class="text-center"> اللجنةالوطنية لتنمية القيادات -- لجنةالثقافة الرقمية</h4>
+                    </div>
+
+                </div>
+            </div>
+            <div class="content" style="margin-top: 0px;">
+                <!-- Start content -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6 col-xs-12 col-lg-offset-3">
+    
+                                <div class="widget-simple card-box ">
+                                    <div>
+                                        {%if type == 'kesem'%}
+                                        <form role="form" action="{{ path('inscrit_Kesm') }}" method="POST">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">القسم</label>
+                                                            <select  name="kesm" class="form-control">
+                                                                {%for kesm in kesms%}
+                                                                    <option value="{{kesm.id}}">{{kesm.nom}}</option>
+                                                                {%endfor%}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">كلمة السر </label>
+                                                            <input type="password" name="psw" class="form-control" required="">
+                                                        </div>
+                                                        <input type="submit" class="btn btn-primary btn-lg" value="دخول ">
+                                        </form>
+                                                        {%else%}
+                                        <form role="form" action="{{ path('inscrit_Dawra') }}" method="POST">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">الدورة</label>
+                                                            <select  name="dawra" class="form-control">
+                                                                {%for dawra in dawrats%}
+                                                                    <option value="{{dawra.id}}">({{dawra.idMarkez.nom}}) - {{dawra.nom}}</option>
+                                                                {%endfor%}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">كلمة العبور</label>
+                                                            <input type="text" name="nom" class="form-control" required="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">كلمة السر </label>
+                                                            <input type="password" name="psw" class="form-control" required="" >
+                                                        </div>
+                                                        
+                                                        <input type="submit" class="btn btn-primary btn-lg" value="دخول ">
+                                        </form>
+                                                        {%endif%}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    {% endblock %}

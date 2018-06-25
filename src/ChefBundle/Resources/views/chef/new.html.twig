@@ -1,0 +1,110 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <h1>إضافة قائد(ة) </h1>
+                        </div>
+                        <div class="card-box"> 
+                            <div class="row">
+                            {{ form_start(form) }}
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الاسم</label>
+                                    {{ form_widget(form.nom ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>اللقب</label>
+                                    {{ form_widget(form.prenom ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>المعرف الكشفي</label>
+                                    {{ form_widget(form.inscrit ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>بطاقة التعريف الوطنية</label>
+                                    {{ form_widget(form.cin ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>تاريخ الولادة</label>
+                                    {{ form_widget(form.dateNaissance ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الفوج</label>
+                                    {{ form_widget(form.fawej ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الجهة</label>
+                                    {{ form_widget(form.idJiha ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>القسم</label>
+                                    {{ form_widget(form.idKesm ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>  
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>المستوى التدريبي</label>
+                                    {{ form_widget(form.lastDirasa ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>المستوى الدراسي</label>
+                                    {{ form_widget(form.etude ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>المهنة</label>
+                                    {{ form_widget(form.travail ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الهاتف</label>
+                                    {{ form_widget(form.tel ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-lg-3 col-xs-12">
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الجنس</label>
+                                    {{ form_widget(form.sex ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            
+                            </div>
+                                <div class="row">
+                            <input type="submit" class="btn btn-lg btn-primary col-lg-3" value="إنشاء" />
+                            {{ form_end(form) }}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+

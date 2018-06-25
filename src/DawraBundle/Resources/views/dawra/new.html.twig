@@ -1,0 +1,101 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <h1>إضافة الدورة </h1>
+                        </div>
+                        <div class="card-box"> 
+                            <div class="row">
+                                {{ form_start(form) }}
+                                <div class="col-sm-3 col-lg-3 col-xs-12 {%if type.code != 'R'%} hidden {%endif%}">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>موضوع الدورة</label>
+                                        {{ form_widget(form.nom ,{'attr': {'class': 'form-control' ,'value':'--'} }) }}
+                                    </div>
+                                </div>  
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>نوع الدورة</label>
+                                        <select class="form-control" name="type">
+                                            <option value="{{type.id}}">{{type.nom}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                {%if atrib|length != 0  %}
+                                    <div class="col-sm-3 col-lg-3 col-xs-12"  >
+                                        <div class="form-group col-sm-10 col-lg-10 col-xs-10" >
+                                            <label>الصنف</label>
+                                            <select class="form-control" name="senef">
+                                                {% for atri in atrib %}
+
+                                                    <option value="{{atri.id}}">{{atri.nom}}</option>
+
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div> 
+                                {%endif%}
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>تاريخ البداية</label>
+                                        {{ form_widget(form.dateDeb ,{'attr': {'class': 'form-control'} }) }}
+                                    </div>
+                                </div>  
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>تاريخ النهاية</label>
+                                        {{ form_widget(form.dateFin ,{'attr': {'class': 'form-control'} }) }}
+                                    </div>
+                                </div>  
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>المكان</label>
+                                        {{ form_widget(form.lieux ,{'attr': {'class': 'form-control'} }) }}
+                                    </div>
+                                </div>  
+                                <div class="col-sm-3 col-lg-3 col-xs-12 {%if type.code == 'R' or type.code == 'DTW'  or type.code == 'DTM'%} hidden {%endif%}">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>الجهة</label>
+                                        <select class="form-control" name="jiha">
+                                            {%for jiha in jihas%}
+                                                <option value="{{jiha.id}}" {%if  jiha.id == 25%}selected=""{%endif%}>{{jiha.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>  
+                                <div class="col-sm-3 col-lg-3 col-xs-12 {%if type.code != 'DT'%} hidden {%endif%}">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>القسم</label>
+                                        <select class="form-control" name="kesm">
+                                            {%for kesm in kesms%}
+                                                <option value="{{kesm.id}}" {%if kesm.id == 9%}selected=""{%endif%}>{{kesm.nom}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>  
+                                
+
+
+                                {{ form_widget(form) }}
+                            </div>
+                            <div class="row">
+                                <input type="submit" class="btn btn-primary btn-lg" value="إنشاء" />
+                            </div>
+                            {{ form_end(form) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    {% endblock %}
+

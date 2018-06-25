@@ -1,0 +1,290 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid" >
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <!-- Start content -->
+            <div class="content" style="margin-top: 0px;">
+                <div class="row">
+                    {%if msg is defined %}
+                        <div class="col-sm-5 col-lg-5 col-xs-12 col-lg-offset-4">
+                            <div class="card-box">
+                                <h1 class="text-center">الدراسات التدريبية ديسمبر  2017  </h1>
+                                <div class="col-sm-12 col-lg-12 col-xs-12">
+                                    <div class="alert alert-danger text-center">
+                                        <strong>تثبت في كلمة السر .</strong><br>
+
+                                    </div>
+                                </div>
+                                <form role="form" action="{{ path('inscrit_Kesm') }}" method="POST">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">القسم</label>
+                                        <select  name="kesm" class="form-control">
+                                            {%for kesm in kesms%}
+                                                <option value="{{kesm.id}}">{{kesm.nom}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">كلمة السر </label>
+                                        <input type="password" name="psw" class="form-control" required="">
+                                    </div>
+                                    <input type="submit" class="btn btn-primary btn-lg" value="دخول ">
+                                </form>
+                            </div>
+
+                        </div>
+                    {%else%}
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                        
+                        <div class="card-box text-center"> 
+                            <h3>قائمة المشاركين قسم  {{ k.nom}}</h3>
+                        </div>
+                        <div class="card-box"> 
+                            <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>الاسم و اللقب</th>
+                                        <th>عدد ب ت و</th>
+                                        <th>عدد الانخراط</th>
+                                        <th>الجهة</th>
+                                        <th>الدراسة</th>
+                                        <th>قرار اللجنة الجهوية</th>
+                                        <th>قرار اللجنة الوطنية</th>
+                                        <th>الحوالة البريدية</th>
+                                        <th>الدراسة</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for inscrit in inscrits %}
+                                        <tr>
+                                            <td>{{ inscrit.nom }} {{ inscrit.prenom }}</td>
+                                            <td>{{ inscrit.cin }}</td>
+                                            <td>{{ inscrit.numeroInscrit }}</td>
+                                            <td>{{ inscrit.idJiha.name }}</td>
+                                            <td>{{ inscrit.idDirassa.nom  }}</td>
+                                            
+                                            <td>
+                                                
+                                                
+                                                    {%if inscrit.accepteJ == 1%}
+                                                    <span class="label label-success">مقبول</span>
+                                                    {%elseif inscrit.accepteJ == 2%}
+                                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                            </td>
+                                            <td>
+                                                {%if inscrit.accepteW == 1%}
+                                                    <span class="label label-success">مقبول</span>
+                                                {%elseif inscrit.accepteW == 2%}
+                                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageW}}">مرفوض</span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                            </td>
+                                            <td>
+                                                {%if inscrit.accepteJ == 1 and inscrit.accepteW == 1%}
+                                                        {%if inscrit.paye == 1 %}
+                                                    <span class="label label-success">دفع الاشتراك</span>
+                                                    {%elseif inscrit.paye == 2%}
+                                                    <span class="label label-danger">لم يدفع الإشتراك</span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                                
+                                                    {%elseif inscrit.accepteJ == 2 or inscrit.accepteW == 2%}
+                                                        <span class="label label-danger">غير مؤهل  </span>
+                                                    {%else%}
+                                                        <span class="label label-default">في طور الإنجاز</span>
+                                                    {%endif%}
+                                            </td>
+                                            <td>
+                                                {%if inscrit.idDirassaA != null%}
+                                                    <span class="label label-primary">({{inscrit.idMarkez.nom}}) - {{inscrit.idDirassaA.nom}}</span>
+                                                {%elseif inscrit.accepteJ == 2 or inscrit.accepteW == 2%}
+                                                        <span class="label label-danger">غير مؤهل  </span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                            </td>
+                                            <td>
+                                                <a  class="btn btn-xs btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-{{inscrit.id}}"><i class="fa fa-plus"></i> تفاصيل </a>
+                                            </td>
+                                            <div id="con-close-modal-{{inscrit.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">ملف القائد {{ inscrit.nom }} {{ inscrit.prenom }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الاسم</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">اللقب</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.prenom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">تاريخ الولادة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.dateNaissance|date('Y-m-d') }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المستوى العلمي</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.niveau }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المهنة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.travail }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الهاتف</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.tel }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">العنوان</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">العنوان</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                            </div>
+                                                        </div>
+                                                        <h2 class="text-center"> بطاقة التعريف الوطنية </h2>
+                                                        <hr>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">رقم بطاقة التعريف الوطنية</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.cin }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوجه الأول</label>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinFace)}}" target="_blanc"><img src="{{ asset('bundles/home/images/cin/'~inscrit.imageCinFace)}}" width="50px"  ></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوجه الثاني</label>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinPile)}}" target="_blanc"><img src="{{ asset('bundles/home/images/cin/'~inscrit.imageCinPile)}}" width="50px"  ></a>
+                                                            </div>
+                                                        </div>
+                                                            <h2 class="text-center col-md-12"> المعلومات الكشفية </h2>
+                                                        <hr>
+                                                         <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المعرف الكشقي</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.numeroInscrit }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الدراسة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idDirassa.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">القسم</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idKesm.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الفوج</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.fawj }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوحدة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.wehda }}">
+                                                            </div>
+                                                        </div>
+                                                        <h2 class="text-center col-sm-12 col-lg-12 col-xs-12"> أخر دراسة تدريبية </h2>
+                                                        <hr>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الدراسة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lastDirassa.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">قائدها</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.chefLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">مكانها</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lieuxLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الشهر</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.moisLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">السنة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.yearLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </tr>
+                                        
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                </div>
+            </div>
+
+        {% endblock %}

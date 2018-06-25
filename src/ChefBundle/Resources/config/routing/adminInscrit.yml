@@ -1,0 +1,81 @@
+adminInscrit_index:
+    path:     /
+    defaults: { _controller: "DirasetBundle:adminInscrit:index" }
+    methods:  GET
+adminInscrit_attribChara:
+    path:     /attribChara
+    defaults: { _controller: "DirasetBundle:adminInscrit:attribChara" }
+    methods:  [GET, POST]
+    
+adminInscrit_attribTamhidiya:
+    path:     /attribTamhidiya
+    defaults: { _controller: "DirasetBundle:adminInscrit:attribTamhidiya" }
+    methods:  [GET, POST]
+    
+adminInscrit_atrib:
+    path:     /attrib
+    defaults: { _controller: "DirasetBundle:adminInscrit:attrib" }
+    methods:  [GET, POST]
+    
+adminInscrit_accepterW:
+    path:     /accepterW
+    defaults: { _controller: "DirasetBundle:adminInscrit:accepterW" }
+    methods:  [GET, POST]
+adminInscrit_accepterResultW:
+    path:     /accepterResultW
+    defaults: { _controller: "DirasetBundle:adminInscrit:aceptResult" }
+    methods:  [GET, POST]
+    
+adminInscrit_statW:
+    path:     /statW
+    defaults: { _controller: "DirasetBundle:adminInscrit:statW" }
+    methods:  [GET, POST]
+    
+adminInscrit_stat:
+    path:     /stat
+    defaults: { _controller: "DirasetBundle:adminInscrit:stat" }
+    methods:  [GET, POST]
+    
+adminInscrit_stat2W:
+    path:     /stat2W
+    defaults: { _controller: "DirasetBundle:adminInscrit:stat2W" }
+    methods:  [GET, POST]
+    
+adminInscrit_finalResult:
+    path:     /finalResult
+    defaults: { _controller: "DirasetBundle:adminInscrit:finalResult" }
+    methods:  [GET, POST]
+    
+adminInscrit_accepterJ:
+    path:     /accepterJ
+    defaults: { _controller: "DirasetBundle:adminInscrit:accepterJ" }
+    methods:  [GET, POST]
+adminInscrit_paye:
+    path:     /paye
+    defaults: { _controller: "DirasetBundle:adminInscrit:paye" }
+    methods:  [GET, POST]
+
+adminInscrit_dawra_index:
+    path:     /dawraTadribIndex
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:index" }
+    methods:  [GET, POST]
+adminInscrit_dawra_new:
+    path:     /dawraTadribNew
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:new" }
+    methods:  [GET, POST]
+adminInscrit_dawra_edit:
+    path:     /dawraTadribEdit
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:edit" }
+    methods:  [GET, POST]
+adminInscrit_markez_new:
+    path:     /MarkezNew
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:newMarkez" }
+    methods:  [GET, POST]
+adminInscrit_markez_edit:
+    path:     /MarkezEdit
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:editMarkez" }
+    methods:  [GET, POST]
+adminInscrit_editDirassa:
+    path:     /editDirassa
+    defaults: { _controller: "DirasetBundle:DawaratTadrib:editDirassa" }
+    methods:  [GET, POST]

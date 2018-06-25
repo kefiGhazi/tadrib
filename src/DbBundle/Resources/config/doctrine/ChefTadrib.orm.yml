@@ -1,0 +1,40 @@
+DbBundle\Entity\ChefTadrib:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\ChefTadribRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: string
+            length: 255
+        chef:
+            type: string
+            length: 255
+        lieux:
+            type: string
+            length: 255
+    manyToOne:
+        idChef:
+            targetEntity: Chef
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_chef:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idTadrib:
+            targetEntity: MostawaTadribi
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_tadrib:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

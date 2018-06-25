@@ -1,0 +1,150 @@
+{% block menu %}
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+
+            <div class="text-center">
+                <a href="#" class="logo"><img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="20px"> <span>الكشافة التونسية</span> </a>
+                <button class="button-menu-mobile open-left waves-light waves-effect">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+            </div>
+
+
+        </div>
+
+        <!-- Navbar -->
+
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="">
+                    <ul class="nav navbar-nav navbar-right pull-right">
+
+
+
+
+                        <li class="hidden-xs">
+                            <a href="{{path('fos_user_security_logout')}}" class="right-bar-toggle waves-effect waves-light"><i class="md md-settings-power"></i>خروج</a>
+                        </li>
+
+                    </ul> 
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft">
+
+            <div id="sidebar-menu">
+                {% if app.security.getToken().getUser() %}
+
+                    <ul>
+                        <li class="menu-title">الخيارات</li>
+
+                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+
+                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> الدورات التدريبية </span>
+                                        <span class="menu-arrow"></span></a>
+                                    <ul class="list-unstyled">
+                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                            <li><a href="{{path('dawra_index',{'type':'DT'})}}"><i class="fa fa-bars"></i> الدورات التدريبية الأساسية </a></li>
+                                            {%endif%}
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                            <li><a href="{{path('dawra_index',{'type':'DTM'})}}"><i class="fa fa-bars"></i> الدورات التدريبية المتقدمة </a></li>
+                                            {%endif%}
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                            <li><a href="{{path('dawra_index',{'type':'DTW'})}}"><i class="fa fa-bars"></i> دورات التدريب الوظيفي </a></li>
+                                            {%endif%} 
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                            <li><a href="{{path('dawra_index',{'type':'T'})}}"><i class="fa fa-bars"></i> وحدات تدريبية تأهيلية </a></li>
+                                            {%endif%}
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                            <li><a href="{{path('dawra_index',{'type':'DI'})}}"><i class="fa fa-bars"></i> دورات الاختصاص </a></li>
+                                            {%endif%}
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI")%}
+                                            <li><a href="{{path('dawra_index',{'type':'R'})}}"><i class="fa fa-bars"></i> دورات مركز روافد </a></li>
+                                            {%endif%}
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                            <li><a href="{{path('dawra_index',{'type':'A'})}}"><i class="fa fa-bars"></i> دورات أخرى </a></li>
+                                            {%endif%}    {#<li><a href="{{path('dawra_new')}}"><i class="fa fa-plus"></i> اضافة دورة </a></li>#}
+                                    </ul>
+                                </li>
+
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> قاعدة بيانات القادة </span>
+                                        <span class="menu-arrow"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="{{path('chef_index')}}"><i class="fa fa-bars"></i> قائمة القادة </a></li>
+                                        <li><a href="{{path('chef_new')}}"><i class="fa fa-plus"></i> اضافة قائد </a></li>
+                                    </ul>
+                                </li>
+                                <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> الإحتياجات التدريبية </span>
+                                        <span class="menu-arrow"></span></a>
+                                    <ul class="list-unstyled">
+                                        <li><a href="#"><i class="fa fa-bars"></i> الابتدائية </a></li>
+                                        <li><a href="#"><i class="fa fa-bars"></i> التمهيدية </a></li>
+                                        <li><a href="#"><i class="fa fa-bars"></i> الشارة الخشبية </a></li>
+                                        <li><a href="#"><i class="fa fa-bars"></i> م ق تدريب </a></li>
+                                        <li><a href="#"><i class="fa fa-bars"></i> ق تدريب </a></li>
+                                    </ul>
+                                </li>
+                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                    <li class="has_sub">
+                                        <a href="#" ><i class="fa fa-users"></i> <span> تقارير الارشاد الفني </span></a>
+                                       {# <a href="#" ><i class="fa fa-users"></i> <span> التسجيل في التمهيدية و الشارة </span></a>#}
+
+                                    </li>
+                                {%endif%}
+                            {%endif%}
+                            <li class="has_sub">
+                                 <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> دراسات صيف 2018 </span>
+                                     <span class="menu-arrow"></span></a>
+                                 <ul class="list-unstyled">
+                                     <li><a href="{{path('adminInscrit_index')}}"><i class="fa fa-bars"></i> القائمة الاولية</a></li>
+                                     
+                                         {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")   or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                           
+                                                 <li><a href="{{path('adminInscrit_stat')}}"><i class="fa fa-bars"></i>إحصائيات الأولية</a></li>
+                                                 <li><a href="{{path('adminInscrit_stat2W')}}"><i class="fa fa-bars"></i>إحصائيات المقبولين</a></li>
+                                                 <li><a href="{{path('adminInscrit_statW')}}"><i class="fa fa-bars"></i> الإحصائيات النهائية</a></li>
+                                           
+                                         <li><a href="{{path('adminInscrit_accepterResultW')}}"><i class="fa fa-bars"></i>  قائمة المقبولين وطني</a></li>
+                                         <li><a href="{{path('adminInscrit_accepterW')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين وطني</a></li>
+                                         {%endif%}
+                                         {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}
+ 
+                                         <li><a href="{{path('adminInscrit_accepterJ')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين جهوي</a></li>
+                                         {%endif%}
+                                         {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+ 
+                                         <li><a href="{{path('adminInscrit_dawra_index')}}"><i class="fa fa-bars"></i> إنشاء الدورات</a></li>
+                                         <li><a href="{{path('adminInscrit_attribChara')}}"><i class="fa fa-bars"></i> إسناد دورات الشارة</a></li>
+                                         <li><a href="{{path('adminInscrit_attribTamhidiya')}}"><i class="fa fa-bars"></i> إسناد دورات التمهيدية</a></li>
+                                         {%endif%}
+                                     <li><a href="{{path('adminInscrit_finalResult')}}"><i class="fa fa-bars"></i> النتائج النهائية</a></li>
+                                 </ul>
+                             </li>
+                        {%endif%}
+                    </ul>
+                {%endif%}
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+    <!-- Left Sidebar End --> 
+
+{% endblock menu %}

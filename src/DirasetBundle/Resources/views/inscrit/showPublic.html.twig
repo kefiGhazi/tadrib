@@ -1,0 +1,125 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">المنظومة الرقمية لتنمية القيادات  </h1>
+                        <img  src="{{ asset('bundles/home/images/tadrib.png')}}" width="50px" style="top: 8px;position:  absolute;right: 300px;width: 100px;">
+                    </div>
+
+                </div>
+            </div>
+            <div class="content" style="margin-top: 0px;">
+                <!-- Start content -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="widget-simple card-box ">
+                            {%if chef%}
+                                    <div class="row">
+                                {%if chef.sex == 1%}
+                                    <div class="col-sm-12 col-lg-12 col-xs-12 col-lg-offset-5"><h1>القائد {{ chef.nom }} {{ chef.prenom }}</h1></div>
+                                {%else%}
+                                    <div class="col-sm-12 col-lg-12 col-xs-12 col-lg-offset-5"><h1>القائدة {{ chef.nom }} {{ chef.prenom }}</h1></div>
+                                {%endif%}
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المعرف الكشفي :</b><span class="small"> {{ chef.inscrit }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>تاريخ الولادة :</b><span class="small"> {% if chef.dateNaissance %}{{ chef.dateNaissance|date('Y-m-d') }}{% endif %}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>القسم :</b><span class="small"> {{ chef.idKesm.nom }}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الجهة :</b><span class="small"> {{ chef.idJiha.name }}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الفوج :</b><span class="small"> {{ chef.fawej}}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى التدريبي :</b><span class="small"> {{ chef.lastDirasa }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى الدراسي :</b><span class="small"> {{ chef.etude }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المهنة :</b><span class="small"> {{ chef.travail }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الهاتف :</b><span class="small"> {{ chef.tel }}</span></h3></div>
+                                </div>
+
+
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                                
+                                <div class="card-box col-lg-12">
+                            <div> 
+                                <div class="card-box">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th>الدراسة</th>
+                                            <th>الصفة</th>
+                                            <th>تاريخها</th>
+                                            <th>مكانها</th>
+                                        </thead>
+                                        <tbody>
+                                            {%for dawra in deres%}
+                                               <tr>
+                                                        <td>{{dawra.idDawra.idType.nom}} {%if dawra.idDawra.idAtributType != null%}  : {{dawra.idDawra.idAtributType.nom}}{%endif%}</td>
+                                                        <td>{{dawra.idSifa.nom}} </td>
+                                                        <td><b>من</b> {{dawra.idDawra.dateDeb|date('Y/m/d')}} <b>إلى</b> {{dawra.idDawra.dateFin|date('Y/m/d')}} </td>
+                                                        <td>{{dawra.idDawra.lieux}}</td>
+                                                    </tr>
+                                                
+                                            {%endfor%}
+                                          {%for dawra in itars%}
+                                                <tr>
+                                                        <td>{{dawra.idDawra.idType.nom}} {%if dawra.idDawra.idAtributType != null%} : {{dawra.idDawra.idAtributType.nom}}{%endif%}</td>
+                                                        <td>{{dawra.idSifa.nom}} </td>
+                                                        <td><b>من</b> {{dawra.idDawra.dateDeb|date('Y/m/d')}} <b>إلى</b> {{dawra.idDawra.dateFin|date('Y/m/d')}} </td>
+                                                        <td>{{dawra.idDawra.lieux}}</td>
+                                                    </tr>
+                                           {%endfor%}
+                                        </tbody>
+                                    </table>
+                                        
+                                </div>
+                            </div>
+                                </div>
+                                {%else%}
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                                            <div class="alert alert-danger text-center">
+                                                <strong>لا تملك ملف بقاعدة البيانات</strong><br>
+                                            </div>
+                                        </div>
+                                        <a href="{{path('diraset_homepage')}}" class="btn btn-sm btn-purple">الصفحة الرئيسية</a>
+                                    </div>
+                                {%endif%}
+                       
+            </div>
+        </div>                   <br><br>
+            <footer class="footer text-right" style="right: 0px">
+                <div class="row">
+                <div class="col-md-5"><span style="font-size: 20px;" class="pull-left">الكشافة التونسية</span></div>
+                <div class="col-md-2"><img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"></div>
+                <div class="col-md-5"><span class="pull-right" style="font-size: 20px;">اللجنة الوطنية لتنمية القيادات -- لجة الثقافة الرقمية</span> </div>
+            </div>
+            </footer>
+
+        {% endblock %}
+

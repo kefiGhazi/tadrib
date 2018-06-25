@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Inscrits list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Datenaissance</th>
+                <th>Niveau</th>
+                <th>Travail</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Adress</th>
+                <th>Cheflastdirassa</th>
+                <th>Lieuxlastdirassa</th>
+                <th>Moislastdirassa</th>
+                <th>Yearlastdirassa</th>
+                <th>Cin</th>
+                <th>Numeroinscrit</th>
+                <th>Imagecinface</th>
+                <th>Imagecinpile</th>
+                <th>Fawj</th>
+                <th>Wehda</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inscrit in inscrits %}
+            <tr>
+                <td><a href="{{ path('inscrit_show', { 'id': inscrit.id }) }}">{{ inscrit.id }}</a></td>
+                <td>{{ inscrit.nom }}</td>
+                <td>{{ inscrit.prenom }}</td>
+                <td>{% if inscrit.dateNaissance %}{{ inscrit.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ inscrit.niveau }}</td>
+                <td>{{ inscrit.travail }}</td>
+                <td>{{ inscrit.tel }}</td>
+                <td>{{ inscrit.email }}</td>
+                <td>{{ inscrit.adress }}</td>
+                <td>{{ inscrit.chefLastDirassa }}</td>
+                <td>{{ inscrit.lieuxLastDirassa }}</td>
+                <td>{{ inscrit.moisLastDirassa }}</td>
+                <td>{{ inscrit.yearLastDirassa }}</td>
+                <td>{{ inscrit.cin }}</td>
+                <td>{{ inscrit.numeroInscrit }}</td>
+                <td>{{ inscrit.imageCinFace }}</td>
+                <td>{{ inscrit.imageCinPile }}</td>
+                <td>{{ inscrit.fawj }}</td>
+                <td>{{ inscrit.wehda }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('inscrit_show', { 'id': inscrit.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('inscrit_edit', { 'id': inscrit.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('inscrit_new') }}">Create a new inscrit</a>
+        </li>
+    </ul>
+{% endblock %}

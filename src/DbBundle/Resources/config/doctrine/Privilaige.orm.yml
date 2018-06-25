@@ -1,0 +1,70 @@
+DbBundle\Entity\Privilaige:
+    type: entity
+    table: privilaige
+    indexes:
+        id_user:
+            columns:
+                - id_user
+        id_sifa:
+            columns:
+                - id_sifa
+        id_jiha:
+            columns:
+                - id_jiha
+        id_donneur:
+            columns:
+                - id_donneur
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        date:
+            type: date
+            nullable: false
+        actif:
+            type: integer
+            nullable: false
+            unsigned: false
+    manyToOne:
+        idUser:
+            targetEntity: \UserBundle\Entity\User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idSifa:
+            targetEntity: Sifa
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_sifa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idJiha:
+            targetEntity: Jiha
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_jiha:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idDonneur:
+            targetEntity: \UserBundle\Entity\User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_donneur:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

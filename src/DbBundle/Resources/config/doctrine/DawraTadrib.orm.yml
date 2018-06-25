@@ -1,0 +1,52 @@
+DbBundle\Entity\DawraTadrib:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\DawraTadribRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        chef:
+            type: string
+            length: 255
+        login:
+            type: string
+            length: 255
+        psw:
+            type: string
+            length: 255
+    manyToOne:
+        idMarkez:
+            targetEntity: MarkezTadrib
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_markez:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idKesm:
+            targetEntity: Kesm
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_kesm:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idAtributType:
+            targetEntity: AtributType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_atribut_type:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

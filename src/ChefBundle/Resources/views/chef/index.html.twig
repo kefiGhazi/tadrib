@@ -1,0 +1,57 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                             <h1>قائمة القادة</h1>
+                        </div>
+                        <div class="card-box"> 
+                            <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>الاسم و اللقب</th>
+                                        <th>المعرف الكشفي</th>
+                                        <th>تاريخ الولادة</th>
+                                        <th>القسم</th>
+                                        <th>الجهة</th>
+                                        <th>الفوج</th>
+                                        <th>المستوى التدريبي</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for chef in chefs %}
+                                        <tr>
+                                            <td>{{ chef.nom }} {{ chef.prenom }}</td>
+                                            <td>{{ chef.inscrit }}</td>
+                                            <td>{% if chef.dateNaissance %}{{ chef.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ chef.idKesm.nom }}</td>
+                                            <td>{{ chef.idJiha.name }}</td>
+                                            <td>{{ chef.fawej }}</td>
+                                            <td>{{ chef.lastDirasa }}</td>
+                                            <td>
+                                                <a href="{{ path('chef_show', { 'id': chef.id }) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تفاصيل"><i class="fa fa-plus"></i>  </a>
+                                                <a href="{{ path('chef_edit', { 'id': chef.id }) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل"><i class="fa fa-pencil"></i>  </a>
+                                                <a href="{{ path('chef_delete', { 'id': chef.id }) }}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف"><i class="fa fa-trash"></i>  </a>
+                                            </td>
+                                                
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

@@ -1,0 +1,7 @@
+diraset_inscrit:
+    resource: "@DirasetBundle/Resources/config/routing/inscrit.yml"
+    prefix:   /inscrit
+
+diraset_homepage:
+    path:     /
+    defaults: { _controller: DirasetBundle:Default:index }

@@ -1,0 +1,56 @@
+DbBundle\Entity\ItarDawra:
+    type: entity
+    table: itar_dawra
+    indexes:
+        id_dawra:
+            columns:
+                - id_dawra
+        id_sifa:
+            columns:
+                - id_sifa
+        id_chef:
+            columns:
+                - id_chef
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        actif:
+            type: integer
+            nullable: false
+            unsigned: false
+            default: '1'
+    manyToOne:
+        idDawra:
+            targetEntity: Dawra
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_dawra:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idSifa:
+            targetEntity: Sifa
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_sifa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idChef:
+            targetEntity: Chef
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_chef:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

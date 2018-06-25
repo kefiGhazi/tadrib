@@ -1,0 +1,9 @@
+home_homepage:
+    path:     /
+    defaults: { _controller: HomeBundle:Default:index }
+home_login:
+    path:     /homelogin
+    defaults: { _controller: HomeBundle:Default:homelogin }
+home_loginDawra:
+    path:     /loginDawra
+    defaults: { _controller: HomeBundle:Default:loginDawra }

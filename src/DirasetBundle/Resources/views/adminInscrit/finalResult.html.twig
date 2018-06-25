@@ -1,0 +1,361 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <h1>قائمة القادة<span> ({{inscrits|length}}) </span></h1>
+                        </div>
+                        <div class="card-box"> 
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{path('adminInscrit_finalResult')}}">
+                                    <div class="col-sm-3 col-lg-3 col-xs-12">
+                                        <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                            <label>الجهة </label>
+                                            <select name="jiha" class="form-control">
+                                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+
+                                                    <option value="" selected="">جميع الجهات</option>
+                                                {%endif%}
+                                                {%for jiha in jihas %}
+                                                    <option value="{{jiha.id}}" {%if J == jiha.id %} selected="" {%endif%}>{{jiha.name}}</option>
+                                                {%endfor%}
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3 col-lg-3 col-xs-12">
+                                        <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                            <label>الدراسات </label>
+                                            <select name="Dirassa" class="form-control">
+                                                <option value="">جميع الدراسات</option>
+                                                <option value="2"{%if D == "2" %} selected="" {%endif%}>تمهيدية</option>
+                                                <option value="3"{%if D == "3" %} selected="" {%endif%}>شارة خشبية</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-3 col-lg-3 col-xs-12">
+                                        <input type="submit" value="بحث" class="btn btn-lg btn-success">
+                                    </div> 
+                                </form>
+                            </div>
+                            <table class="table table-striped table-bordered" id="datatable" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>الاسم و اللقب</th>
+                                        <th>تاريخ الولادة</th>
+                                        <th>القسم</th>
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") %}
+                                            <th>الجهة</th>
+                                            {%endif%}
+                                        <th>الدراسة</th>
+                                        <th>الحضور</th>
+                                        <th>النتيجة</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%set i = 1%}
+                                    {% for inscrit in inscrits %}
+                                        <tr>
+                                            <td>{{i}}</td>
+                                            <td>{{ inscrit.nom }} {{ inscrit.prenom }}</td>
+                                            <td>{% if inscrit.dateNaissance %}{{ inscrit.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ inscrit.idKesm.nom }}</td>
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") %}
+                                                <td>{{ inscrit.idJiha.name }}</td>
+                                            {%endif%}
+                                            <td>{{ inscrit.idDirassaA.nom  }}</td>
+                                            <td>
+                                                {%if inscrit.presence == 1%}
+                                                    <span class="label label-success">حاضر</span>
+                                                {%elseif inscrit.presence == 2%}
+                                                    <span class="label label-danger" >غائب</span>
+                                                {%else%}{%endif%}
+                                            </td>
+                                            <td>
+                                                {%if inscrit.result == 1%}
+                                                    <span class="label label-success">يؤهل</span>
+                                                    {%elseif inscrit.result == 2%}
+                                                    <span class="label label-danger" >يعيد</span>
+                                                {%else%}
+                                                    
+                                                {%endif%}
+                                            </td>
+                                            {%set i = i+1%}
+                                            <td>
+                                                <a  class="btn btn-xs btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-{{inscrit.id}}"><i class="fa fa-eye"></i></a>
+                                                {#                                             <a href="{{ path('inscrit_edit', { 'id': inscrit.id }) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> تعديل </a>#}
+                                                {#                                                <a href="{{ path('chef_delete', { 'id': inscrit.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> حذف </a>
+                                                #}                                            </td>
+                                    <div id="con-close-modal-{{inscrit.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">ملف القائد {{ inscrit.nom }} {{ inscrit.prenom }}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الاسم</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">اللقب</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.prenom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">تاريخ الولادة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.dateNaissance|date('Y-m-d') }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المستوى العلمي</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.niveau }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المهنة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.travail }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الهاتف</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.tel }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">العنوان</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">العنوان</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                            </div>
+                                                        </div>
+                                                 {#       <h2 class="text-center"> بطاقة التعريف الوطنية </h2>
+                                                        <hr>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">رقم بطاقة التعريف الوطنية</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.cin }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوجه الأول</label>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinFace)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوجه الثاني</label>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinPile)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                            </div>
+                                                        </div>#}
+                                                        <h2 class="text-center col-md-12"> المعلومات الكشفية </h2>
+                                                        <hr>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">المعرف الكشقي</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.numeroInscrit }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الدراسة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idDirassa.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">القسم</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idKesm.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الفوج</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.fawj }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الوحدة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.wehda }}">
+                                                            </div>
+                                                        </div>
+                                                        <h2 class="text-center col-sm-12 col-lg-12 col-xs-12"> أخر دراسة تدريبية </h2>
+                                                        <hr>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الدراسة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lastDirassa.nom }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">قائدها</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.chefLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">مكانها</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lieuxLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">الشهر</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.moisLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="field-1" class="control-label">السنة</label>
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.yearLastDirassa }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                                
+                                
+                                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <div class="row">
+                            <h1>إحصائيات حسب الأقسام الفنية</h1>
+                            <div class="card-box col-sm-12 col-lg-12 col-xs-12"> 
+                                
+                                <table class="table table table-hover m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>القسم</th>
+                                                <th>التمهيدية</th>
+                                                <th>الشارة الخشبية</th>
+                                                <th>المجموع </th>
+                                                <th>الحضور </th>
+                                                <th>المجموع الناجحين</th>
+                                                <th>يعيد</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% set TotalT = 0%}
+                                            {% set TotalCH = 0%}
+                                            {% set Total = 0%}
+                                            {% set TotalP = 0%}
+                                            {% set P = 0%}
+                                            {% set TotalTo = 0%}
+                                            {% set To = 0%}
+                                            {% set TotalA = 0%}
+                                            {% set A = 0%}
+                                            {% set tamhidiya = 0%}
+                                            {% set T = 0%}
+                                            {% set chara = 0%}
+                                            {% set C = 0%}
+                                            {% for kesem in kesms%}
+                                                {% for inscrit in inscrits if inscrit.idKesm.id == kesem.id%}
+                                                    {% if inscrit.idDirassa.id == 2%}
+                                                        {% set T = T + 1%}
+                                                    {% else%}
+                                                        {% set C = C + 1%}
+                                                    {% endif%}
+                                                    
+                                                    
+                                                    {% set To = To + 1%}
+                                                    {% if inscrit.result == 1%}
+                                                        {% set A = A + 1%}
+                                                    {% endif%}
+                                                    {% if inscrit.presence == 1%}
+                                                        {% set P = P + 1%}
+                                                    {% endif%}
+                                                {%endfor%}
+                                                <tr>
+                                                    <th scope="row">{{kesem.nom}}</th>
+                                                    <td>{{T}}</td>
+                                                    <td>{{C}}</td>
+                                                    <td>{{To}}</td>
+                                                    <td>{{P}}</td>
+                                                    <td>{{A}}</td>
+                                                    <td>{{P-A}}</td>
+                                                </tr>
+                                                
+                                                {% set tamhidiya = tamhidiya + T%}
+                                                {% set chara = chara + C%}
+                                                {% set TotalTo = TotalTo + To%}
+                                                {% set TotalP = TotalP + P%}
+                                                {% set TotalA = TotalA + A%}
+                                                {% set To = 0%}
+                                                {% set P = 0%}
+                                                {% set A = 0%}
+                                                {% set T = 0%}
+                                                {% set C = 0%}
+                                            {%endfor%}
+                                            <tr>
+                                                <th scope="row">المجموع</th>
+                                                    <td>{{tamhidiya}}</td>
+                                                    <td>{{chara}}</td>
+                                                    <td>{{TotalTo}}</td>
+                                                    <td>{{TotalP}}</td>
+                                                    <td>{{TotalA}}</td>
+                                                    <td>{{TotalP-TotalA}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                           
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+

@@ -1,0 +1,198 @@
+{% extends 'HomeBundle:Default:layout2.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page" style="margin: 10px">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <div class="card-box">
+                        <h1 class="text-center">المنظومة الرقمية لتنمية القيادات  </h1>
+                        <img  src="{{ asset('bundles/home/images/tadrib.png')}}" width="50px" style="top: 8px;position:  absolute;right: 300px;width: 100px;">
+                    </div>
+                        {#<h1 class="text-center">الدراسات التدريبية ديسمبر  2017  </h1>
+                        <h4 class="text-center"> اللّجنة الوطنية للتدريب -- لجنة  الثقافة الرّقمية</h4>#}
+                    </div>
+
+                </div>
+            </div>
+            <div class="content" style="margin-top: 0px;">
+                <!-- Start content -->
+                <div class="row">
+
+                    {%if msg is defined and msg == 1%}
+                       
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="alert alert-warning text-center">
+                        <strong>رقم بطاقة التعريف الوطنية أو المعرف الكشفي الوحيد تم إستعمالهم سابقا.</strong><br>
+			<strong>إتصل برئيس اللجنة الجهوية للتدريب للتثبت.</strong>
+                    </div>
+
+                </div>
+            
+                    {%endif%}
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-6 col-xs-12">
+    
+                                <div class="widget-simple card-box ">
+                                    <h2 class="text-center"> دراسة التمهيدية </h2>
+                                    <hr>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" onclick="tamhidiya(1);">تسجيل</button>
+                                            <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" onclick="tamhidiya(2);">تعديل ملف</button>
+                                        </div>
+                                    <hr>
+                                    <div id="CinscritForm" hidden="">
+                                        <h3 class="text-center" id="tt">تسجيل</h3>
+                                        <form role="form" action="{{ path('inscrit_new') }}" method="POST">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">بطاقة التعريف الوطنية</label>
+                                                            <input type="text" name="cin" class="form-control" id="Tcin" required="" title="بطافة التعريف الوطنية تتكون من 8 ارقام" required="" pattern="[0-9]{8}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">المعرف الكشفي </label>
+                                                            <input type="text" name="num" class="form-control" id="Cinscrit" title="المعرف الكشفي يتكون من 10 ارقام" required="" pattern="[0-9]{10}">
+                                                        </div>
+                                                        <input type="hidden" name="D" value="2">
+                                                        
+                                                        <input type="submit" class="btn btn-primary btn-lg" id="ts" value="تسجيل ">
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6 col-xs-12">
+    
+                                <div class="widget-simple card-box ">
+                                    <h2 class="text-center"> دراسة الشارة الخشبية </h2>
+                                    <hr>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" onclick="chara(1);">تسجيل</button>
+                                            <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-5" onclick="chara(2);">تعديل ملف</button>
+                                        </div>
+                                    <hr>
+                                    <div id="TinscritForm" hidden="">
+                                        <h3 class="text-center" id="ct">تسجيل</h3>
+                                        <form role="form" action="{{ path('inscrit_new') }}" method="POST">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">بطاقة التعريف الوطنية</label>
+                                                            <input  type="text" name="cin" class="form-control" id="Tcin" title="بطافة التعريف الوطنية تتكون من 8 ارقام" required="" pattern="[0-9]{8}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">المعرف الكشفي </label>
+                                                            <input type="text" name="num" class="form-control" id="Tinscrit" title="المعرف الكشفي يتكون من 10 ارقام" required="" pattern="[0-9]{10}">
+                                                        </div>
+                                                        <input type="hidden" name="D" value="3">
+                                                        <input type="submit" class="btn btn-primary btn-lg" id="cs" value="تسجيل ">
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {#<div class="col-sm-12 col-lg-12 col-xs-12 ">
+                        <div class="row">
+
+                            <div class="col-sm-6 col-lg-6 col-xs-12 col-lg-offset-3">
+
+                                <div class="widget-simple card-box ">
+                                    <h2 class="text-center"> الملف الكشفي </h2>
+
+                                    <div>
+                                        <form role="form" action="{{ path('inscrit_show_public') }}" method="POST">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">بطاقة التعريف الوطنية</label>
+                                                <input  type="text" name="cin" class="form-control" id="Tcin" title="بطافة التعريف الوطنية تتكون من 8 ارقام" required="" pattern="[0-9]{8}">
+                                            </div>
+                                            
+                                            <input type="submit" class="btn btn-primary btn-lg" id="cs" value="مشاهدة ">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                                           
+                        </div>
+                    </div>#}
+                    {#<div class="col-sm-12 col-lg-12 col-xs-12 ">
+                        <div class="row">
+
+                            <div class="col-sm-6 col-lg-6 col-xs-12 col-lg-offset-3">
+
+                                <div class="widget-simple card-box ">
+                                    <h2 class="text-center"> النتيجة </h2>
+
+                                    <div  >
+                                        <form role="form" action="{{ path('inscrit_show') }}" method="POST">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">بطاقة التعريف الوطنية</label>
+                                                <input  type="text" name="cin" class="form-control" id="Tcin" title="بطافة التعريف الوطنية تتكون من 8 ارقام" required="" pattern="[0-9]{8}">
+                                            </div>
+                                            
+                                            <input type="submit" class="btn btn-primary btn-lg" id="cs" value="مشاهدة ">
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                                           
+                        </div>
+                    </div>#}
+                    {#<div class="col-sm-12 col-lg-12 col-xs-12 ">
+                        <div class="row">
+
+                            <div class="col-sm-6 col-lg-6 col-xs-12 col-lg-offset-3">
+
+                                <div class="widget-simple card-box ">
+                                    <h1 class="text-center"> إنتهى التسجيل </h1>
+                                </div>
+                            </div>
+                                           
+                        </div>
+                    </div>#}
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer text-right" style="right: 0px">
+            <div class="row">
+                <div class="col-md-5"><span style="font-size: 20px;" class="pull-left">الكشافة التونسية</span></div>
+                <div class="col-md-2"><img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"></div>
+                <div class="col-md-5"><span class="pull-right" style="font-size: 20px;">اللجنة الوطنية لتنمية القيادات -- لجة الثقافة الرقمية</span> </div>
+            </div>
+{#            <img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"> <span style="font-size: 20px;">الكشافة التونسية</span> 
+#}        </footer>
+        <script>
+            function tamhidiya(x) {
+                $('#TinscritForm').attr('hidden', 'hiden');
+                if (x === 1) {
+                    $('#CinscritForm').removeAttr('hidden');
+                    $('#tt').html('تسجيل');
+                    $('#ts').val('تسجيل');
+                } else {
+                    $('#CinscritForm').removeAttr('hidden');
+                    $('#tt').html('تعديل');
+                    $('#ts').val('تعديل');
+                }
+            }
+            function chara(x) {
+                $('#CinscritForm').attr('hidden', 'hiden');
+
+                if (x === 1) {
+                    $('#TinscritForm').removeAttr('hidden');
+                    $('#ct').html('تسجيل');
+                    $('#cs').val('تسجيل');
+                } else {
+                    $('#TinscritForm').removeAttr('hidden');
+                    $('#ct').html('تعديل');
+                    $('#cs').val('تعديل');
+                }
+            }
+            
+        </script>
+    {% endblock %}
+

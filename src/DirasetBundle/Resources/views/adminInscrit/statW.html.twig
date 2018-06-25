@@ -1,0 +1,156 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <div class="row">
+                                <h1>إحصائيات حسب الجهات</h1>
+                                <div class="col-sm-12 col-lg-12 col-xs-12">
+                                    <table class="table table table-hover m-0 dataTables_empty" id="datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>الجهة</th>
+                                                <th>التمهيدية</th>
+                                                <th>ع</th>
+                                                <th>أ</th>
+                                                <th>ز</th>
+                                                <th>ك</th>
+                                                <th>م</th>
+                                                <th>ج</th>
+                                                <th>د</th>
+                                                <th>الشارة الخشبية</th>
+                                                <th>ع</th>
+                                                <th>أ</th>
+                                                <th>ز</th>
+                                                <th>ك</th>
+                                                <th>م</th>
+                                                <th>ج</th>
+                                                <th>د</th>
+                                                <th>إناث</th>
+                                                <th>ذكور</th>
+                                                <th >المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             
+                                            {% for stat in stats%}
+                                                <tr>
+                                                    <th scope="row">{{stat.name}}</th>
+                                                    <td><b>{{stat.tamhidiya}}</b></td>
+                                                    <td>{{stat.TA}}</td>
+                                                    <td>{{stat.TACH}}</td>
+                                                    <td>{{stat.TZ}}</td>
+                                                    <td>{{stat.TK}}</td>
+                                                    <td>{{stat.TM}}</td>
+                                                    <td>{{stat.TJ}}</td>
+                                                    <td>{{stat.TD}}</td>
+                                                    <td><b>{{stat.chara}}</b></td>
+                                                    <td>{{stat.CHA}}</td>
+                                                    <td>{{stat.CHACH}}</td>
+                                                    <td>{{stat.CHZ}}</td>
+                                                    <td>{{stat.CHK}}</td>
+                                                    <td>{{stat.CHM}}</td>
+                                                    <td>{{stat.CHJ}}</td>
+                                                    <td>{{stat.CHD}}</td>
+                                                    <td><b>{{stat.femme}}</b></td>
+                                                    <td><b>{{stat.home}}</b></td>
+                                                    <td data-order="{{stat.total}}"><b>{{stat.total}}</b></td>
+                                                </tr>
+                                            {%endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-sm-12 col-lg-12 col-xs-12">
+                                    <div class="bar-chart" dir="ltr">
+                                        <svg style="height:400px;width:100%"></svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <div class="row">
+                            <h1>إحصائيات حسب الأقسام الفنية</h1>
+                            <div class="card-box col-sm-4 col-lg-4 col-xs-12"> 
+                                <h4>المجموع</h4>
+                                <table class="table table table-hover m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>القسم</th>
+                                                <th>التمهيدية</th>
+                                                <th>الشارة الخشبية</th>
+                                                <th>المجموع</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% set TotalT = 0%}
+                                            {% set TotalCH = 0%}
+                                            {% set Total = 0%}
+                                            {% for stat in statsK%}
+                                                <tr>
+                                                    <th scope="row">{{stat.name}}</th>
+                                                    <td>{{stat.tamhidiya}}</td>
+                                                    <td>{{stat.chara}}</td>
+                                                    <td>{{stat.total}}</td>
+                                                </tr>
+                                                {% set TotalT = TotalT + stat.tamhidiya%}
+                                                {% set TotalCH = TotalCH + stat.chara%}
+                                                {% set Total = Total + stat.total%}
+                                            {%endfor%}
+                                            <tr>
+                                                <th scope="row">المجموع</th>
+                                                    <td>{{TotalT}}</td>
+                                                    <td>{{TotalCH}}</td>
+                                                    <td>{{Total}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div class="card-box col-sm-4 col-lg-4 col-xs-12"> 
+                                <h4>شارة خشبية</h4>
+                                <div id="chart1" dir="ltr">
+                                <svg style="height:500px;width:100%"></svg>
+                            </div>
+                            </div>
+                            <div class="card-box  col-sm-4 col-lg-4 col-xs-12"> 
+                                
+                                <h4>تمهيدية</h4>
+                                 <div id="chart2" dir="ltr">
+                                <svg style="height:500px;width:100%"></svg>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                                    <script>
+                                                        $(document).ready(function() {
+    $('#datatable').DataTable( {
+        "paging":   false,
+        "ordering": false,
+        "info":     false
+    } );
+} );
+                                                    </script>
+{% endblock %}
+
+
+

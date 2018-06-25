@@ -1,0 +1,42 @@
+DbBundle\Entity\AtributType:
+    type: entity
+    table: atribut_type
+    indexes:
+        id_type:
+            columns:
+                - id_type
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        code:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        actif:
+            type: integer
+            nullable: false
+            unsigned: false
+            default: '1'
+    manyToOne:
+        idType:
+            targetEntity: TypeDawra
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_type:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

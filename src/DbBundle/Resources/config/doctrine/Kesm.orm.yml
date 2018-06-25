@@ -1,0 +1,28 @@
+DbBundle\Entity\Kesm:
+    type: entity
+    table: kesm
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        code:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        psw:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+    lifecycleCallbacks: {  }

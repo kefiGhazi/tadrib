@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+    
+<!-- Mirrored from coderthemes.com/minton_2.0/blue_rtl/index.html  -->
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="الكشافة التونسية">
+        <meta name="author" content="Simplicity">
+
+        <link rel="shortcut icon" href="{{ asset('bundles/home/images/favicon_1.png')}}">
+
+ 
+
+        <!-- DataTables -->
+        <link href="{{asset('bundles/home/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/datatables/buttons.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/datatables/fixedHeader.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/datatables/responsive.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/datatables/scroller.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <link href="{{asset('bundles/home/plugins/switchery/switchery.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('bundles/home/css/bootstrap-rtl.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/core.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/icons.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/components.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/pages.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/menu.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/responsive.css')}}" rel="stylesheet" type="text/css">
+
+        <script src="{{asset('bundles/home/js/modernizr.min.js')}}"></script>
+        
+        
+        
+        
+    </head>
+
+
+    <body class="fixed-left">
+        
+        <!-- Begin page -->
+        <div id="wrapper">
+               
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            {% block body %}{% endblock %}
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+
+
+    
+              <script>
+            var resizefunc = [];
+        </script>
+
+        
+       
+        
+        <!-- jQuery  -->
+        <script src="{{asset('bundles/home/js/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/home/js/bootstrap-rtl.min.js')}}"></script>
+        <script src="{{asset('bundles/home/js/detect.js')}}"></script>
+        <script src="{{asset('bundles/home/js/fastclick.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.slimscroll.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.blockUI.js')}}"></script>
+        <script src="{{asset('bundles/home/js/waves.js')}}"></script>
+        <script src="{{asset('bundles/home/js/wow.min.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.nicescroll.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.scrollTo.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/switchery/switchery.min.js')}}"></script>
+
+        <!-- Datatables-->
+        <script src="{{asset('bundles/home/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/buttons.bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/jszip.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/pdfmake.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/vfs_fonts.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/buttons.print.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.keyTable.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.responsive.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/responsive.bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/datatables/dataTables.scroller.min.js')}}"></script>
+
+        <!-- Datatable init js -->
+        <script src="{{asset('bundles/home/pages/datatables.init.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.core.js')}}"></script>
+        <script src="{{asset('bundles/home/js/jquery.app.js')}}"></script>
+        
+        <!-- Notification js -->
+        <script src="{{asset('bundles/home/plugins/notifyjs/dist/notify.min.js')}}"></script>
+        <script src="{{asset('bundles/home/plugins/notifications/notify-metro.js')}}"></script>
+       
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+               
+                $('#datatable').dataTable({
+                    dom: 'Bfrtip',
+        buttons: [
+            'copy', 'excel'
+        ],
+                    "language": {
+                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
+                    }});
+                $('#datatable2').dataTable({
+                "language": {
+                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
+                    }});
+                $('#datatable-keytable').DataTable( { keys: true } );
+                $('#datatable-responsive').DataTable();
+                $('#datatable-scroller').DataTable( { ajax: "{{asset('bundles/home/plugins/datatables/json/scroller-demo.json')}}", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
+                var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
+            } );
+            TableManageButtons.init();
+
+        </script>
+       
+       <script>
+           {% if message is defined %}
+            $.Notification.notify('{{message.type}}','top left','{{message.titre}}', '{{message.text}}');
+           {% endif %}
+        </script>
+    
+    </body>
+
+</html
+
+
