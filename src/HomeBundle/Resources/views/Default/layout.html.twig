@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
-    
-<!-- Mirrored from coderthemes.com/minton_2.0/blue_rtl/index.html  -->
-<head>
+
+    <!-- Mirrored from coderthemes.com/minton_2.0/blue_rtl/index.html  -->
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="description" content="الكشافة التونسية.">
@@ -10,7 +10,7 @@
 
         <link rel="shortcut icon" href="{{ asset('bundles/home/images/favicon_1.png')}}">
 
- 
+
 
         <!-- DataTables -->
         <link href="{{asset('bundles/home/plugins/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -28,234 +28,230 @@
         <link href="{{asset('bundles/home/css/pages.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('bundles/home/css/menu.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('bundles/home/css/responsive.css')}}" rel="stylesheet" type="text/css">
-
+        <link href="{{asset('bundles/home/css/select2.min.css')}}" rel="stylesheet" type="text/css">
+        
+        
+        
         <script src="{{asset('bundles/home/js/modernizr.min.js')}}"></script>
-        
-        
-        
-        
+        <script src="{{asset('bundles/home/js/jquery.min.js')}}"></script>
+
+
+
     </head>
 
 
     <body class="fixed-left" style="font-size: 15px;">
-        
+
         <!-- Begin page -->
         <div id="wrapper">
-               {% include "HomeBundle:Default:menu.html.twig" %}
-    
+            {% include "HomeBundle:Default:menu.html.twig" %}
+
 
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->                      
-            {% block body %}{% endblock %}
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
+        {% block body %}{% endblock %}
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
 
 
-        </div>
-        <!-- END wrapper -->
+    </div>
+    <!-- END wrapper -->
 
 
-    
-              <script>
-            var resizefunc = [];
-        </script>
 
-        
-       
-        
-        <!-- jQuery  -->
-        <script src="{{asset('bundles/home/js/jquery.min.js')}}"></script>
-        <script src="{{asset('bundles/home/js/bootstrap-rtl.min.js')}}"></script>
-        <script src="{{asset('bundles/home/js/detect.js')}}"></script>
-        <script src="{{asset('bundles/home/js/fastclick.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.slimscroll.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.blockUI.js')}}"></script>
-        <script src="{{asset('bundles/home/js/waves.js')}}"></script>
-        <script src="{{asset('bundles/home/js/wow.min.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.nicescroll.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.scrollTo.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/switchery/switchery.min.js')}}"></script>
+    <script>
+        var resizefunc = [];
+    </script>
 
-        <!-- Datatables-->
-        <script src="{{asset('bundles/home/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.bootstrap.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.buttons.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/buttons.bootstrap.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/jszip.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/pdfmake.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/vfs_fonts.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/buttons.html5.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/buttons.print.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.keyTable.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.responsive.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/responsive.bootstrap.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/datatables/dataTables.scroller.min.js')}}"></script>
 
-        <!-- Datatable init js -->
-        <script src="{{asset('bundles/home/pages/datatables.init.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.core.js')}}"></script>
-        <script src="{{asset('bundles/home/js/jquery.app.js')}}"></script>
-        
-        <!-- Notification js -->
-        <script src="{{asset('bundles/home/plugins/notifyjs/dist/notify.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/notifications/notify-metro.js')}}"></script>
-        
-        <!-- Nvd3 js -->
-        <script src="{{asset('bundles/home/plugins/d3/d3.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/nvd3/build/nv.d3.min.js')}}"></script>
-        <script src="{{asset('bundles/home/plugins/nvd3/jquery.nvd3.init.js')}}"></script>
-       
-   
+
+
+    <!-- jQuery  -->
+    <script src="{{asset('bundles/home/js/bootstrap-rtl.min.js')}}"></script>
+    <script src="{{asset('bundles/home/js/detect.js')}}"></script>
+    <script src="{{asset('bundles/home/js/fastclick.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.slimscroll.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.blockUI.js')}}"></script>
+    <script src="{{asset('bundles/home/js/waves.js')}}"></script>
+    <script src="{{asset('bundles/home/js/wow.min.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.nicescroll.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.scrollTo.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/switchery/switchery.min.js')}}"></script>
+
+    <!-- Datatables-->
+    <script src="{{asset('bundles/home/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/buttons.bootstrap.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/pdfmake.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/buttons.print.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.fixedHeader.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.keyTable.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/responsive.bootstrap.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/datatables/dataTables.scroller.min.js')}}"></script>
+
+    <!-- Datatable init js -->
+    <script src="{{asset('bundles/home/pages/datatables.init.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.core.js')}}"></script>
+    <script src="{{asset('bundles/home/js/jquery.app.js')}}"></script>
+
+    <!-- Notification js -->
+    <script src="{{asset('bundles/home/plugins/notifyjs/dist/notify.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/notifications/notify-metro.js')}}"></script>
+
+    <!-- Nvd3 js -->
+    <script src="{{asset('bundles/home/plugins/d3/d3.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/nvd3/build/nv.d3.min.js')}}"></script>
+    <script src="{{asset('bundles/home/plugins/nvd3/jquery.nvd3.init.js')}}"></script>
+        <script src="{{asset('bundles/home/js/select2.min.js')}}" ></script>
+
         <script type="text/javascript">
-            $(document).ready(function() {
-               
-                $('#datatable').dataTable({
-                    "language": {
-                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
-                    }});
-                $('#datatable2').dataTable({
-                    "language": {
-                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
-                    }
-});
-                $('#datatable-keytable').DataTable( { keys: true } );
-                $('#datatable-responsive').DataTable();
-                $('#datatable-scroller').DataTable( { ajax: "{{asset('bundles/home/plugins/datatables/json/scroller-demo.json')}}", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
-                var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
-            } );
-            TableManageButtons.init();
-
+        $('select').select2();
         </script>
-       
-       <script>
-           {% if message is defined %}
-            $.Notification.notify('{{message.type}}','top left','{{message.titre}}', '{{message.text}}');
-           {% endif %}
-        </script>
-        <script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#datatable').dataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'pdf'],
+                "language": {
+                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
+                }});
+            $('#datatable2').dataTable({
+                "language": {
+                    "url": "{{asset('bundles/home/plugins/datatables/Arabic.json')}}"
+                }
+            });
+            $('#datatable-keytable').DataTable({keys: true});
+            $('#datatable-responsive').DataTable();
+            $('#datatable-scroller').DataTable({ajax: "{{asset('bundles/home/plugins/datatables/json/scroller-demo.json')}}", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true});
+            var table = $('#datatable-fixed-header').DataTable({fixedHeader: true});
+        });
+        TableManageButtons.init();
+
+    </script>
+
+    <script>
+        {% if message is defined %}
+            $.Notification.notify('{{message.type}}', 'top left', '{{message.titre}}', '{{message.text}}');
+        {% endif %}
+    </script>
+    <script>
 
 
 
-(function($) {
-    'use strict';
-
-    
-    
-    var historicalBarChart = [{
-        key: 'Cumulative Return',
-        values: [
-            {%if stats is defined%} 
+        (function($) {
+        'use strict';
+                var historicalBarChart = [{
+                key: 'Cumulative Return',
+                        values: [
+        {%if stats is defined%} 
             {%for stat in stats%}
-          {
-            'label': '{{stat.name}}',
-            'value': {{stat.total}}
-         }, 
-                {%endfor%}
-                {%endif%}
-        ]
-    }];
-    nv.addGraph(function() {
-        var barChart = nv.models.discreteBarChart().x(function(d) {
-            return d.label;
-        }).y(function(d) {
-            return d.value;
-        }).staggerLabels(true).tooltips(false).showValues(true).duration(250);
-        barChart.yAxis.axisLabel('عدد المسجلين');
-        d3.select('.bar-chart svg').datum(historicalBarChart).call(barChart);
-        nv.utils.windowResize(barChart.update);
-        return barChart;
-    });
-       
-    
-    //Regular pie chart example
-	{#nv.addGraph(function() {
-	  var chart = nv.models.pieChart()
-	      .x(function(d) { return d.label })
-	      .y(function(d) { return d.value })
-	      .showLabels(true);
+                                {
+                                'label': '{{stat.name}}',
+                                        'value':{{stat.total}}
+                                },
+            {%endfor%}
+        {%endif%}
+                            ]
+                    }];
+                    nv.addGraph(function() {
+                    var barChart = nv.models.discreteBarChart().x(function(d) {
+                    return d.label;
+                    }).y(function(d) {
+                    return d.value;
+                    }).staggerLabels(true).tooltips(false).showValues(true).duration(250);
+                            barChart.yAxis.axisLabel('عدد المسجلين');
+                            d3.select('.bar-chart svg').datum(historicalBarChart).call(barChart);
+                            nv.utils.windowResize(barChart.update);
+                            return barChart;
+                    });
+//Regular pie chart example
+        {#nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .showLabels(true);
 	
-	    d3.select("#chart1 svg")
-	        .datum(exampleData)
-	      	.transition().duration(1200)
-	        .call(chart);
+            d3.select("#chart1 svg")
+                .datum(exampleData)
+                .transition().duration(1200)
+                .call(chart);
 	
-	  return chart;
-	});#}
-	
-	//Donut chart example
-	nv.addGraph(function() {
-	  var chart = nv.models.pieChart()
-	      .x(function(d) { return d.label })
-	      .y(function(d) { return d.value })
-	      .showLabels(true)     //Display pie labels
-	      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-	      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-	      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-	      .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-	      ;
-	
-	    d3.select("#chart2 svg")
-	        .datum(exampleData2())
-	        .transition().duration(350)
-	        .call(chart);
-	
-	  return chart;
-	});
-        
-	nv.addGraph(function() {
-	  var chart = nv.models.pieChart()
-	      .x(function(d) { return d.label })
-	      .y(function(d) { return d.value })
-	      .showLabels(true)     //Display pie labels
-	      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-	      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-	      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-	      .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-	      ;
-	
-	    d3.select("#chart1 svg")
-	        .datum(exampleData())
-	        .transition().duration(350)
-	        .call(chart);
-	
-	  return chart;
-	});
-	
-	//Pie chart example data. Note how there is only a single array of key-value pairs.
-	function exampleData() {
-	  return  [
-              {%if statsK is defined%} 
+          return chart;
+        });#}
+
+                    //Donut chart example
+                    nv.addGraph(function() {
+                    var chart = nv.models.pieChart()
+                            .x(function(d) { return d.label })
+                            .y(function(d) { return d.value })
+                            .showLabels(true)     //Display pie labels
+                            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                            ;
+                            d3.select("#chart2 svg")
+                            .datum(exampleData2())
+                            .transition().duration(350)
+                            .call(chart);
+                            return chart;
+                    });
+                    nv.addGraph(function() {
+                    var chart = nv.models.pieChart()
+                            .x(function(d) { return d.label })
+                            .y(function(d) { return d.value })
+                            .showLabels(true)     //Display pie labels
+                            .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                            .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                            .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                            .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                            ;
+                            d3.select("#chart1 svg")
+                            .datum(exampleData())
+                            .transition().duration(350)
+                            .call(chart);
+                            return chart;
+                    });
+                    //Pie chart example data. Note how there is only a single array of key-value pairs.
+                            function exampleData() {
+                            return  [
+        {%if statsK is defined%} 
             {%for stat in statsK%}
-	      { 
-	        'label': '{{stat.name}}',
-                'value': {{stat.chara}}
-	      } , 
-	      {%endfor%}
-              {%endif%}
-	      
-	    ];
-	}
-	function exampleData2() {
-	  return  [
-              
-	      {%if statsK is defined%} 
+                                {
+                                'label': '{{stat.name}}',
+                                        'value':{{stat.chara}}
+                                },
+            {%endfor%}
+        {%endif%}
+
+                            ];
+                            }
+                    function exampleData2() {
+                    return  [
+
+        {%if statsK is defined%} 
             {%for stat in statsK%}
-	      { 
-	        'label': '{{stat.name}}',
-                'value': {{stat.tamhidiya}}
-	      } , 
-	      {%endfor%}
-              {%endif%}
-	      
-	      
-	    ];
-	}
-})(jQuery);
-        </script>
-    </body>
+                        {
+                        'label': '{{stat.name}}',
+                                'value':{{stat.tamhidiya}}
+                        },
+            {%endfor%}
+        {%endif%}
+
+
+                    ];
+                    }
+                    })(jQuery);
+    </script>
+</body>
 
 </html
 

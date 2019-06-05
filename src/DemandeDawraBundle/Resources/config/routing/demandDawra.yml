@@ -1,0 +1,46 @@
+demande_dawra_index:
+    path:     /all
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:index" }
+    methods:  GET
+
+demande_dawra_show:
+    path:     /{id}/show
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:show" }
+    methods:  GET
+
+demande_dawra_new:
+    path:     /new
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:new" }
+    methods:  [GET, POST]
+    
+demande_dawra_aceept:
+    path:     /{id}/accept
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:accept" }
+    methods:  [GET, POST]
+    
+demande_dawra_pdf:
+    path:     /{id}/pdf
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:pdf" }
+    methods:  [GET, POST]
+    
+demande_dawra_realiser:
+    path:     /{id}/realiser
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:realiser" }
+    methods:  [GET, POST]
+    
+demande_dawra_generer:
+    path:     /{id}/generer
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:generer" }
+    methods:  [GET, POST]
+
+demande_dawra_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:edit" }
+    methods:  [GET, POST]
+
+demande_dawra_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DemandeDawraBundle:DemandeDawra:delete" }
+    methods:  [GET, POST]
+    
+

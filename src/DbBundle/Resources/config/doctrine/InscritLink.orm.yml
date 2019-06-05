@@ -1,0 +1,83 @@
+DbBundle\Entity\InscritLink:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\InscritLinkRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        chefLastDirassa:
+            type: string
+            length: 255
+        lieuxLastDirassa:
+            type: string
+            length: 255
+        moisLastDirassa:
+            type: string
+            length: 255
+        yearLastDirassa:
+            type: string
+            length: 255
+        accepteW:
+            type: integer
+            nullable: true
+        accepteJ:
+            type: integer
+            nullable: true
+        paye:
+            type: integer
+            nullable: true
+        presence:
+            type: integer
+            nullable: true
+        result:
+            type: integer
+            nullable: true
+        accepteMessageW:
+            type: text 
+            nullable: true
+        accepteMessageJ:
+            type: text   
+            nullable: true
+    manyToOne:
+        lastDirassa:
+            targetEntity: AtributType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                last_dirassa:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idLink:
+            targetEntity: Link
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_link:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idChef:
+            targetEntity: Chef
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_chef:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idDirassaA:
+            targetEntity: DawraTadrib
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            nullable: true
+            joinColumns:
+                id_dirassa_a:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -118,8 +118,8 @@
                                                     {#<div class="btn-group"> 
                                                         <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui'})}}">نعم</a></li>
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non'})}}">لا</a></li>
+                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','Jiha':'oui'})}}">نعم</a></li>
+                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','Jiha':'oui'})}}">لا</a></li>
                                                         </ul>
                                                     </div>#}
                                                 {%elseif inscrit.accepteJ == 2 and inscrit.accepteW == 1%}

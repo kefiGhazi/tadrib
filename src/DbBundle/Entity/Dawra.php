@@ -33,6 +33,11 @@ class Dawra
      * @var string
      */
     private $lieux;
+    
+    /**
+     * @var string
+     */
+    private $etat = 'open';
 
     /**
      * @var \DateTime
@@ -332,4 +337,14 @@ class Dawra
     {
         return $this->idAtributType;
     }
+    
+    function getEtat() {
+        return $this->etat;
+    }
+
+    function setEtat($etat) {
+        $this->etat = $etat;
+    }
+
+
 }

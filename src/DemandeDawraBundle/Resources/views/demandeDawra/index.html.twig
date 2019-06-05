@@ -1,0 +1,168 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+
+                            <h1>قائمة المطالب</h1>
+
+                        </div>
+                        <div class="card-box"> 
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer resize" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>تاريخ الطلب</th>
+                                        <th>الجهة</th>
+                                        <th>الدورة</th>
+                                        <th>قائدها</th>
+                                        <th>تاريخ</th>
+                                        <th>المكان</th>
+                                        <th>القسم</th>
+                                        <th>عدد المتدربين</th>
+                                        <th>قرار اللجنة الوطنية</th>
+                                        <th>الانجاز</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for dawra in dawras %}
+                                        <tr>
+                                            <td>{{ dawra.dateCreation|date('Y-m-d') }}</td>
+                                            <td>{{ dawra.idJiha.name }}</td>
+                                            <td>{{ dawra.idType.nom }} {{ dawra.idAtributType.nom }}</td>
+                                            <td>{{dawra.chefDawra}}</td>
+                                            <td>من {% if dawra.dateDeb %}{{ dawra.dateDeb|date('Y-m-d') }}{% endif %} {% if dawra.dateFin %} إلى {{ dawra.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ dawra.lieux }}</td>
+                                            <td>{{ dawra.idKesm.nom }}</td>
+                                            <td>{{dawra.nombre}}</td>
+                                            <td>
+                                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI")%}
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="{{path('demande_dawra_aceept',{'id' : dawra.id ,'repense':1})}}">نعم</a></li>
+                                                            <li><a data-toggle="modal" data-target="#con-close-modal-non-{{dawra.id}}">لا</a></li>
+                                                        </ul>
+                                                        <div id="con-close-modal-non-{{dawra.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <form action="{{path('demande_dawra_aceept',{'id':dawra.id,'repense':2})}}" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                            <h4 class="modal-title">رفض الدورة </h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="field-1" class="control-label">السبب</label>
+                                                                                        <textarea name="raison" class="form-control" required="" ></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                                                                            <button type="submit" class="btn btn-default waves-effect" >تسجيل</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {%endif%}
+                                                {%if dawra.repense == 1%}
+                                                    <span class="label label-success">مقبول</span>
+                                                {%elseif dawra.repense == 2%}
+                                                    <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{dawra.raison}}">مرفوض</span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                            </td>
+                                            <td>
+                                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                    {%if dawra.repense in [1,2]%}
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="{{path('demande_dawra_realiser',{'id':dawra.id,'repense':1})}}">نعم</a></li>
+                                                                <li><a href="{{path('demande_dawra_realiser',{'id':dawra.id,'repense':2})}}">لا</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    {%endif%}
+                                                {%endif%}
+                                                {%if dawra.repense == 1%}
+                                                    {%if dawra.realiser == 1%}
+                                                        <span class="label label-success">نعم</span>
+                                                    {%elseif dawra.realiser == 2%}
+                                                        <span class="label label-danger" >لا</span>
+                                                    {%else%}
+                                                        <span class="label label-default">في طور الإنجاز</span>
+                                                    {%endif%}
+                                                {%elseif dawra.repense == 2%}
+                                                    <span class="label label-danger" >لا</span>
+                                                {%else%}
+                                                    <span class="label label-default">في طور الإنجاز</span>
+                                                {%endif%}
+                                                {%if  app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                                    {%if dawra.repense == 1 and dawra.realiser == 1 and dawra.generer == 1 %}
+                                                        <a href="#" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تم إنشاء الدورة"><i class="fa fa-check"></i></a>
+                                                        {%else%}
+                                                        <a href="#" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="لم يقع إنشاء الدورة"><i class="fa fa-close"></i></a>
+                                                        {%endif%}
+                                                        {%if dawra.repense == 1 %}
+                                                        <a href="{{ path('demande_dawra_pdf', { 'id': dawra.id }) }}" class="btn btn-xs btn-pink" target="_blank" data-toggle="tooltip" data-placement="top" title="" data-original-title="تحميل الترخيص"><i class="fa fa-print"></i></a>
+                                                        {%endif%}
+                                                    {%endif%}
+
+                                            </td>
+
+
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                <td>
+                                                    <a href="{{ path('demande_dawra_delete', { 'id': dawra.id }) }}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف"><i class="fa fa-trash"></i> </a>
+                                                    <a href="{{ path('demande_dawra_edit', { 'id': dawra.id }) }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل"><i class="fa fa-pencil"></i> </a>
+                                                    {%if dawra.repense == 1 and dawra.realiser == 1 and dawra.generer != 1%}
+                                                        <a href="{{ path('demande_dawra_generer', { 'id': dawra.id }) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="إنشاء الدورة"><i class="fa fa-plus"></i></a>
+                                                        {%else%}
+                                                        <a href="#" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تم إنشاء الدورة"><i class="fa fa-check"></i></a>
+                                                        {%endif%}
+                                                </td>
+                                            {%else%}
+                                                <td>
+                                                    {%if dawra.generer != 1 %}
+                                                        <a href="{{ path('demande_dawra_edit', { 'id': dawra.id }) }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل"><i class="fa fa-pencil"></i> </a>
+                                                    {%else%}
+                                                        <a href="#" class="btn btn-xs btn-primary disabled" data-toggle="tooltip" data-placement="top" title="" data-original-title="التعديل مغلق"><i class="fa fa-pencil"></i> </a>
+
+                                                    {%endif%}
+                                                </td>
+                                            {%endif%}
+
+
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <ul>
+                                <li>
+
+                                    <a href="{{ path('demande_dawra_new') }}" class="btn btn-default"><i class="fa fa-plus"></i> مطلب جديد</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

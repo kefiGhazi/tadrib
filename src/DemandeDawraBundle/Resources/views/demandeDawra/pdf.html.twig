@@ -1,0 +1,56 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <img src="{{asset('bundles/home/images/header_pdf.jpg')}}">
+                                </div>
+                                <div class="col-sm-10">
+                                    <center><h2> جهة {{dawra.idJiha.name}}</h2></center>
+                                    <div style="font-size: 25px;color: black;">
+                                        <h4>تحية كشفية,</h4>
+                                        <p>
+                                            وبعد, إستجابة لمطلبكم يرخص رئيس اللجنة الوطنية لتنمية القيادات, لجهة <b>{{dawra.idJiha.name}}</b> بتنظيم {{dawra.idType.nom }} <b>{{ dawra.idAtributType.nom }}</b> وفق االتالي:
+                                        </p>
+                                        <ul>
+                                            <li>التاريخ : <b> من {% if dawra.dateDeb %}{{ dawra.dateDeb|date('Y-m-d') }}{% endif %} {% if dawra.dateFin %} إلى {{ dawra.dateFin|date('Y-m-d') }}{% endif %} </b></li>
+                                            <li>المكان : <b>  {{ dawra.lieux }} </b></li>
+                                            <li>بمشاركة : <b>  {{ dawra.nombre }} </b> متدربا</li>
+                                            <li>بقيادة : <b>  {{ dawra.chefDawra }} </b></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <img src="{{asset('bundles/home/images/body_pdf.jpg')}}">
+                                </div>
+                                <div class="col-sm-10"></div>
+                                <div class="col-sm-10">
+                                    <img  src="{{asset('bundles/home/images/footer_pdf.jpg')}}">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="card-box ">
+                                <button class="btn btn-primary waves-effect waves-light m-t-10" onclick="print()"><i class="fa fa-print"></i> طباعة</button>
+                            </div>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

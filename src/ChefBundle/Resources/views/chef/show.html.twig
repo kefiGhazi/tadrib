@@ -44,6 +44,19 @@
                                 <div class="col-sm-6 col-lg-4 col-xs-12">
                                     <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى التدريبي :</b><span class="small"> {{ chef.lastDirasa }}</span></h3></div>
                                 </div>
+                                {% if chef.lastDirasa == 'مساعد قائد تدريب' or chef.lastDirasa == 'قائد تدريب'%}
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الاعتماد التدريبي :</b><span class="small"> {% if chef.valide == 'OUI'%} نعم{% else %} لا {% endif %} </span></h3></div>
+                                </div>
+                                {% if chef.valide == 'OUI'%}
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>تاريخ بداية الاعتماد :</b><span class="small"> {% if chef.valideDateDeb %}{{ chef.valideDateDeb|date('Y-m-d') }}{% endif %}</span></h3></div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>تاريخ بداية الاعتماد :</b><span class="small"> {% if chef.valideDateFin %}{{ chef.valideDateFin|date('Y-m-d') }}{% endif %}</span></h3></div>
+                                    </div>
+                                {% endif %}
+                                {% endif %}
                                 <div class="col-sm-6 col-lg-4 col-xs-12">
                                     <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى الدراسي :</b><span class="small"> {{ chef.etude }}</span></h3></div>
                                 </div>
@@ -64,6 +77,11 @@
                                 {{ form_start(delete_form) }}
                                 <button class=" btn btn-bg btn-danger" type="submit"><i class="fa fa-times"></i> حذف</button>
                                 {{ form_end(delete_form) }}
+                            </div>
+                            <div class="row pull-right" style="display: inline-flex">
+                                  {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                        <a class=" btn btn-bg btn-primary" href="{{ path('chef_erched_show', { 'id': chef.id }) }}" ><i class="fa fa-pencil"></i> <span> تقارير الارشاد الفني </span></a>
+                                {%endif%}
                             </div>
                         </div>
                         <div class="card-box col-lg-12">

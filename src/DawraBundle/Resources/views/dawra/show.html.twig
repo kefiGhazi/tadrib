@@ -9,12 +9,12 @@
             <div class="content">
                 {%if msg != null%}
                     <div class="col-sm-12 col-lg-12 col-xs-12">
-                    <div class="alert alert-dismissable alert-{{typeAlert}} text-center">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <strong>{{msg}}</strong>
-                    </div>
+                        <div class="alert alert-dismissable alert-{{typeAlert}} text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>{{msg}}</strong>
+                        </div>
 
-                </div>
+                    </div>
                 {%endif%}
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-xs-12">
@@ -37,8 +37,9 @@
                         </div>
                         <div class="card-box"> 
                             <div class="title">
-                                <button class="btn btn-primary waves-effect waves-light m-t-10" data-toggle="modal" data-target="#con-close-modal2"><i class="fa fa-plus"></i> إضافة قيادة الدورة</button>
-
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                    <button class="btn btn-primary waves-effect waves-light m-t-10" data-toggle="modal" data-target="#con-close-modal2"><i class="fa fa-plus"></i> إضافة قيادة الدورة</button>
+                                {%endif%}
                             </div>                        
                             <div class="body">
                                 <h2>قيادة الدورة</h2>
@@ -47,6 +48,9 @@
                                         <tr>
                                             <th>إسم القائد</th>
                                             <th>الصفة </th>
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                <th style="width: 20px;">#</th>
+                                            {%endif%}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,6 +58,9 @@
                                             <tr>
                                                 <td>{{itar.idChef.nom}} {{itar.idChef.prenom}}</td>
                                                 <td>{{itar.idSifa.nom}}</td>
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                    <td><a class="btn btn-xs btn-danger supprimeItar" href="{{path('dawra_delete_itar',{'id': itar.id})}}"><i class="fa fa-trash"></i></a></td>
+                                                {%endif%}
                                             </tr>
                                         {%endfor%}
                                     </tbody>
@@ -62,7 +69,9 @@
                         </div>
                         <div class="card-box"> 
                             <div class="title">
-                                <button class="btn btn-primary waves-effect waves-light m-t-10" data-toggle="modal" data-target="#con-close-modal"><i class="fa fa-plus"></i> إظافة متدرب(ة)</button>
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                    <button class="btn btn-primary waves-effect waves-light m-t-10" data-toggle="modal" data-target="#con-close-modal"><i class="fa fa-plus"></i> إظافة متدرب(ة)</button>
+                                {%endif%}
                             </div>                        
                             <div class="body">
                                 <h2>المشاركين في الدورة</h2>
@@ -74,6 +83,9 @@
                                             <th>الجهة </th>
                                             <th>الفوج </th>
                                             <th>النتيجة </th>
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                <th style="width: 20px;"></th>
+                                            {%endif%}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,12 +96,15 @@
                                                 <td>{{deres.idChef.idJiha.name}}</td>
                                                 <td>{{deres.idChef.fawej}}</td>
                                                 <td>
-                                                     {%if deres.result == 1%}
-                                                    <span class="label label-success">يؤهل</span>
-                                                {%else%}
-                                                    <span class="label label-danger">يعيد الدورة</span>
-                                                {%endif%}
+                                                    {%if deres.result == 1%}
+                                                        <span class="label label-success">يؤهل</span>
+                                                    {%else%}
+                                                        <span class="label label-danger">يعيد الدورة</span>
+                                                    {%endif%}
                                                 </td>
+                                {%if dawra.etat =='open' or app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                    <td><a class="btn btn-xs btn-danger supprimeItar" href="{{path('dawra_delete_deres',{'id': deres.id})}}"><i class="fa fa-trash"></i></a></td>
+                                                {%endif%}
                                             </tr>
                                         {%endfor%}
                                     </tbody>
@@ -131,7 +146,7 @@
                                 </div>
                             </div>
 
-                           
+
 
                         </div>
                         <div class="modal-footer">
@@ -172,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
@@ -182,5 +197,7 @@
                 </div>
             </div>
         </div><!-- /.modal -->
+
+
     {% endblock %}
 

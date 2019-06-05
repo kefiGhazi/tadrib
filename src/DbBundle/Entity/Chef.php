@@ -63,6 +63,20 @@ class Chef
      * @var string
      */
     private $tel;
+    
+    /**
+     * @var string
+     */
+    private $valide = 'NON';
+    
+    /**
+     * @var \DateTime
+     */
+    private $valideDateDeb;
+    /**
+     * @var \DateTime
+     */
+    private $valideDateFin;
 
    
 
@@ -86,7 +100,7 @@ class Chef
      */
     private $actif = 1;
     
-/**
+    /**
      * @var integer
      */
     private $sex = 1;
@@ -374,6 +388,53 @@ class Chef
     function setSex($sex) {
         $this->sex = $sex;
     }
+    function getValide() {
+        return $this->valide;
+    }
+
+    /**
+     * Get valideDateDeb
+     *
+     * @return \DateTime 
+     */
+    function getValideDateDeb() {
+        return $this->valideDateDeb;
+    }
+
+    /**
+     * Get valideDateFin
+     *
+     * @return \DateTime 
+     */
+    function getValideDateFin(){
+        return $this->valideDateFin;
+    }
+
+    function setValide($valide) {
+        $this->valide = $valide;
+    }
+
+    /**
+     * Set valideDateDeb
+     *
+     * @param \DateTime $valideDateDeb
+     * @return Chef
+     */
+    function setValideDateDeb($valideDateDeb) {
+        $this->valideDateDeb = $valideDateDeb;
+    }
+
+    /**
+     * Set valideDateFin
+     *
+     * @param \DateTime $valideDateFin
+     * @return Chef
+     */
+    function setValideDateFin($valideDateFin) {
+        $this->valideDateFin = $valideDateFin;
+    }
+
+
 
 
 

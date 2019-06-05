@@ -19,8 +19,10 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
             new ChefBundle\ChefBundle(),
+            new SimpleChefBundle\SimpleChefBundle(),
             new DbBundle\DbBundle(),
             new DawraBundle\DawraBundle(),
+            new DemandeDawraBundle\DemandeDawraBundle(),
             new HomeBundle\HomeBundle(),
             new DirasetBundle\DirasetBundle(),
         );

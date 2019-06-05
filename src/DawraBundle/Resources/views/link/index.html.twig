@@ -1,0 +1,62 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <h1>روابط الدراسات</h1>
+                        </div>
+                        <div class="card-box"> 
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>إسم الدورة</th>
+                                        <th>مركز التدريب</th>
+                                        <th>السنة الكشفية</th>
+                                        <th>تاريخ البداية</th>
+                                        <th>تاريخ النهاية</th>
+                                        <th> بداية االتسجيل</th>
+                                        <th> نهاية التسجيل</th>
+                                        <th>---</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for link in links %}
+                                        <tr>
+                                            <td>{{ link.nom }}</td>
+                                            <td>{{ link.markez }}</td>
+                                            <td>{{ link.annee }}</td>
+                                            <td>{% if link.dateDeb %}{{ link.dateDeb|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{% if link.dateFin %}{{ link.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{% if link.dateDebInscrit %}{{ link.dateDebInscrit|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{% if link.dateFinInscrit %}{{ link.dateFinInscrit|date('Y-m-d') }}{% endif %}</td>
+                                            <td>
+                                                <div class="btn-group dropup">
+                                                    <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">الخيارات <span class="caret"></span></button>
+                                                    <div class="dropdown-menu" x-placement="top-start" >
+                                                        <a class="dropdown-item" href="{{ path('link_show', { 'id': link.id }) }}"><i class="fa fa-eye" style="color: blue;"></i>  مشاهدة</a><br>
+                                                        <a class="dropdown-item" href="{{ path('link_edit', { 'id': link.id }) }}"><i class="fa fa-pencil" style="color: orange;"></i>  تعدبل</a><br>
+                                                        <a class="dropdown-item" href="{{ path('link_delete', { 'id': link.id }) }}" onclick="return confirm('مسح الدورة ؟')"><i class="fa fa-trash" style="color: red;"></i>  مسح</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('link_new') }}" class="btn btn-default"><i class="fa fa-plus"></i> إضافة رابط</a>
+                                    </li>
+                                </ul>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

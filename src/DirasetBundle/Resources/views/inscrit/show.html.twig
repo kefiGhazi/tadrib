@@ -8,255 +8,120 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-12 col-xs-12">
                     <div class="card-box">
-                        <h1 class="text-center">الدراسات التدريبية ديسمبر  2017  </h1>
+                        <h1 class="text-center">الدراسات التدريبية أوت  2018  </h1>
                         <h4 class="text-center"> اللجنةالوطنية لتنمية القيادات -- لجنةالثقافة الرقمية</h4>
                     </div>
 
                 </div>
             </div>
-            <div class="content" style="margin-top: 0px;">
-                <!-- Start content -->
-                <div class="row">
-                    <div class="col-sm-8 col-lg-8 col-xs-12 col-lg-offset-3">
-                        <div class="widget-simple card-box ">
-                            {%if inscrit%}
-                                <div class="row">
-   {#                                 <h3><b>الاسم :</b> <span style="color: grey;"> {{inscrit.nom}} </span></h3>
-                                    <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
-                                    <h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>
-                                    <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
-#}
-                                    <div class="row">
-{#                                                                            {%if inscrit.accepteW == 1 and inscrit.accepteJ == 1 and inscrit.paye == 1 and inscrit.idMarkez != null%}
-                                                                            {%if inscrit.accepteW == 1 and inscrit.accepteJ == 1 and inscrit.paye == 1 %}
-#}                                                                            {%if inscrit.result == 1  %}
-                                          
-                                            
+
+
+            {%if inscrit%}
+                {%if inscrit.accepteW == 1 and inscrit.accepteJ == 1 and inscrit.paye == 1 %}
+                    {%if inscrit.result == 1  %} 
+                        <div class="content" style="margin-top: 0px;">
+                            <!-- Start content -->
+                            <div class="row">
+                                <div class="col-sm-8 col-lg-8 col-xs-12 col-lg-offset-3">
+                                    <div class="widget-simple card-box ">
+                                        <div class="row">
                                             <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                  <h3><b>الاسم :</b> <span style="color: grey;"> {{inscrit.nom}} </span></h3>
-                                    <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
-                                    {#<h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>#}
-                                    <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
-                                    <h3><b>الدراسة :</b> <span style="color: grey;"> {{inscrit.idDirassaA.nom}} </span></h3>
-                                    </div>
-                                                <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                    <div class="alert alert-success text-center">
-                                                        <strong>يؤهل </strong><br>
-                                                    </div>
-{#                                                    <h4><b>رأي اللجنة الوطنية للتدريب :</b> <span style="color: grey;"> {%if inscrit.accepteMessageW%} {{inscrit.accepteMessageW}} {%else%} -- {%endif%} </span></h4>
-                                                    <h4><b>رأي اللجنة الجهوية للتدريب :</b> <span style="color: grey;">{%if inscrit.accepteMessageJ%} {{inscrit.accepteMessageJ}} {%else%} -- {%endif%} </span></h4>
-                                                    <h4><b>الاشتراك في الدراسة :</b> <span style="color: grey;"> {%if inscrit.paye != null and inscrit.paye == 1%} خالص {%elseif inscrit.paye != null and inscrit.paye == 2%} لم تدفع معلوم الاشتراك{%else%} -- {%endif%} </span></h4>
-#}                                                </div>
-                                            
-                                            {# <div class="col-lg-12">
-                                                <table cellspacing="0" cellpadding="0" border="0" >
-                                                    <tr>
-                                                        <td  width="597"><img src="{{asset('bundles/home/images/entete.jpg')}}" alt="titre" /></td> 
-                                                    </tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="0" >
-                                                    <tr>
-                                                        <td  width="400" align="left"></td>
-                                                        <td  width="180" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     background-color:#E6E6E6;
-                                                                     font-size: 24px; color: black">
-                                                                    {{inscrit.idKesm.nom}}</DIV> 
-                                                                </FONT></strong></td>
-                                                    </tr>
-                                                </table>
-                                                <table width="597" border="0">
-                                                    <tr>
-                                                        <td width="597"><p><strong style="color:#E11A1A"><em><h1 align="center"><FONT COLOR=#E11A1ASIZE=1>
-                                                                            <DIV STYLE="font-family: Arial Black; 
-                                                                                 font-size: 20px; color: black">
-                                                                                دعوة للدورات التدريبية <br> ديسمبر 2017
-                                                                            </DIV> 
-                                                                            </FONT></h1></em></strong></p></td>
-                                                    </tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="1" width="597">
-                                                    <tr>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    الاسم: {{inscrit.nom}}</DIV> 
-                                                                </FONT></strong></td>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    اللقب: {{inscrit.prenom}}</DIV> 
-                                                                </FONT></strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    الجهة: {{inscrit.idJiha.name}}</DIV> 
-                                                                </FONT></strong></td>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    الفوج: {%if inscrit.fawj is defined and inscrit.fawj != null%} {{inscrit.fawj}} {%else%} --{%endif%}</DIV> 
-                                                                </FONT></strong></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    بطاقة التعريف الوطنية: {% if inscrit.cin is defined %}{{inscrit.cin}}{%else%}--{%endif%}</DIV> 
-                                                                </FONT></strong></td>
-                                                        <td  width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 16px; color: black">
-                                                                    المعرف الكشفي: {% if inscrit.numeroInscrit is defined%}{{inscrit.numeroInscrit}}{%else%}--{%endif%}</DIV> 
-                                                                </FONT></strong></td>
-                                                    </tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="0" width="597">
-                                                    <tr>
-                                                        <td  width="20" align="right"><FONT COLOR=#BBBBDD SIZE=1>
-                                                            <DIV STYLE="font-family: Arial Black;
-                                                                 background-color:#E6E6E6; 
-                                                                 font-size: 16px; color: black">
-                                                                &nbsp;
-                                                            </DIV> 
-                                                            </FONT></td>
-                                                       {# <td  width="500" align="right"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black;
-                                                                     background-color:#E6E6E6; 
-                                                                     font-size: 16px; color: black">
-                                                                    العنوان: </DIV> 
-                                                                </FONT></strong></td>#}
-                                                   {#</tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="1" >
-                                                    <tr>
-                                                        <td  width="490" align="right">
-                                                            <strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 14px; color: black">
-                                                                    بعد استكمالك لفترة تربصك و استجابة لطلبك و بناءا على موافقة رئيس لجنتك الجهوية و قائد جهتك
-                                                                    ندعوك للمشاركة في الدورة التدريبة وفق المعطيات التالية:
-                                                                </DIV> 
-                                                                </FONT></strong>
-                                                        </td>
-                                                        <td  width="107" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     background-color:#E6E6E6;
-                                                                     font-size:18px; color: black">
-                                                                    {%if inscrit.idDirassa.nom is defined and inscrit.idDirassa.nom != null%} {{inscrit.idDirassa.nom}}{%else%} في طور الانجاز{%endif%} </DIV> 
-                                                                </FONT></strong></td>
-                                                    </tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="0" >
-                                                    <tr>
-                                                        <td  width="597" align="right">
-                                                            <strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 14px; color: black">
-                                                                    ** مكان الدراسة: {%if inscrit.idMarkez.nom is defined and inscrit.idMarkez.nom != null%} {{inscrit.idMarkez.nom}} {%else%} في طور الانجاز{%endif%}</DIV> 
-                                                                </FONT></strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td  width="597" align="right">
-                                                            <strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size: 14px; color: black">
-                                                                    * المطلوب الحضور يوم الأحد 17 ديسمبر 2017   من الساعة الثانية بعد الزوال الى الساعة الرابعة بعد الزوال.
-                                                                </DIV> 
-                                                                </FONT></strong>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td  width="597" align="right">
-                                                            <strong><FONT COLOR=#BBBBDD SIZE=1>
-                                                                <DIV STYLE="font-family: Arial Black; 
-                                                                     font-size:14px; color: black">
-                                                                    * تنتهي الدورة يوم السبت 23 ديسمبر 2017 على الساعة العاشرة صباحا.
-                                                                </DIV> 
-                                                                </FONT></strong>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <table cellspacing="0" cellpadding="0" border="0" >
-                                                    <tr>
-                                                        <td  width="597" ><img src="{{asset('bundles/home/images/pied2.jpg')}}" alt="titre" /></td> 
-                                                    </tr>
-                                                </table>
-                                                <table width="597" border="0" >
-                                                    <td width="300" ><p><strong style="color:#c90"><em><h1 align="right"> {%if inscrit.idDirassaA.nom is defined and inscrit.idDirassaA.nom != null%} {{inscrit.idDirassaA.nom}}{%else%} في طور الانجاز{%endif%} </h1></em></strong></p></td>
-{#                                                    <td width="20" ><p><strong style="color:#c90" ><em><h1 align="left">~</h1></em></strong></p></td>
-#}{#                                                    <td width="97" ><p><strong style="color:#c90"><em><h1 align="right">773</h1></em></strong></p></td>
-#}                                                    {#<td width="50"><script language="Javascript">
-                                                        function imprimer() {
-                                                            window.print();
-                                                        }
-                                                        </script>
-                                                        <div align="right"><input  name="imprimer" onClick="imprimer()" type="button" value="طباعة"></div></td>
-                                                    </tr>
-                                                </table>#}
+                                                <h3><b>الاسم :</b> <span style="color: grey;"> {{inscrit.nom}} </span></h3>
+                                                <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
+                                                <h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>
+                                                <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
+                                                <h3><b>الدراسة :</b> <span style="color: grey;"> {{inscrit.idDirassaA.nom}} </span></h3>
                                             </div>
-
-
-                                            {#                                        <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                                                        <div class="alert alert-success text-center">
-                                                                                            <strong>تم قبول الملف .</strong><br>
-                                            
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                                                        <h3><b>الدراسة :</b> <span style="color: grey;">{%if inscrit.idDirassaA.nom is defined and inscrit.idDirassaA.nom != null%} {{inscrit.idDirassaA.nom}}{%else%} في طور الانجاز{%endif%}  </span></h3>
-                                                                                        <h3><b>مركز التدريب :</b> <span style="color: grey;">{%if inscrit.idMarkez.nom is defined and inscrit.idMarkez.nom != null%} {{inscrit.idMarkez.nom}} {%else%} في طور الانجاز{%endif%}  </span></h3>
-                                                                                        <h3><b>قائد الدراسة :</b> <span style="color: grey;">{%if inscrit.idDirassaA.chef is defined and inscrit.idDirassaA.chef != null%} {{inscrit.idDirassaA.chef}}{%else%} في طور الانجاز{%endif%}   </span></h3>
-                                                                                    </div>
-                                                                                    <a href="javascript:window.print()" class="btn btn-inverse bt-lg waves-effect waves-light"><i class="fa fa-print"></i> طباعة</a>
-                                            #}                                    {%else%}
-                                                <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                  <h3><b>الاسم :</b> <span style="color: grey;"> {{inscrit.nom}} </span></h3>
-                                    <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
-                                    {#<h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>#}
-                                    <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
-                                    <h3><b>الدراسة :</b> <span style="color: grey;"> {{inscrit.idDirassaA.nom}} </span></h3>
-                                    </div>
-                                                <div class="col-sm-12 col-lg-12 col-xs-12">
-                                                    <div class="alert alert-danger text-center">
-                                                        {%if inscrit.paye == 1%}
-                                                        <strong>يعيد الدورة </strong><br>
-                                                        {%else%}
-                                                            <strong>غير مشارك </strong><br>
-                                                        {%endif%}
-                                                        {%if inscrit.presence == 2%}
-                                                        <p>غائب</p>
-                                                        {%endif%}
-                                                    </div>
-{#                                                    <h4><b>رأي اللجنة الوطنية للتدريب :</b> <span style="color: grey;"> {%if inscrit.accepteMessageW%} {{inscrit.accepteMessageW}} {%else%} -- {%endif%} </span></h4>
-                                                    <h4><b>رأي اللجنة الجهوية للتدريب :</b> <span style="color: grey;">{%if inscrit.accepteMessageJ%} {{inscrit.accepteMessageJ}} {%else%} -- {%endif%} </span></h4>
-                                                    <h4><b>الاشتراك في الدراسة :</b> <span style="color: grey;"> {%if inscrit.paye != null and inscrit.paye == 1%} خالص {%elseif inscrit.paye != null and inscrit.paye == 2%} لم تدفع معلوم الاشتراك{%else%} -- {%endif%} </span></h4>
-#}                                                </div>
-                                            {%endif%}
-                                        </div> 
-                                    </div>
-                                {%else%}
-                                    <div class="row">
-                                        <div class="col-sm-12 col-lg-12 col-xs-12">
-                                            <div class="alert alert-danger text-center">
-                                                <strong>لم تقم بالتسجيل في الدراسات .</strong><br>
+                                            <div class="col-sm-12 col-lg-12 col-xs-12">
+                                                <div class="alert alert-success text-center">
+                                                    <strong>ناجح و يؤهل للدور </strong><br>
+                                                </div>
                                             </div>
                                         </div>
-                                        <a href="{{path('diraset_homepage')}}" class="btn btn-sm btn-purple">الصفحة الرئيسية</a>
                                     </div>
-                                {%endif%}
+                                </div>
+                            </div>
+                        </div>
+
+                    {%else%}
+                        <div class="content" style="margin-top: 0px;">
+                            <!-- Start content -->
+                            <div class="row">
+                                <div class="col-sm-8 col-lg-8 col-xs-12 col-lg-offset-3">
+                                    <div class="widget-simple card-box ">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-lg-12 col-xs-12">
+                                                <h3><b>الاسم :</b> <span style="color: grey;">{{inscrit.nom}} </span></h3>
+                                                <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
+                                                <h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>
+                                                <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
+                                                <h3><b>الدراسة :</b> <span style="color: grey;"> {{inscrit.idDirassaA.nom}} </span></h3>
+
+                                            </div>
+                                            <div class="col-sm-12 col-lg-12 col-xs-12">
+                                                <div class="alert alert-danger text-center">
+                                                    {#<strong>غير مؤهل	 </strong><br>#}
+                                                    {%if inscrit.presence == 2%}
+                                                        <strong>لم يشارك في الدورة </strong><br>
+                                                    {%else%}
+                                                        <strong>يعيد الدورة </strong><br>
+                                                    {%endif%}
+                                                    {#{%if inscrit.presence == 2%}
+                                                        <p>غائب</p>
+                                                    {%endif%}#}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {%endif%}
+                {%else%}
+                    <div class="content" style="margin-top: 0px;">
+                        <!-- Start content -->
+                        <div class="row">
+                            <div class="col-sm-8 col-lg-8 col-xs-12 col-lg-offset-3">
+                                <div class="widget-simple card-box ">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                                            <h3><b>الاسم :</b> <span style="color: grey;">{{inscrit.nom}} </span></h3>
+                                            <h3><b>اللقب :</b> <span style="color: grey;"> {{inscrit.prenom}} </span></h3>
+                                            <h3><b>رقم البطاقة التعريف :</b> <span style="color: grey;"> {{inscrit.cin}} </span></h3>
+                                            <h3><b>المعرف الوحيد :</b> <span style="color: grey;"> {{inscrit.numeroInscrit}} </span></h3>
+
+                                        </div>
+                                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                                            <div class="alert alert-danger text-center">
+
+                                                <strong>لم يشارك في الدورة </strong><br>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+            {%endif%}
+            {%else%}
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="alert alert-danger text-center">
+                            <strong>لم تقم بالتسجيل في الدراسات .</strong><br>
+                        </div>
+                    </div>
+                    <a href="{{path('diraset_homepage')}}" class="btn btn-sm btn-purple">الصفحة الرئيسية</a>
+                </div>
+                {%endif%}
                 </div>
             </div>
-            <footer class="footer text-right" style="right: 0px">
-                <img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"> <span style="font-size: 20px;">الكشافة التونسية</span> 
-            </footer>
-
-        {% endblock %}
-
+        </div>
+    </div>
+</div>
+</div>
+<footer class="footer text-right" style="right: 0px">
+    <img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"> <span style="font-size: 20px;">الكشافة التونسية</span> 
+</footer>
+{%endblock%}

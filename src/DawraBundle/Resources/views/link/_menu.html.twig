@@ -1,0 +1,23 @@
+{# empty Twig template #}
+
+<div class="page-title-right">
+    <ul class="breadcrumb m-0">
+        <li><a href="{{path('adminInscrit_index')}}">  القائمة الاولية</a></li>
+        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")   or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_stat')}}"> إحصائيات الأولية</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_stat2W')}}"> إحصائيات المقبولين</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_statW')}}">  الإحصائيات النهائية</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterResultW')}}">   قائمة المقبولين وطني</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterW')}}">  تحين قائمة المقبولين وطني</a></li>
+            {%endif%}
+            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterJ')}}">  تحين قائمة المقبولين جهوي</a></li>
+            {%endif%}
+            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_dawra_index')}}">  إنشاء الدورات</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_attribChara')}}">  إسناد دورات الشارة</a></li>
+            <li class="breadcrumb-item"><a href="{{path('adminInscrit_attribTamhidiya')}}">  إسناد دورات التمهيدية</a></li>
+            {%endif%}
+        <li class="breadcrumb-item"><a href="{{path('adminInscrit_finalResult')}}">  النتائج النهائية</a></li>
+    </ul>
+</div>

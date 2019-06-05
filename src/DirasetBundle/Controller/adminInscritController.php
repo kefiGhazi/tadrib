@@ -705,7 +705,14 @@ class adminInscritController extends Controller {
         }
         $em->merge($Ins);
         $em->flush();
-        return $this->redirectToRoute('adminInscrit_accepterW');
+        
+        if($request->get('Jiha') != NULL && $request->get('Jiha') == 'oui'){
+                    return $this->redirectToRoute('adminInscrit_accepterJ');
+
+        }else{
+                    return $this->redirectToRoute('adminInscrit_accepterW',array('jiha'=>$request->get('J'), 'Dirassa'=>$request->get('D')));
+
+        }
     }
 
     public function presenceAction(Request $request) {
@@ -771,7 +778,7 @@ class adminInscritController extends Controller {
         }
 
 
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where p.idDirassa = 3 AND p.accepteW = 1 AND p.accepteJ = 1 AND p.paye = 1 " . $condition);
+        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where p.idDirassa = 3 AND p.accepteW = 1  AND p.paye = 1 " . $condition);
         $inscrit = $query->getResult();
         $dawrat = $em->getRepository('DbBundle:DawraTadrib')->findBy(array("idAtributType" => 3));
 
@@ -809,7 +816,7 @@ class adminInscritController extends Controller {
         }
 
 
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where p.idDirassa = 2 AND p.accepteW = 1 AND p.accepteJ = 1 AND p.paye = 1 " . $condition);
+        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where p.idDirassa = 2 AND p.accepteW = 1  AND p.paye = 1 " . $condition);
         $inscrit = $query->getResult();
         $dawrat = $em->getRepository('DbBundle:DawraTadrib')->findBy(array("idAtributType" => 2));
 

@@ -1,0 +1,55 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                             <h1>قائمة القادة</h1>
+                        </div>
+                        <div class="card-box"> 
+                            <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>تاريخ التقرير</th>
+                                        <th>الاسم و اللقب</th>
+                                        <th>المعرف الكشفي</th>
+                                        <th>ب.ت.و</th>
+                                        <th>المستوي التدريبي</th>
+                                        <th>المرشد الفني</th>
+                                        <th>العدد المسند</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for raport in raports %}
+                                        <tr>
+                                           <td>{% if raport.date %}{{ raport.date|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ raport.idChef.nom }} {{ raport.idChef.prenom }}</td>
+                                            <td>{{ raport.idChef.inscrit }}</td>
+                                            <td>{{ raport.idChef.cin }}</td>
+                                            <td>{{ raport.idChef.lastDirasa }}</td>
+                                            <td>{{ raport.mochref }}</td>
+                                            <td>{{ raport.note }}</td>
+                                            <td>
+                                                <a href="{{ path('chef_erched_show', { 'id': raport.idChef.id }) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تفاصيل"><i class="fa fa-plus"></i>  </a>
+                                            </td>
+                                                
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

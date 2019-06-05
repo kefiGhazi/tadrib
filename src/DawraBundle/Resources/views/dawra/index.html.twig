@@ -10,10 +10,10 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 col-xs-12">
                         <div class="card-box"> 
-                            
-                                        <h1>{{type.nom}}</h1>
-                                        
-                            
+
+                            <h1>{{type.nom}}</h1>
+
+
                         </div>
                         <div class="card-box"> 
                             <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
@@ -21,18 +21,18 @@
                                     <tr>
                                         <th>الدورة</th>
                                         <th>تاريخ </th>
-                                        {%if type.code != 'R'%}
-                                        <th>الجهة</th>
-                                        {%endif%}
+                                            {%if type.code != 'R'%}
+                                            <th>الجهة</th>
+                                            {%endif%}
                                         <th>المكان</th>
-                                        {%if type.code != 'R'%}
-                                        <th>القسم</th>
-                                        {%endif%}
-                                        {%if type.code == 'R'%}
-                                        <th>المدرب</th>
-                                        {%else%}
-                                        <th>قائدها</th>
-                                        {%endif%}
+                                            {%if type.code != 'R'%}
+                                            <th>القسم</th>
+                                            {%endif%}
+                                            {%if type.code == 'R'%}
+                                            <th>المدرب</th>
+                                            {%else%}
+                                            <th>قائدها</th>
+                                            {%endif%}
                                         <th>---</th>
                                     </tr>
                                 </thead>
@@ -41,27 +41,45 @@
                                         <tr>
                                             <td>{{ dawra.idType.nom }} {% if dawra.idAtributType != null %} {{ dawra.idAtributType.nom }} {% endif %}</td>
                                             <td>من {% if dawra.dateDeb %}{{ dawra.dateDeb|date('Y-m-d') }}{% endif %} {% if dawra.dateFin %} إلى {{ dawra.dateFin|date('Y-m-d') }}{% endif %}</td>
-                                             {%if type.code != 'R'%}
-                                            <td>{{ dawra.idJiha.name }}</td>
+                                            {%if type.code != 'R'%}
+                                                <td>{{ dawra.idJiha.name }}</td>
                                             {%endif%}
                                             <td>{{ dawra.lieux }}</td>
-                                             {%if type.code != 'R'%}
-                                            <td>{{ dawra.idKesm.nom }}</td>
+                                            {%if type.code != 'R'%}
+                                                <td>{{ dawra.idKesm.nom }}</td>
                                             {%endif%}
                                             <td>{{listChefs[dawra.id]}}</td>
                                             <td>
-                                                <a href="{{ path('dawra_show', { 'id': dawra.id }) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> تفاصيل </a>
-                                                <a href="{{ path('dawra_edit', { 'id': dawra.id ,'type':type.code}) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> تعديل </a>
+                                                <a href="{{ path('dawra_show', { 'id': dawra.id }) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تفاصيل"><i class="fa fa-plus"></i></a>
+                                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                        <a href="{{ path('dawra_edit', { 'id': dawra.id ,'type':type.code}) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل"><i class="fa fa-pencil"></i></a>
+                                                        <a href="{{ path('dawra_delete', { 'id': dawra.id ,'type':type.code}) }}" onclick="return confirm('مسح الدورة ؟')" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="مسح"><i class="fa fa-trash"></i></a>
+                                                        {%if dawra.etat =='open'%}
+                                                        <a href="{{ path('dawra_close', { 'id': dawra.id ,'type':type.code,'etat':'close'}) }}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="غلق"><i class="fa fa-lock"></i></a>
+                                                        {%else%}
+                                                        <a href="{{ path('dawra_open', { 'id': dawra.id ,'type':type.code,'etat':'open'}) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="فتح"><i class="fa fa-unlock-alt"></i></a>
+                                                        {%endif%}
+                                                    {%else%}
+                                                        {%if dawra.etat =='open'%}
+                                                        <a href="{{ path('dawra_edit', { 'id': dawra.id ,'type':type.code}) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل" ><i class="fa fa-pencil"></i></a>
+                                                        {%else%}
+                                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="تم غلق الدورة" ><i class="fa fa fa-close"></i></a>
+                                                        {%endif%}
+                                                    {%endif%}
+
+
                                             </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('dawra_new',{'type':type.code}) }}" class="btn btn-default"><i class="fa fa-plus"></i> إضافة دورة</a>
-                                </li>
-                            </ul>
+                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('dawra_new',{'type':type.code}) }}" class="btn btn-default"><i class="fa fa-plus"></i> إضافة دورة</a>
+                                    </li>
+                                </ul>
+                            {%endif%}
                         </div>
                     </div>
                 </div>

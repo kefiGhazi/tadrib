@@ -31,6 +31,12 @@ class ChefType extends AbstractType
                                                     'شارة خشبية' => 'شارة خشبية',
                                                     'مساعد قائد تدريب' => 'مساعد قائد تدريب',
                                                     'قائد تدريب' => 'قائد تدريب',)))
+               ->add('valide', ChoiceType::class, array('choices'  => array(
+                                                    'NON' => 'لا',
+                                                    'OUI' => 'نعم',)
+                                                        ))
+                ->add('valideDateDeb', DateType::class, array('widget' => 'single_text','required' => false))
+                ->add('valideDateFin', DateType::class, array('widget' => 'single_text','required' => false))
                ->add('sex', ChoiceType::class, array('choices'  => array(
                                                     '1' => 'ذكر',
                                                     '2' => 'أنثى',)))

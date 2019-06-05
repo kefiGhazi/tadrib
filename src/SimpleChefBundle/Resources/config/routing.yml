@@ -1,0 +1,20 @@
+simple_chef_index:
+    path:     /
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:index" }
+    methods:  [GET, POST]
+
+simple_chef_show:
+    path:     /show
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:show" }
+    methods:  [GET, POST] 
+
+simple_chef_edit:
+    path:     /edit
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:edit" }
+    methods:  [GET, POST]
+    
+simple_chef_liste_diraset:
+    path:     /listeDiraset
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:listeDiraset" }
+    methods:  [GET, POST]
+

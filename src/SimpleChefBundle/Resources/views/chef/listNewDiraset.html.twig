@@ -1,0 +1,61 @@
+{% extends 'HomeBundle:Default:verticalLayout.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+
+            {% if ListeDiraset|length == 0 %}       
+            <div class="card-box"> 
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12 col-lg-offset-4">
+                        <h1>لم يتم العثور على  دراسات </h1>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+                {% for dirasa in ListeDiraset %}
+                    <article class="pricing-column col-lg-3 col-md-3">
+                        <div class="inner-box card-box">
+                            <div class="plan-header text-center">
+                                <h2 class="plan-price">{{ dirasa.nom }}</h2>
+                                <h3 class="plan-title">
+                                    {%set x = 1 %}
+                                    {% for jiha in dirasa.jihas %}
+                                        {% if x != 1 %} | {% endif %}
+                                        {{jiha.name}} 
+
+                                        {% set x = x+1 %}
+                                    {% endfor %}
+                                </h3>
+                                <div class="plan-duration">
+                                    {%set x = 1 %}
+                                    {% for kesem in dirasa.kesms %}
+                                        {% if x != 1 %} | {% endif %}
+                                        {{kesem.nom}} 
+
+                                        {% set x = x+1 %}
+                                    {% endfor %}
+                                </div>
+                                <div class="plan-duration">{{dirasa.markez}}</div>
+                            </div>
+                            <ul class="plan-stats list-unstyled text-center p-t-0">
+                                <li><i class="ti-calendar text-success"></i> تاريخ الدراسة</li>
+                                <li> من {{dirasa.dateDeb|date('d-m-Y')}} إلى {{dirasa.dateFin|date('d-m-Y')}}</li>
+                                <li><i class="ti-calendar text-success"></i> تاريخ التسجيل</li>
+                                <li> من {{dirasa.dateDebInscrit|date('d-m-Y')}} إلى {{dirasa.dateFinInscrit|date('d-m-Y')}}</li>
+                            </ul>
+
+                            <div class="text-center">
+                                <button id="saveInscrit" class="btn btn-danger btn-bordred btn-rounded waves-effect waves-light">تسجيل</button>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% endblock %}
+
+

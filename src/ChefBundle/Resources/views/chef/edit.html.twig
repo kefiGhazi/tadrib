@@ -69,6 +69,28 @@
                                     {{ form_widget(edit_form.lastDirasa ,{'attr': {'class': 'form-control'} }) }}
                                 </div>
                             </div>
+                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                            <div class="col-sm-3 col-lg-3 col-xs-12" id="valideDiv" {% if chef.lastDirasa == 'مساعد قائد تدريب' or chef.lastDirasa == 'قائد تدريب'%} {% else %} hidden {% endif %}>
+                                <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                    <label>الاعتماد التدريبي</label>
+                                    {{ form_widget(edit_form.valide ,{'attr': {'class': 'form-control'} }) }}
+                                </div>
+                            </div>
+                            <div id="dateValideDiv" {% if chef.valide == 'NON'%} hidden="" {% endif %}>
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>تاريخ بداية الاعتماد</label>
+                                    {{ form_widget(edit_form.valideDateDeb ,{'attr': {'class': 'form-control'} }) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>تاريخ بداية الاعتماد</label>
+                                    {{ form_widget(edit_form.valideDateFin ,{'attr': {'class': 'form-control'} }) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                             <div class="col-sm-3 col-lg-3 col-xs-12">
                                 <div class="form-group col-sm-10 col-lg-10 col-xs-10">
                                     <label>المستوى الدراسي</label>
@@ -104,6 +126,36 @@
                 </div>
             </div>
         </div>
-
+ {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                       
+<script>
+$('#dbbundle_chef_lastDirasa').on('change', function (){
+    if($('#dbbundle_chef_lastDirasa').val() === 'مساعد قائد تدريب' || $('#dbbundle_chef_lastDirasa').val() === 'قائد تدريب' ){
+        $('#valideDiv').removeAttr('hidden');
+        if($('#dbbundle_chef_valide').val() === 'OUI' ){
+            $('#dateValideDiv').removeAttr('hidden');
+            $('#dbbundle_chef_valideDateDeb').attr('required', true);
+            $('#dbbundle_chef_valideDateFin').attr('required', true);
+        }
+    }else{
+        $('#valideDiv').attr('hidden','hidden');
+        $('#dateValideDiv').attr('hidden','hidden');
+        $('#dbbundle_chef_valideDateDeb').removeAttr('required');
+        $('#dbbundle_chef_valideDateFin').removeAttr('required');
+    }
+});
+$('#dbbundle_chef_valide').on('change', function (){
+    if($('#dbbundle_chef_valide').val() === 'OUI' ){
+        $('#dateValideDiv').removeAttr('hidden');
+        $('#dbbundle_chef_valideDateDeb').attr('required', true);
+        $('#dbbundle_chef_valideDateFin').attr('required', true);
+    }else{
+        $('#dateValideDiv').attr('hidden','hidden');
+        $('#dbbundle_chef_valideDateDeb').removeAttr('required');
+        $('#dbbundle_chef_valideDateFin').removeAttr('required');
+    }
+});
+</script>
+{% endif %}
     {% endblock %}
 

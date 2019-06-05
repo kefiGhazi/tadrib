@@ -1,0 +1,19 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box"> 
+                        <h1>إنشاء رابط </h1>
+                    </div>
+                    <div class="card-box"> 
+                        {{ include('DawraBundle:link:form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

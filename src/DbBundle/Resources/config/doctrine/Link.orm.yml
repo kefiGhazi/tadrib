@@ -1,0 +1,63 @@
+DbBundle\Entity\Link:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\LinkRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+        annee:
+            type: string
+            length: 255
+        markez:
+            type: string
+            length: 255
+        actif:
+            type: integer
+            default: 1
+        dateDeb:
+            type: date
+        dateFin:
+            type: date
+        dateDebInscrit:
+            type: date
+        dateFinInscrit:
+            type: date
+    manyToMany:
+        jihas:
+          targetEntity: Jiha
+          joinTable:
+            name: links_jihas
+            joinColumns:
+              link_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              jiha_id:
+                referencedColumnName: id
+        kesms:
+          targetEntity: Kesm
+          joinTable:
+            name: links_kesms
+            joinColumns:
+              link_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              kesm_id:
+                referencedColumnName: id
+        mostawaTadribis:
+          targetEntity: AtributType
+          joinTable:
+            name: links_mostawa_tadribis
+            joinColumns:
+              link_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              mostawaTadribi_id:
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

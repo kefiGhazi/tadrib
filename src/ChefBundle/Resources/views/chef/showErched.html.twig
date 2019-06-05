@@ -1,0 +1,277 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            <div class="row">
+                                {%if chef.sex == 1%}
+                                    <div class="col-sm-12 col-lg-12 col-xs-12 col-lg-offset-5"><h1>القائد {{ chef.nom }} {{ chef.prenom }}</h1></div>
+                                {%else%}
+                                    <div class="col-sm-12 col-lg-12 col-xs-12 col-lg-offset-5"><h1>القائدة {{ chef.nom }} {{ chef.prenom }}</h1></div>
+                                {%endif%}
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>رقم بطاقة التعريف :</b><span class="small"> {{ chef.cin }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المعرف الكشفي :</b><span class="small"> {{ chef.inscrit }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>تاريخ الولادة :</b><span class="small"> {% if chef.dateNaissance %}{{ chef.dateNaissance|date('Y-m-d') }}{% endif %}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>القسم :</b><span class="small"> {{ chef.idKesm.nom }}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الجهة :</b><span class="small"> {{ chef.idJiha.name }}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الفوج :</b><span class="small"> {{ chef.fawej}}</span></h3></div>
+                                </div>
+
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى التدريبي :</b><span class="small"> {{ chef.lastDirasa }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المستوى الدراسي :</b><span class="small"> {{ chef.etude }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المهنة :</b><span class="small"> {{ chef.travail }}</span></h3></div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xs-12">
+                                    <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>الهاتف :</b><span class="small"> {{ chef.tel }}</span></h3></div>
+                                </div>
+                            </div>
+                            <div class="row" style="display: inline-flex">
+                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                    <a class=" btn btn-bg btn-primary" href="#" data-toggle="modal" data-target="#con-close-modal"><i class="fa fa-plus"></i> <span> إضافة تقرير</span></a>
+                                {%endif%}
+                            </div>
+                        </div>
+                        {%set x = 0 %}
+                        {%for raport in raports%}
+                            {%set x = x +1 %}
+                            <div class="card-box col-lg-12">
+                                <div class="row" style="display: inline-flex">
+                                    <a class=" btn btn-bg btn-primary" href="#" ><i class="fa fa-plus"></i> <span>  تقرير عدد {{x}}</span></a>
+                                    <a class=" btn btn-bg btn-danger" href='{{path('chef_erched_delete',{'id':raport.id})}}' ><i class="fa fa-trash"></i></a>
+                                    <a class=" btn btn-bg btn-warning" href="#" data-toggle="modal" onclick="getInformationErched('{{path('get_chef_erched',{'id':raport.id})}}')" data-target="#con-close-modal-edit" ><i class="fa fa-pencil"></i></a>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>النشاط :</b><span class="small"> {{ raport.activite }}</span></h3></div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المناسبة :</b><span class="small"> {{ raport.cause }}</span></h3></div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المكان :</b><span class="small"> {{ raport.lieu }}</span></h3></div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>التاريخ : </b><span class="small">{% if raport.date %}{{ raport.date|date('Y-m-d') }}{% endif %}</span></h3></div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>المرشد الفني : </b><span class="small">{{ raport.mochref }}</span></h3></div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>العدد المسند /10 : </b><span class="small"> {{ raport.note }}</span></h3></div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                                        <div class="col-sm-12 col-lg-12 col-xs-12"><h3><b>ملخص التقرير  : </b></h3></div>
+                                        <p> {{ raport.resume }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        {%endfor%}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{path('chef_erched_add')}}" method="post">
+                        <input type="hidden" name="type" value="D">
+                        <input type="hidden" name="idChef" value="{{chef.id}}">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">إضافة تقرير</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">النشاط</label>
+                                        <select class="form-control" name="activite" required="required">
+                                            <option value="تقديم جلسة تدريبية">تقديم جلسة تدريبية</option>
+                                            <option value="قيادة دورة تدريبية">قيادة دورة تدريبية</option>
+                                            <option value="المساعدة في قيادة دورة تدريبية">المساعدة في قيادة دورة تدريبية</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المناسبة</label>
+                                        <input type="text" class="form-control" id="field-0" name="cause" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المكان</label>
+                                        <input type="text" class="form-control" id="field-0" name="lieu" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">التاريخ</label>
+                                        <input type="date" class="form-control" id="field-0" name="date" required="required" pattern="[0-9]{10}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المرشد الفني</label>
+                                        <input type="text" class="form-control" id="field-0" name="mochref" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">العدد المستد / 10</label>
+                                        <input type="text" class="form-control" id="field-0" name="note" placeholder="عدد من 0 الى 10" required="required" pattern= "[0-9]" min="0" max="11">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">ملخص التقرير</label>
+                                        <textarea class="form-control" name="resume"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">تسجيل</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal -->                        
+        <div id="con-close-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{path('chef_erched_edit')}}" method="post">
+                        <input type="hidden" name="idChef"  value="{{chef.id}}">
+                        <input type="hidden" name="idRaport" id="idRaport" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">تعديل تقرير</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">النشاط</label>
+                                        <select class="form-control" name="activite" id="activite" required="required">
+                                            <option value="تقديم جلسة تدريبية">تقديم جلسة تدريبية</option>
+                                            <option value="قيادة دورة تدريبية">قيادة دورة تدريبية</option>
+                                            <option value="المساعدة في قيادة دورة تدريبية">المساعدة في قيادة دورة تدريبية</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المناسبة</label>
+                                        <input type="text" class="form-control" id="cause" name="cause" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المكان</label>
+                                        <input type="text" class="form-control" id="lieu" name="lieu" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">التاريخ</label>
+                                        <input type="date" class="form-control" id="date" name="date" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">المرشد الفني</label>
+                                        <input type="text" class="form-control" id="mochref" name="mochref" required="required" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">العدد المستد / 10</label>
+                                        <input type="text" class="form-control" id="note" name="note" placeholder="عدد من 0 الى 10" required="required" pattern= "[0-9]" min="0" max="11">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-0" class="control-label">ملخص التقرير</label>
+                                        <textarea class="form-control" name="resume" id="resume"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                            <button type="submit" class="btn btn-info waves-effect waves-light">تسجيل</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal -->      
+        <script>
+            function getInformationErched(url) {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    success: function (data)
+                    {
+                        var raport = data.data;
+                        $('#idRaport').val(raport.id);
+                        $('#activite').val(raport.activite);
+                        $('#cause').val(raport.cause);
+                        $('#date').val(raport.date);
+                        $('#mochref').val(raport.mochref);
+                        $('#note').val(raport.note);
+                        $('#lieu').val(raport.lieu);
+                        $('#resume').val(raport.resume);
+                        
+                    }
+                });
+            }
+        </script>
+    {% endblock %}
+
+

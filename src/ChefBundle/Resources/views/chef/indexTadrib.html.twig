@@ -1,0 +1,67 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                             <h1>قائمة القادة</h1>
+                        </div>
+                        <div class="card-box">
+                            <table id="datatable" class="table table-responsive table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 300px;">الاسم و اللقب</th>
+                                        <th style="width: 70px;">المعرف الكشفي</th>
+                                        <th style="width: 70px;">ب.ت.و</th>
+                                        <th style="width: 70px;">القسم</th>
+                                        <th style="width: 70px;">الجهة</th>
+                                        <th style="width: 250px;">المستوى التدريبي</th>
+                                        <th style="width: 250px;">الاعتماد التدريبي</th>
+                                        <th style="width: 250px;">تاريخ بداية الاعتماد</th>
+                                        <th style="width: 250px;">تاريخ نهاية الاعتماد</th>
+                                        <th style="min-width: 85px;">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for chef in chefs %}
+                                        <tr>
+                                            <td style="width: 300px;">{{ chef.nom }} {{ chef.prenom }}</td>
+                                            <td style="width: 70px;">{{ chef.inscrit }}</td>
+                                            <td style="width: 70px;">{{ chef.cin }}</td>
+                                            <td style="width: 70px;">{{ chef.idKesm.nom }}</td>
+                                            <td style="width: 70px;">{{ chef.idJiha.name }}</td>
+                                            <td style="width: 250px;">{{ chef.lastDirasa }}</td>
+                                            <td style="width: 250px;">
+                                                {% if chef.valide == 'OUI'%}
+                                                    نعم
+                                                {% else %}
+                                                    لا
+                                                {% endif %}
+                                            </td>
+                                            <td style="width: 250px;">{% if chef.valideDateDeb and chef.valide == 'OUI' %}{{ chef.valideDateDeb|date('Y-m-d') }}{% endif %}</td>
+                                            <td style="width: 250px;">{% if chef.valideDateFin and chef.valide == 'OUI'%}{{ chef.valideDateFin|date('Y-m-d') }}{% endif %}</td>
+                                            <td style="min-width: 85px;">
+                                                <a href="{{ path('chef_show', { 'id': chef.id }) }}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="تفاصيل"><i class="fa fa-plus"></i>  </a>
+                                                <a href="{{ path('chef_edit', { 'id': chef.id }) }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="تعديل"><i class="fa fa-pencil"></i>  </a>
+                                                <a href="{{ path('chef_delete', { 'id': chef.id }) }}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="حذف"><i class="fa fa-trash"></i>  </a>
+                                            </td>
+                                                
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

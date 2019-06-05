@@ -1,0 +1,133 @@
+DbBundle\Entity\DemandeDawra:
+    type: entity
+    table: demande_dawra
+    indexes:
+        id_createur:
+            columns:
+                - id_createur
+        id_jiha:
+            columns:
+                - id_jiha
+        id_kesm:
+            columns:
+                - id_kesm
+        id_type:
+            columns:
+                - id_type
+        id_atribut_type:
+            columns:
+                - id_atribut_type
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        
+        repense:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        realiser:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        generer:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        raison:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        nombre:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        chefDawra:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: chef_dawra
+        dateDeb:
+            type: date
+            nullable: false
+            column: date_deb
+        dateAccept:
+            type: date
+            nullable: true
+            column: date_accept
+        dateFin:
+            type: date
+            nullable: false
+            column: date_fin
+        lieux:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+        dateCreation:
+            type: date
+            nullable: false
+            column: date_creation
+        actif:
+            type: integer
+            nullable: false
+            unsigned: false
+            default: '1'
+    manyToOne:
+        idCreateur:
+            targetEntity: \UserBundle\Entity\User
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_createur:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idJiha:
+            targetEntity: Jiha
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_jiha:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idKesm:
+            targetEntity: Kesm
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_kesm:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idType:
+            targetEntity: TypeDawra
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_type:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idAtributType:
+            targetEntity: AtributType
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_atribut_type:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

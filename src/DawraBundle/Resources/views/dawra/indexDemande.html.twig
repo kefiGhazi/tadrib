@@ -1,0 +1,76 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <!-- /.row -->
+        <!-- Page Content -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                        <div class="card-box"> 
+                            {%if etat == 'demande'%}
+                                <h1>قائمة المطالب</h1>
+                            {%else%}
+                                <h1>{{type.nom}}</h1>
+                            {%endif%}
+                        </div>
+                        <div class="card-box"> 
+                            {#<table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr>
+                                        <th>الدورة</th>
+                                        <th>تاريخ </th>
+                                            {%if type.code != 'R'%}
+                                            <th>الجهة</th>
+                                            {%endif%}
+                                        <th>المكان</th>
+                                            {%if type.code != 'R'%}
+                                            <th>القسم</th>
+                                            {%endif%}
+                                            {%if type.code == 'R'%}
+                                            <th>المدرب</th>
+                                            {%else%}
+                                            <th>قائدها</th>
+                                            {%endif%}
+                                        <th>---</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for dawra in dawras %}
+                                        <tr>
+                                            <td>{{ dawra.idType.nom }} {% if dawra.idAtributType != null %} {{ dawra.idAtributType.nom }} {% endif %}</td>
+                                            <td>من {% if dawra.dateDeb %}{{ dawra.dateDeb|date('Y-m-d') }}{% endif %} {% if dawra.dateFin %} إلى {{ dawra.dateFin|date('Y-m-d') }}{% endif %}</td>
+                                            {%if type.code != 'R'%}
+                                                <td>{{ dawra.idJiha.name }}</td>
+                                            {%endif%}
+                                            <td>{{ dawra.lieux }}</td>
+                                            {%if type.code != 'R'%}
+                                                <td>{{ dawra.idKesm.nom }}</td>
+                                            {%endif%}
+                                            <td>{{listChefs[dawra.id]}}</td>
+                                            <td>
+                                                <a href="{{ path('dawra_show', { 'id': dawra.id }) }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> تفاصيل </a>
+                                                <a href="{{ path('dawra_edit', { 'id': dawra.id ,'type':type.code}) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> تعديل </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>#}
+                            <ul>
+                                <li>
+                                    {%if etat == 'demande'%}                                    
+                                        <a href="{{ path('dawra_new',{'etat':'demande'}) }}" class="btn btn-default"><i class="fa fa-plus"></i> مطلب جديد</a>
+                                    {%else%}
+                                        <a href="{{ path('dawra_new',{'type':type.code,'etat':'valide'}) }}" class="btn btn-default"><i class="fa fa-plus"></i> إضافة دورة</a>
+                                    {%endif%}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

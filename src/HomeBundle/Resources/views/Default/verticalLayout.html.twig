@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="الكشافة التونسية.">
+        <meta name="author" content="Simplicity">
+
+        <link rel="shortcut icon" href="{{ asset('bundles/home/images/favicon_1.png')}}">
+
+        <link href="{{asset('bundles/home/plugins/multiselect/css/multi-select.css')}}"  rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/select2/css/select2.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('bundles/home/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+        <link href="{{asset('bundles/home/plugins/switchery/switchery.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('bundles/home/css/bootstrap-rtl.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/core.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/icons.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/components.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/style.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/pages.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/menu.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('bundles/home/css/responsive.css')}}" rel="stylesheet" type="text/css">
+        <script src="{{asset('bundles/home/js/modernizr.min.js')}}"></script>
+
+        <script src="{{asset('bundles/home/js/jquery.min.js')}}"></script>
+    </head>
+
+    <body>
+
+        <br>
+
+
+        <div class="wrapper" >
+            <div class="container-fluid">
+
+                <!-- Page-Title -->
+                <div class="row" style=" margin-top: 10px;">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="btn-group pull-right" style="top: 8px;">
+                                <ol class="breadcrumb hide-phone p-0 m-0">
+                                    <li class="breadcrumb-item"><a href="{{path('simple_chef_liste_diraset')}}">تسجيل في الدراسات</a></li>
+                                    <li class="breadcrumb-item"><a>مطالب التسجيل</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('simple_chef_show')}}">ملف</a></li>
+                                    <li class="breadcrumb-item"><a href="{{path('simple_chef_index')}}">خروج</a></li>
+
+                                </ol>
+                            </div>
+                            <h4 class="page-title"><img  src="{{ asset('bundles/home/images/tadrib.png')}}" width="50px" style="top: 8px;">اللجنة الوطنية لتنمية القيادات -- لجة الثقافة الرقمية</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title end breadcrumb -->
+
+                {% block body %}{% endblock %}
+
+            </div> <!-- end container -->
+        </div>
+        <!-- end wrapper -->
+
+        <div class="col-sm-12" style="margin: 40px;"></div>
+        <!-- Footer -->
+        <footer class="footer" style="right: 0; margin-top: 10px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="col-md-5"><span style="font-size: 20px;" class="pull-left">الكشافة التونسية</span></div>
+                        <div class="col-md-2"><img src="{{ asset('bundles/home/images/favicon_1.png')}}" width="50px"></div>
+                        <div class="col-md-5"><span class="pull-right" style="font-size: 20px;">اللجنة الوطنية لتنمية القيادات -- لجة الثقافة الرقمية</span> </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+
+        <!-- jQuery  -->
+   
+
+        <script src="{{asset('bundles/home/plugins/multiselect/js/jquery.multi-select.js')}}" type="text/javascript" ></script>
+        <script src="{{asset('bundles/home/plugins/select2/js/select2.min.js')}}" type="text/javascript"></script>
+        <!-- Page js  -->
+
+
+
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+                $('.circliful-chart').circliful();
+            });
+
+            // BEGIN SVG WEATHER ICON
+            if (typeof Skycons !== 'undefined') {
+                var icons = new Skycons(
+                        {"color": "#3bafda"},
+                        {"resizeClear": true}
+                ),
+                        list = [
+                            "clear-day", "clear-night", "partly-cloudy-day",
+                            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                            "fog"
+                        ],
+                        i;
+
+                for (i = list.length; i--; )
+                    icons.set(list[i], list[i]);
+                icons.play();
+            }
+            ;
+
+        </script>
+
+    </body>
+</html>

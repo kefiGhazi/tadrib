@@ -9,6 +9,10 @@ home:
 dawra:
     resource: "@DawraBundle/Resources/config/routing.yml"
     prefix:   /admin/dawra
+    
+demand_dawra:
+    resource: "@DemandeDawraBundle/Resources/config/routing.yml"
+    prefix:   /admin/demandeDawra
 
 db:
     resource: "@DbBundle/Resources/config/routing.yml"
@@ -17,7 +21,14 @@ db:
 chef:
     resource: "@ChefBundle/Resources/config/routing.yml"
     prefix:   /admin/chef
-
+    
+simpleChef:
+    resource: "@SimpleChefBundle/Resources/config/routing.yml"
+    prefix:   /simpleChef
+    
+db_link:
+    resource: "@DawraBundle/Resources/config/routing/link.yml"
+    prefix:   /admin/link
 app:
     resource: '@AppBundle/Controller/'
     type: annotation

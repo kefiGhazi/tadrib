@@ -1,0 +1,24 @@
+link_index:
+    path:     /
+    defaults: { _controller: "DawraBundle:Link:index" }
+    methods:  GET
+
+link_show:
+    path:     /{id}/show
+    defaults: { _controller: "DawraBundle:Link:show" }
+    methods:  GET
+
+link_new:
+    path:     /new
+    defaults: { _controller: "DawraBundle:Link:new" }
+    methods:  [GET, POST]
+
+link_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DawraBundle:Link:edit" }
+    methods:  [GET, POST]
+
+link_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DawraBundle:Link:delete" }
+    methods:  [GET, POST]

@@ -22,8 +22,28 @@ dawra_edit:
     path:     /{id}/edit
     defaults: { _controller: "DawraBundle:Dawra:edit" }
     methods:  [GET, POST]
+    
+dawra_close:
+    path:     /{id}/close
+    defaults: { _controller: "DawraBundle:Dawra:close" }
+    methods:  [GET, POST]
+    
+dawra_open:
+    path:     /{id}/open
+    defaults: { _controller: "DawraBundle:Dawra:open" }
+    methods:  [GET, POST]
 
 dawra_delete:
     path:     /{id}/delete
     defaults: { _controller: "DawraBundle:Dawra:delete" }
-    methods:  DELETE
+    methods:  [GET, POST, DELETE]
+    
+dawra_delete_itar:
+    path:     /{id}/deleteItar
+    defaults: { _controller: "DawraBundle:Dawra:deleteItar" }
+    methods:  [GET, POST, DELETE]
+
+dawra_delete_deres:
+    path:     /{id}/deleteFeres
+    defaults: { _controller: "DawraBundle:Dawra:deleteDeres" }
+    methods:  [GET, POST, DELETE]

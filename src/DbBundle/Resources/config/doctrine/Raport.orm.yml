@@ -1,0 +1,49 @@
+DbBundle\Entity\Raport:
+    type: entity
+    table: null
+    repositoryClass: DbBundle\Repository\RaportRepository
+    indexes:
+        id_chef:
+            columns:
+                - id_chef
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        activite:
+            type: string
+            length: 255
+        cause:
+            type: string
+            length: 255
+        lieu:
+            type: string
+            length: 255
+        date:
+            type: date
+        mochref:
+            type: string
+            length: 255
+        note:
+            type: string
+            length: '10'
+        resume:
+            type: text
+        actif:
+            type: integer
+            nullable: false
+            unsigned: false
+    manyToOne:
+        idChef:
+            targetEntity: Chef
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_chef:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

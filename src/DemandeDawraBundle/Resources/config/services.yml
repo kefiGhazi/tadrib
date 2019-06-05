@@ -1,0 +1,4 @@
+services:
+#    dawra.example:
+#        class: DawraBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

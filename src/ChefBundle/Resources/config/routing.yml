@@ -6,17 +6,62 @@ chef_index:
     path:     /
     defaults: { _controller: "ChefBundle:Chef:index" }
     methods:  GET
+chef_indexTadrib:
+    path:     /ChefTadrib
+    defaults: { _controller: "ChefBundle:Chef:indexTadrib" }
+    methods:  GET
+    
+chef_exporter:
+    path:     /exporter
+    defaults: { _controller: "ChefBundle:Chef:exporter" }
+    methods:  GET
 
 chef_show:
     path:     /{id}/show
     defaults: { _controller: "ChefBundle:Chef:show" }
-    methods:  GET
+    methods:  [GET, POST]
+    
+chef_erched_show:
+    path:     /{id}/showErched
+    defaults: { _controller: "ChefBundle:Chef:showErched" }
+    methods:  [GET, POST]
+    
+get_chef_erched:
+    path:     /{id}/getChefErched
+    defaults: { _controller: "ChefBundle:Chef:getChefErched" }
+    methods:  [GET, POST]
+    
+chef_erched_index:
+    path:     /listErched
+    defaults: { _controller: "ChefBundle:Chef:listErched" }
+    methods:  [GET, POST]
+    
+chef_erched_delete:
+    path:     /{id}/deleteErched
+    defaults: { _controller: "ChefBundle:Chef:deleteErched" }
+    methods:  [GET, POST]
+    
+chef_erched_add:
+    path:     /addErched
+    defaults: { _controller: "ChefBundle:Chef:addErched" }
+    methods:  [GET, POST]
+    
+chef_erched_edit:
+    path:     /editErched
+    defaults: { _controller: "ChefBundle:Chef:editErched" }
+    methods:  [GET, POST]
     
 
 chef_new:
     path:     /new
     defaults: { _controller: "ChefBundle:Chef:new" }
     methods:  [GET, POST]
+    
+chef_verif:
+    path:     /verif
+    defaults: { _controller: "ChefBundle:Chef:verif" }
+    methods:  [GET, POST]
+
 
 chef_update:
     path:     /update

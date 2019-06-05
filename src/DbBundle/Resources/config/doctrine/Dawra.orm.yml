@@ -31,6 +31,11 @@ DbBundle\Entity\Dawra:
             nullable: true
             length: 255
             fixed: false
+        etat:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
         dateDeb:
             type: date
             nullable: false
