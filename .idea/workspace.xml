@@ -2,43 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f909277c-d3c9-4a01-8c52-157f71094fdb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DbBundle/Form/ChefTypeInscrit.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/inscrit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/listInscrit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChefBundle/Resources/config/routing/adminInscrit.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChefBundle/Resources/config/routing/adminInscrit.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DawraBundle/Controller/LinkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DawraBundle/Controller/LinkController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/_menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/_menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Entity/Chef.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Entity/Chef.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Entity/DawraTadrib.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Entity/DawraTadrib.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Entity/Inscrit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Entity/Inscrit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Entity/MarkezTadrib.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Entity/MarkezTadrib.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Form/InscritType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Form/InscritType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Repository/InscritRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Repository/InscritRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Chef.orm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Chef.orm.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/DawraTadrib.orm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/DawraTadrib.orm.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Inscrit.orm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Inscrit.orm.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/MarkezTadrib.orm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/MarkezTadrib.orm.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Controller/DawaratTadribController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Controller/DawaratTadribController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Controller/InscritController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Controller/InscritController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Controller/adminInscritController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Controller/adminInscritController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterJ.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterJ.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterResultW.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterResultW.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterW.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterW.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/attribChara.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/attribChara.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/finalResult.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/finalResult.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/statW.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/statW.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/dawaratTadrib/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/dawaratTadrib/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/Dawra.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/Dawra.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/homelogin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/homelogin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/verticalLayout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/verticalLayout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleChefBundle/Controller/SimpleChefController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Controller/SimpleChefController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/Default/datatableLayout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/Default/datatableLayout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/listNewDiraset.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/listNewDiraset.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -111,11 +75,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="140" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -126,13 +99,6 @@
             <state>
               <caret column="17" selection-end-column="17" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DawraBundle/Controller/DawraController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4090" />
           </provider>
         </entry>
       </file>
@@ -194,7 +160,6 @@
         <option value="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterResultW.html.twig" />
         <option value="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterJ.html.twig" />
         <option value="$PROJECT_DIR$/src/ChefBundle/Controller/ChefController.php" />
-        <option value="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig" />
         <option value="$PROJECT_DIR$/src/DawraBundle/Resources/views/link/_menu.html.twig" />
         <option value="$PROJECT_DIR$/src/DbBundle/Entity/DawraTadrib.php" />
         <option value="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/DawraTadrib.orm.yml" />
@@ -211,6 +176,7 @@
         <option value="$PROJECT_DIR$/src/DirasetBundle/Controller/adminInscritController.php" />
         <option value="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/homelogin.html.twig" />
         <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig" />
       </list>
     </option>
   </component>
@@ -395,6 +361,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/DbBundle/Repository" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -433,12 +400,12 @@
       <updated>1560332941492</updated>
       <workItem from="1560332942976" duration="27360000" />
       <workItem from="1560500908436" duration="26903000" />
-      <workItem from="1560719335883" duration="6639000" />
+      <workItem from="1560719335883" duration="7254000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60902000" />
+    <option name="totallyTimeSpent" value="61517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1987" y="25" width="1853" height="1055" extended-state="6" />
@@ -600,13 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
           <caret line="334" selection-start-line="334" selection-end-line="334" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="52" column="102" selection-start-line="52" selection-start-column="102" selection-end-line="52" selection-end-column="102" />
         </state>
       </provider>
     </entry>
@@ -778,6 +738,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="140" selection-end-column="35" />
         </state>
       </provider>
     </entry>

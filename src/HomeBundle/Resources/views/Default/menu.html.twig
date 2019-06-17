@@ -111,34 +111,34 @@
                                     </li>
                                 {%endif%}
                             {%endif%}
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> دراسات صيف 2018 </span>
-                                    <span class="menu-arrow"></span></a>
-                                <ul class="list-unstyled">
-                                    <li><a href="{{path('adminInscrit_index')}}"><i class="fa fa-bars"></i> القائمة الاولية</a></li>
+{#                            <li class="has_sub">#}
+{#                                <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> دراسات صيف 2018 </span>#}
+{#                                    <span class="menu-arrow"></span></a>#}
+{#                                <ul class="list-unstyled">#}
+{#                                    <li><a href="{{path('adminInscrit_index')}}"><i class="fa fa-bars"></i> القائمة الاولية</a></li>#}
 
-                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")   or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+{#                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")   or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}#}
 
-                                        <li><a href="{{path('adminInscrit_stat')}}"><i class="fa fa-bars"></i>إحصائيات الأولية</a></li>
-                                        <li><a href="{{path('adminInscrit_stat2W')}}"><i class="fa fa-bars"></i>إحصائيات المقبولين</a></li>
-                                        <li><a href="{{path('adminInscrit_statW')}}"><i class="fa fa-bars"></i> الإحصائيات النهائية</a></li>
+{#                                        <li><a href="{{path('adminInscrit_stat')}}"><i class="fa fa-bars"></i>إحصائيات الأولية</a></li>#}
+{#                                        <li><a href="{{path('adminInscrit_stat2W')}}"><i class="fa fa-bars"></i>إحصائيات المقبولين</a></li>#}
+{#                                        <li><a href="{{path('adminInscrit_statW')}}"><i class="fa fa-bars"></i> الإحصائيات النهائية</a></li>#}
 
-                                        <li><a href="{{path('adminInscrit_accepterResultW')}}"><i class="fa fa-bars"></i>  قائمة المقبولين وطني</a></li>
-                                        <li><a href="{{path('adminInscrit_accepterW')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين وطني</a></li>
-                                        {%endif%}
-                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}
+{#                                        <li><a href="{{path('adminInscrit_accepterResultW')}}"><i class="fa fa-bars"></i>  قائمة المقبولين وطني</a></li>#}
+{#                                        <li><a href="{{path('adminInscrit_accepterW')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين وطني</a></li>#}
+{#                                        {%endif%}#}
+{#                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}#}
 
-                                        <li><a href="{{path('adminInscrit_accepterJ')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين جهوي</a></li>
-                                        {%endif%}
-                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+{#                                        <li><a href="{{path('adminInscrit_accepterJ')}}"><i class="fa fa-bars"></i> تحين قائمة المقبولين جهوي</a></li>#}
+{#                                        {%endif%}#}
+{#                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}#}
 
-                                        <li><a href="{{path('adminInscrit_dawra_index')}}"><i class="fa fa-bars"></i> إنشاء الدورات</a></li>
-                                        <li><a href="{{path('adminInscrit_attribChara')}}"><i class="fa fa-bars"></i> إسناد دورات الشارة</a></li>
-                                        <li><a href="{{path('adminInscrit_attribTamhidiya')}}"><i class="fa fa-bars"></i> إسناد دورات التمهيدية</a></li>
-                                        {%endif%}
-                                    <li><a href="{{path('adminInscrit_finalResult')}}"><i class="fa fa-bars"></i> النتائج النهائية</a></li>
-                                </ul>
-                            </li>
+{#                                        <li><a href="{{path('adminInscrit_dawra_index')}}"><i class="fa fa-bars"></i> إنشاء الدورات</a></li>#}
+{#                                        <li><a href="{{path('adminInscrit_attribChara')}}"><i class="fa fa-bars"></i> إسناد دورات الشارة</a></li>#}
+{#                                        <li><a href="{{path('adminInscrit_attribTamhidiya')}}"><i class="fa fa-bars"></i> إسناد دورات التمهيدية</a></li>#}
+{#                                        {%endif%}#}
+{#                                    <li><a href="{{path('adminInscrit_finalResult')}}"><i class="fa fa-bars"></i> النتائج النهائية</a></li>#}
+{#                                </ul>#}
+{#                            </li>#}
                         {%endif%}
                     </ul>
                 {%endif%}
