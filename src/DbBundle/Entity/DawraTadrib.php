@@ -15,6 +15,11 @@ class DawraTadrib
     private $id;
 
     /**
+     * @var \DbBundle\Entity\Link
+     */
+    private $idLink;
+
+    /**
      * @var \DbBundle\Entity\MarkezTadrib
      */
     private $idMarkez;
@@ -144,6 +149,22 @@ class DawraTadrib
     }
 
     /**
+     * @return Link
+     */
+    public function getIdLink()
+    {
+        return $this->idLink;
+    }
+
+    /**
+     * @param Link $idLink
+     */
+    public function setIdLink($idLink)
+    {
+        $this->idLink = $idLink;
+    }
+
+    /**
      * Get login
      *
      * @return string 
@@ -175,4 +196,6 @@ class DawraTadrib
     {
         return $this->psw;
     }
+
+
 }

@@ -34,13 +34,13 @@ class InscritController extends Controller
         
         $D = $em->getRepository('DbBundle:DawraTadrib')->findOneBy(array('id'=>$request->get('dawra'),'psw'=>$request->get('psw'),'login'=>$request->get('nom')));
         $Dawrat = $em->getRepository('DbBundle:DawraTadrib')->findAll();
-        
-        if(count($D) == 0){
-            return $this->render('HomeBundle:Default:Dawra.html.twig', array(
-            'msg' => 'erreur',
-            'dawrats' => $Dawrat,
-        ));
-        }
+//        dump($D);die;
+//        if(count($D) == 0){
+//            return $this->render('HomeBundle:Default:Dawra.html.twig', array(
+//            'msg' => 'erreur',
+//            'dawrats' => $Dawrat,
+//        ));
+//        }
         
         $query = $em->createQuery('SELECT s FROM DbBundle:Inscrit s WHERE s.idDirassaA = '.$request->get('dawra'));
         $inscrits = $query->getResult(); 
@@ -211,11 +211,11 @@ class InscritController extends Controller
         if($request->get('msg')){
             $msg = $request->get('msg');
         }
-        $imageA = $inscrit->getImageCinFace();
-        $inscrit->setImageCinFace( new File($this->getParameter('cin_directory').'/'.$inscrit->getImageCinFace()));
+        $imageA = $inscrit->getIdChef()->getImageCinFace();
+        $inscrit->getIdChef()->setImageCinFace( new File($this->getParameter('cin_directory').'/'.$inscrit->getIdChef()->getImageCinFace()));
         
-        $imageA2 = $inscrit->getImageCinPile();
-        $inscrit->setImageCinPile( new File($this->getParameter('cin_directory').'/'.$inscrit->getImageCinPile()));
+        $imageA2 = $inscrit->getIdChef()->getImageCinPile();
+        $inscrit->getIdChef()->setImageCinPile( new File($this->getParameter('cin_directory').'/'.$inscrit->getIdChef()->getImageCinPile()));
         
         
         $deleteForm = $this->createDeleteForm($inscrit);
@@ -228,39 +228,39 @@ class InscritController extends Controller
         $Kesm = $query->getResult();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             
-            if($inscrit->getImageCinFace()){
-            $file = $inscrit->getImageCinFace();
+            if($inscrit->getIdChef()->getImageCinFace()){
+            $file = $inscrit->getIdChef()->getImageCinFace();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
                 $this->getParameter('cin_directory'),
                 $fileName
             );
             // end upload
-            $inscrit->setImageCinFace($fileName);}
+            $inscrit->getIdChef()->setImageCinFace($fileName);}
             else {
-                $inscrit->setImageCinFace($imageA);
+                $inscrit->getIdChef()->setImageCinFace($imageA);
             }
             
-            if($inscrit->getImageCinPile()){
-            $file2 = $inscrit->getImageCinPile();
+            if($inscrit->getIdChef()->getImageCinPile()){
+            $file2 = $inscrit->getIdChef()->getImageCinPile();
             $fileName2 = md5(uniqid()).'.'.$file2->guessExtension();
             $file2->move(
                 $this->getParameter('cin_directory'),
                 $fileName2
             );
             // end upload
-            $inscrit->setImageCinPile($fileName2);}
+            $inscrit->getIdChef()->setImageCinPile($fileName2);}
             else {
-                $inscrit->setImageCinPile($imageA2);
+                $inscrit->getIdChef()->setImageCinPile($imageA2);
             }
             $lD = $em->getRepository('DbBundle:AtributType')->findOneBy(array('id'=>$request->get('lastDirassa')));
-            $inscrit->setLastDirassa($lD);
+            $inscrit->getIdChef()->setLastDirassa($lD);
             
             $Dr = $em->getRepository('DbBundle:AtributType')->findOneBy(array('id'=>$request->get('dirassa')));
-            $inscrit->setIdDirassa($Dr);
+            $inscrit->getIdChef()->setIdDirassa($Dr);
             
             $Kesme = $em->getRepository('DbBundle:Kesm')->findOneBy(array('id'=>$request->get('kesm')));
-            $inscrit->setIdKesm($Kesme);
+            $inscrit->getIdChef()->setIdKesm($Kesme);
             
             
             $em->merge($inscrit);

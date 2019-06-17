@@ -1,7 +1,7 @@
 adminInscrit_index:
     path:     /
     defaults: { _controller: "DirasetBundle:adminInscrit:index" }
-    methods:  GET
+    methods:  [GET, POST]
 adminInscrit_attribChara:
     path:     /attribChara
     defaults: { _controller: "DirasetBundle:adminInscrit:attribChara" }

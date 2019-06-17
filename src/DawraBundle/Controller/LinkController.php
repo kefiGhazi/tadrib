@@ -2,6 +2,7 @@
 
 namespace DawraBundle\Controller;
 
+use DbBundle\Entity\Inscrit;
 use DbBundle\Entity\Link;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,8 +59,11 @@ class LinkController extends Controller
     public function showAction(Link $link)
     {
 
+        $form = $this->createForm('DbBundle\Form\LinkType', $link);
+
         return $this->render('DawraBundle:link:show.html.twig', array(
             'link' => $link,
+            'form' => $form->createView(),
         ));
     }
 

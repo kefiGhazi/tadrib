@@ -2,6 +2,9 @@
 
 namespace DbBundle\Repository;
 
+use DbBundle\Entity\Inscrit;
+use DbBundle\Entity\Jiha;
+use DbBundle\Entity\Link;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +15,189 @@ use Doctrine\ORM\EntityRepository;
  */
 class InscritRepository extends EntityRepository
 {
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByJiha(array $option)
+    {
+
+        return $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idJiha = :idJiha')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idJiha',  $option['idJiha'])
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByJihaAccept(array $option)
+    {
+
+        return  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idJiha = :idJiha')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idJiha',  $option['idJiha'])
+            ->andWhere('i.accepteW = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByJihaAcceptF(array $option)
+    {
+
+        return  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idJiha = :idJiha')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idJiha',  $option['idJiha'])
+            ->andWhere('i.accepteW = 1')
+            ->andWhere('i.paye = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByKesm(array $option)
+    {
+
+      return $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idKesm = :idKesm')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idKesm',  $option['idKesm'])
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByKesmAccept(array $option)
+    {
+
+        return  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idKesm = :idKesm')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idKesm',  $option['idKesm'])
+            ->andWhere('i.accepteW = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByKesmAcceptF(array $option)
+    {
+
+        return  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('c.idKesm = :idKesm')
+            ->setParameter('idLink', $option['idLink'])
+            ->setParameter('idKesm',  $option['idKesm'])
+            ->andWhere('i.accepteW = 1')
+            ->andWhere('i.paye = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByAcceptWatani(array $option)
+    {
+        $query =  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->andWhere('i.accepteW = 1')
+            ->andWhere('i.paye = 1')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->setParameter('idLink', $option['idLink']);
+
+            if($option['jiha'] != null ){
+                $query = $query->andWhere('c.idKesm = :idJiha')
+                      ->setParameter('idJiha',  $option['jiha']);
+            }
+            if($option['dirassa'] != null ){
+                $query = $query->andWhere('i.idDirassa = :dirassa')
+                      ->setParameter('dirassa',  $option['dirassa']);
+            }
+        $query = $query->getQuery()
+            ->getResult();
+            return $query;
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByAcceptWatani2(array $option)
+    {
+        $query =  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->andWhere('i.accepteW = 1')
+            ->andWhere('i.paye = 1')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->setParameter('idLink', $option['idLink']);
+
+        if($option['jiha'] != null ){
+            $query = $query->andWhere('c.idJiha = :idJiha')
+                ->setParameter('idJiha',  $option['jiha']);
+        }
+        if($option['kesm'] != null ){
+            $query = $query->andWhere('c.idKesm = :kesem')
+                ->setParameter('kesem',  $option['kesm']);
+        }
+        $query = $query->getQuery()
+            ->getResult();
+        return $query;
+    }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByWatani(array $option)
+    {
+        $query =  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->setParameter('idLink', $option['idLink']);
+
+        if($option['jiha'] != null ){
+            $query = $query->andWhere('c.idJiha = :idJiha')
+                ->setParameter('idJiha',  $option['jiha']);
+        }
+        if($option['dirassa'] != null ){
+            $query = $query->andWhere('i.idDirassa = :dirassa')
+                ->setParameter('dirassa',  $option['dirassa']);
+        }
+        $query = $query->getQuery()
+            ->getResult();
+        return $query;
+    }
 }

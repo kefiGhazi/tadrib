@@ -19,6 +19,9 @@
                         <div class="card-box"> 
                         {{ include('DawraBundle:link:_menu.html.twig') }}
                         </div>
+                        <div class="card-box">
+                            {% include 'DawraBundle:link:form.html.twig' with {'show': 'true' } %}
+                    </div>
                     </div>
                 </div>
             </div>

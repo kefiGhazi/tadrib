@@ -66,12 +66,12 @@
                                 <tbody>
                                     {% for inscrit in inscrits %}
                                         <tr>
-                                            <td>{{ inscrit.nom }} {{ inscrit.prenom }}</td>
-                                            <td>{{ inscrit.cin }}</td>
-                                            <td>{{ inscrit.numeroInscrit }}</td>
-                                            <td>{{ inscrit.idJiha.name }}</td>
-                                            <td>{{ inscrit.fawj }}</td>
-                                            <td>{{ inscrit.idKesm.nom }}</td>
+                                            <td>{{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }}</td>
+                                            <td>{{ inscrit.idChef.cin }}</td>
+                                            <td>{{ inscrit.idChef.inscrit }}</td>
+                                            <td>{{ inscrit.idChef.idJiha.name }}</td>
+                                            <td>{{ inscrit.idChef.fawej }}</td>
+                                            <td>{{ inscrit.idChef.idKesm.nom }}</td>
                                             <td>
                                                 
                                                     {%if inscrit.presence == 1%}
@@ -113,7 +113,7 @@
                                             <td>
                                                 {%if  app.user%}
                                                                         {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
-                                                <a  class="btn btn-xs btn-warning waves-effect waves-light" href="{{path('inscrit_edit',{'id':inscrit.id})}}" ><i class="fa fa-pencil"></i> تعديل </a>
+{#                                                <a  class="btn btn-xs btn-warning waves-effect waves-light" href="{{path('inscrit_edit',{'id':inscrit.id})}}" ><i class="fa fa-pencil"></i> تعديل </a>#}
                                                 {%endif%}
                                                 {%endif%}
                                                 <a  class="btn btn-xs btn-success waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-{{inscrit.id}}"><i class="fa fa-plus"></i> تفاصيل </a>
@@ -123,62 +123,57 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title">ملف القائد {{ inscrit.nom }} {{ inscrit.prenom }}</h4>
+                                                    <h4 class="modal-title">ملف القائد {{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }}</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الاسم</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.nom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">اللقب</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.prenom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.prenom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">تاريخ الولادة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.dateNaissance|date('Y-m-d') }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.dateNaissance|date('Y-m-d') }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المستوى العلمي</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.niveau }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.etude }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المهنة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.travail }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.travail }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الهاتف</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.tel }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.tel }}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">العنوان</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
-                                                            </div>
-                                                        </div>
+{#                                                        <div class="col-md-4">#}
+{#                                                            <div class="form-group">#}
+{#                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>#}
+{#                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">العنوان</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.adresse }}">
                                                             </div>
                                                         </div>
                                                         <h2 class="text-center"> بطاقة التعريف الوطنية </h2>
@@ -186,19 +181,19 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">رقم بطاقة التعريف الوطنية</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.cin }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.cin }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوجه الأول</label>
-                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinFace)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinFace)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوجه الثاني</label>
-                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinPile)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinPile)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
                                                             </div>
                                                         </div>
                                                             <h2 class="text-center col-md-12"> المعلومات الكشفية </h2>
@@ -206,7 +201,7 @@
                                                          <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المعرف الكشقي</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.numeroInscrit }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.inscrit }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -218,19 +213,19 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">القسم</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idKesm.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.idKesm.nom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الفوج</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.fawj }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.fawej }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوحدة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.wehda }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.wehda }}">
                                                             </div>
                                                         </div>
                                                         <h2 class="text-center col-sm-12 col-lg-12 col-xs-12"> أخر دراسة تدريبية </h2>
@@ -238,33 +233,28 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الدراسة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lastDirassa.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.lastDirasa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">قائدها</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.chefLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.chefLastDirassa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">مكانها</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lieuxLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.lieuxLastDirassa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الشهر</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.moisLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.dateLastDirassa }}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">السنة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.yearLastDirassa }}">
-                                                            </div>
-                                                        </div>
+
                                                     </div>
                                                    
                                                     

@@ -1,15 +1,24 @@
 {% extends 'HomeBundle:Default:layout.html.twig' %}
-
 {% block body %}
-    <div class="container-fluid">
-        <!-- Page Heading -->
-
-        <!-- /.row -->
-        <!-- Page Content -->
-        <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
-                <div class="row">
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">{{link.nom}} </h1>
+                        <h5 class="text-center plan-title">
+                            {% set first = true %}
+                            {% for jiha in link.jihas %}
+                                {% if first == false %} | {%endif%} {{ jiha.name }}
+                                {% set first = false %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                    <div class="card-box">
+                        {{ include('DawraBundle:link:_menu.html.twig') }}
+                    </div>
                     <div class="col-sm-12 col-lg-12 col-xs-12">
                         <div class="card-box"> 
                             <h1>قائمة القادة<span> ({{inscrits|length}}) </span></h1>
@@ -17,6 +26,7 @@
                         <div class="card-box"> 
                             <div class="col-lg-12">
                                 <form method="POST" action="{{path('adminInscrit_accepterW')}}">
+                                    <input type="hidden" name="idLink" value="{{ link.id }}">
                                     <div class="col-sm-3 col-lg-3 col-xs-12">
                                         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
                                             <label>الجهة </label>
@@ -33,8 +43,9 @@
                                             <label>الدراسات </label>
                                             <select name="Dirassa" class="form-control">
                                                 <option value="">جميع الدراسات</option>
-                                                <option value="2"{%if D == "2" %} selected="" {%endif%}>تمهيدية</option>
-                                                <option value="3"{%if D == "3" %} selected="" {%endif%}>شارة خشبية</option>
+                                                {% for dirassa in link.mostawaTadribis %}
+                                                    <option value="{{ dirassa.id }}" {%if D == dirassa.id %} selected="" {%endif%}> {{ dirassa.nom }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div> 
@@ -64,33 +75,33 @@
                                 <tbody>
                                     {% for inscrit in inscrits %}
                                         <tr>
-                                            <td>{{ inscrit.nom }} {{ inscrit.prenom }} <button class="btn btn-xs btn-primary inscrit" value="{{ inscrit.numeroInscrit }}" data-toggle="modal" data-target="#con-close-modal-non-verif"><i class="fa fa-plus"></i></button> </td>
-                                            <td>{{ inscrit.cin }}</td>
-                                            <td>{{ inscrit.numeroInscrit }}</td>
-                                            <td>{% if inscrit.dateNaissance %}{{ inscrit.dateNaissance|date('Y-m-d') }}{% endif %}</td>
-                                            <td>{{ inscrit.idKesm.nom }}</td>
-                                            <td>{{ inscrit.idJiha.name }}</td>
+                                            <td>{{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }} <button class="btn btn-xs btn-primary inscrit" value="{{ inscrit.idChef.inscrit }}" data-toggle="modal" data-target="#con-close-modal-non-verif"><i class="fa fa-plus"></i></button> </td>
+                                            <td>{{ inscrit.idChef.cin }}</td>
+                                            <td>{{ inscrit.idChef.inscrit }}</td>
+                                            <td>{% if inscrit.idChef.dateNaissance %}{{ inscrit.idChef.dateNaissance|date('Y-m-d') }}{% endif %}</td>
+                                            <td>{{ inscrit.idChef.idKesm.nom }}</td>
+                                            <td>{{ inscrit.idChef.idJiha.name }}</td>
                                             <td>
                                                 {{ inscrit.idDirassa.nom  }}
-                                                {%if inscrit.idDirassa.id == 3%}
-                                                   <div class="btn-group">
-                                                        <button type="button" class="btn btn-xs btn-warning dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_editDirassa',{'id':inscrit.id,'idDirassa':'2','target':'W'})}}">تمهيدية</a></li>
-                                                        </ul>
-                                                    </div>
+{#                                                {%if inscrit.idDirassa.id == 3%}#}
+{#                                                   <div class="btn-group">#}
+{#                                                        <button type="button" class="btn btn-xs btn-warning dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="caret"></span></button>#}
+{#                                                        <ul class="dropdown-menu" role="menu">#}
+{#                                                            <li><a href="{{path('adminInscrit_editDirassa',{'id':inscrit.id,'idDirassa':'2','target':'W'})}}">تمهيدية</a></li>#}
+{#                                                        </ul>#}
+{#                                                    </div>#}
 
-                                                {%else%}
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-xs btn-warning dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_editDirassa',{'id':inscrit.id,'idDirassa':'3','target':'W'})}}">شارة خشبية</a></li>
-                                                        </ul>
-                                                    </div>
-                                                {%endif%}
+{#                                                {%else%}#}
+{#                                                    <div class="btn-group">#}
+{#                                                        <button type="button" class="btn btn-xs btn-warning dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-pencil"></i> <span class="caret"></span></button>#}
+{#                                                        <ul class="dropdown-menu" role="menu">#}
+{#                                                            <li><a href="{{path('adminInscrit_editDirassa',{'id':inscrit.id,'idDirassa':'3','target':'W'})}}">شارة خشبية</a></li>#}
+{#                                                        </ul>#}
+{#                                                    </div>#}
+{#                                                {%endif%}#}
                                             </td>
                                             <td>
-                                                {{ inscrit.lastDirassa.nom }}/{{ inscrit.moisLastDirassa }}-{{ inscrit.yearLastDirassa }}
+                                                {{ inscrit.idChef.lastDirasa }}/{{ inscrit.idChef.dateLastDirassa }}
                                             </td>
 
                                             <td>
@@ -115,16 +126,16 @@
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                     <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="{{path('adminInscrit_accepterW',{'id':inscrit.id,'etat':'oui','jiha':J,'Dirassa':D})}}">نعم</a></li>
+                                                        <li><a href="{{path('adminInscrit_accepterW',{'id':inscrit.id,'etat':'oui','jiha':J,'Dirassa':D, 'idLink' : link.id})}}">نعم</a></li>
                                                         <li><a data-toggle="modal" data-target="#con-close-modal-non-{{inscrit.id}}">لا</a></li>
                                                     </ul>
                                                     <div id="con-close-modal-non-{{inscrit.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                                         <div class="modal-dialog modal-sm">
                                                             <div class="modal-content">
-                                                                <form action="{{path('adminInscrit_accepterW',{'id':inscrit.id,'etat':'non','jiha':J,'Dirassa':D})}}" method="POST">
+                                                                <form action="{{path('adminInscrit_accepterW',{'id':inscrit.id,'etat':'non','jiha':J,'Dirassa':D, 'idLink' : link.id})}}" method="POST">
                                                                     <div class="modal-header">
                                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                        <h4 class="modal-title">رفض تسجيل القائد {{ inscrit.nom }} {{ inscrit.prenom }}</h4>
+                                                                        <h4 class="modal-title">رفض تسجيل القائد {{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }}</h4>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row">
@@ -157,8 +168,8 @@
                                                         <div class="btn-group"> 
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D})}}">نعم</a></li>
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D})}}">لا</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
                                                             </ul>
                                                         </div>
                                                     {%elseif inscrit.paye == 2%}
@@ -166,8 +177,8 @@
                                                         <div class="btn-group"> 
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D})}}">نعم</a></li>
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D})}}">لا</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
                                                             </ul>
                                                         </div>
                                                     {%elseif inscrit.accepteJ == 1 and inscrit.accepteW == 2 %}
@@ -177,8 +188,8 @@
                                                         <div class="btn-group"> 
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D})}}">نعم</a></li>
-                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D})}}">لا</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
+                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
                                                             </ul>
                                                         </div>
                                                     {%endif%}
@@ -191,8 +202,8 @@
                                                     <div class="btn-group"> 
                                                         <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D})}}">نعم</a></li>
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D})}}">لا</a></li>
+                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
+                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
                                                         </ul>
                                                     </div>
                                                 {%endif%}
@@ -210,82 +221,77 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h4 class="modal-title">ملف القائد {{ inscrit.nom }} {{ inscrit.prenom }}</h4>
+                                                    <h4 class="modal-title">ملف القائد {{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }}</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الاسم</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.nom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">اللقب</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.prenom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.prenom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">تاريخ الولادة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.dateNaissance|date('Y-m-d') }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.dateNaissance|date('Y-m-d') }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المستوى العلمي</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.niveau }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.etude }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المهنة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.travail }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.travail }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الهاتف</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.tel }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.tel }}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">العنوان</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
-                                                            </div>
-                                                        </div>
+{#                                                        <div class="col-md-4">#}
+{#                                                            <div class="form-group">#}
+{#                                                                <label for="field-1" class="control-label">البريد الإلكتروني</label>#}
+{#                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.email }}">#}
+{#                                                            </div>#}
+{#                                                        </div>#}
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">العنوان</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.adress }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.adresse }}">
                                                             </div>
                                                         </div>
+
                                                         <h2 class="text-center"> بطاقة التعريف الوطنية </h2>
                                                         <hr>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">رقم بطاقة التعريف الوطنية</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.cin }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.cin }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوجه الأول</label>
-                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinFace)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinFace)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوجه الثاني</label>
-                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.imageCinPile)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
+                                                                <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinPile)}}" target="_blanc" class="btn btn-xs btn-primary"><i class="fa fa-eye"></i> عرض</a>
                                                             </div>
                                                         </div>
                                                         <h2 class="text-center col-md-12"> المعلومات الكشفية </h2>
@@ -293,7 +299,7 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">المعرف الكشقي</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.numeroInscrit }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.inscrit }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
@@ -305,19 +311,19 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">القسم</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idKesm.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.idKesm.nom }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الفوج</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.fawj }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.fawej }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الوحدة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.wehda }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.wehda }}">
                                                             </div>
                                                         </div>
                                                         <h2 class="text-center col-sm-12 col-lg-12 col-xs-12"> أخر دراسة تدريبية </h2>
@@ -325,33 +331,28 @@
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الدراسة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lastDirassa.nom }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.lastDirasa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">قائدها</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.chefLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.chefLastDirassa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">مكانها</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.lieuxLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.lieuxLastDirassa }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">الشهر</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.moisLastDirassa }}">
+                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.idChef.dateLastDirassa }}">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="field-1" class="control-label">السنة</label>
-                                                                <input type="text" class="form-control" readonly="" value="{{ inscrit.yearLastDirassa }}">
-                                                            </div>
-                                                        </div>
+
                                                     </div>
 
 
@@ -372,6 +373,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+
 
 
 

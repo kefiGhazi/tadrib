@@ -2,22 +2,22 @@
 
 <div class="page-title-right">
     <ul class="breadcrumb m-0">
-        <li><a href="{{path('adminInscrit_index')}}">  القائمة الاولية</a></li>
+        <li class="badge badge-sm badge-success"><a href="{{path('link_show' ,{'id' : link.id})}}">  الدورة التدريبية</a></li>
+        <li class="badge badge-sm badge-success"><a href="{{ path('adminInscrit_index' ,{'id':link.id} ) }}">  القائمة الاولية</a></li>
         {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")   or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_stat')}}"> إحصائيات الأولية</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_stat2W')}}"> إحصائيات المقبولين</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_statW')}}">  الإحصائيات النهائية</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterResultW')}}">   قائمة المقبولين وطني</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterW')}}">  تحين قائمة المقبولين وطني</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_stat'  ,{'id':link.id} )}}"> إحصائيات الأولية</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_stat2W',{'id':link.id})}}"> إحصائيات المقبولين</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_statW',{'id':link.id})}}">  الإحصائيات النهائية</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_accepterResultW',{'id':link.id})}}">   قائمة المقبولين وطني</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_accepterW',{'idLink':link.id})}}">  تحين قائمة المقبولين وطني</a></li>
             {%endif%}
             {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_accepterJ')}}">  تحين قائمة المقبولين جهوي</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_accepterJ',{'id':link.id})}}">  تحين قائمة المقبولين جهوي</a></li>
             {%endif%}
             {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN")  or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_dawra_index')}}">  إنشاء الدورات</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_attribChara')}}">  إسناد دورات الشارة</a></li>
-            <li class="breadcrumb-item"><a href="{{path('adminInscrit_attribTamhidiya')}}">  إسناد دورات التمهيدية</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_dawra_index',{'id':link.id})}}">  إنشاء الدورات</a></li>
+            <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_attribChara',{'id':link.id})}}">  إسناد الدورات </a></li>
             {%endif%}
-        <li class="breadcrumb-item"><a href="{{path('adminInscrit_finalResult')}}">  النتائج النهائية</a></li>
+        <li class="badge badge-sm badge-success"><a href="{{path('adminInscrit_finalResult',{'id':link.id})}}">  النتائج النهائية</a></li>
     </ul>
 </div>

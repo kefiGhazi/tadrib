@@ -18,18 +18,19 @@ class DawaratTadribController extends Controller
      * Lists all inscrit entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $dawras = $em->getRepository('DbBundle:DawraTadrib')->findAll();
-        $markezs = $em->getRepository('DbBundle:MarkezTadrib')->findAll();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
+        $dawras = $em->getRepository('DbBundle:DawraTadrib')->findBy(array('idLink' => $link->getId()));
+        $markezs = $em->getRepository('DbBundle:MarkezTadrib')->findBy(array('idLink' => $link->getId()));
         $kesms = $em->getRepository('DbBundle:Kesm')->findAll();
         $query = $em->createQuery('SELECT s FROM DbBundle:AtributType s WHERE s.id <= 3  And s.id > 1');
         $dirassas = $query->getResult(); 
         return $this->render('DirasetBundle:dawaratTadrib:index.html.twig', array(
             'dawras' => $dawras,
             'markezs' => $markezs,
+            'link' => $link,
             'kesms' => $kesms,
             'dirassas' => $dirassas,
         ));
@@ -44,11 +45,13 @@ class DawaratTadribController extends Controller
         
         
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
         $dawraTadrib = new DawraTadrib();
         $dawraTadrib->setNom($request->get('nom'));
         $dawraTadrib->setChef($request->get('chef'));
         $dawraTadrib->setLogin($request->get('login'));
         $dawraTadrib->setPsw($request->get('password'));
+        $dawraTadrib->setIdLink($link);
         $idAtributType = $em->getRepository('DbBundle:AtributType')->findOneBy(array('id' => $request->get('dirassa')));
         $dawraTadrib->setIdAtributType($idAtributType);
         $idKesm = $em->getRepository('DbBundle:Kesm')->findOneBy(array('id' => $request->get('kesm')));
@@ -58,7 +61,7 @@ class DawaratTadribController extends Controller
         
         $em->persist($dawraTadrib);
         $em->flush();
-        return $this->redirectToRoute('adminInscrit_dawra_index');
+        return $this->redirectToRoute('adminInscrit_dawra_index',array('id' =>$link->getId()));
     }
 
     /**
@@ -96,29 +99,31 @@ class DawaratTadribController extends Controller
         
         $em->merge($dawraTadrib);
         $em->flush();
-        return $this->redirectToRoute('adminInscrit_dawra_index');
+        return $this->redirectToRoute('adminInscrit_dawra_index',array('id' =>$dawraTadrib->getIdLink()->getId()));
     }
     public function newMarkezAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
+
         $markez = new \DbBundle\Entity\MarkezTadrib();        
         $markez->setNom($request->get('nom'));
+        $markez->setIdLink($link);
         
         $em->persist($markez);
         $em->flush();
-        return $this->redirectToRoute('adminInscrit_dawra_index');
+        return $this->redirectToRoute('adminInscrit_dawra_index',array('id' =>$link->getId()));
     }
     public function editMarkezAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
         $markez = $em->getRepository('DbBundle:MarkezTadrib')->findOneBy(array('id' => $request->get('id')));        
         $markez->setNom($request->get('nom'));
         
         $em->merge($markez);
         $em->flush();
-        return $this->redirectToRoute('adminInscrit_dawra_index');
+        return $this->redirectToRoute('adminInscrit_dawra_index',array('id' =>$link->getId()));
     }
     public function editDirassaAction(Request $request)
     {

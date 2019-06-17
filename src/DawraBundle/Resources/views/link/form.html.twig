@@ -62,5 +62,11 @@
     </div> 
 </div>
         {{ form_widget(form) }}
-        <input type="submit" class="btn btn-primary btn-lg" value="إنشاء" />
+{% if show is defined %}
+    <script>
+        $('input').attr('readonly', 'readonly');
+    </script>
+{% else %}
+    <input type="submit" class="btn btn-primary btn-lg" value="إنشاء" />
+{% endif %}
 {{ form_end(form) }}

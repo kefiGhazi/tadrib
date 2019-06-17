@@ -50,7 +50,10 @@
                             {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
                                 <li class="has_sub">
                                     {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
-                                        <a href="{{path('demande_dawra_index')}}"><i class="fa fa-users"></i> مطالب تنظيم الدورات التدريبية  </a>
+                                        <a href="{{path('demande_dawra_index')}}"><i class="fa fa-bars"></i> مطالب تنظيم الدورات التدريبية  </a>
+                                    {%endif%}
+                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI")%}
+                                        <a href="{{path('link_index')}}"><i class="fa fa-bars"></i> روابط الدراسات</a>
                                     {%endif%}
                                     <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> الدورات التدريبية </span>
                                         <span class="menu-arrow"></span></a>

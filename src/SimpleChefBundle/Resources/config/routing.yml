@@ -18,3 +18,13 @@ simple_chef_liste_diraset:
     defaults: { _controller: "SimpleChefBundle:SimpleChef:listeDiraset" }
     methods:  [GET, POST]
 
+simple_chef_inscrit:
+    path:     /inscrit/{chef}/{link}
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:inscrit" }
+    methods:  [GET, POST]
+
+simple_chef_inscrit_list:
+    path:     /inscrit/list
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:inscritList" }
+    methods:  [GET, POST]
+

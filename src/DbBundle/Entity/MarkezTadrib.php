@@ -15,6 +15,11 @@ class MarkezTadrib
     private $id;
 
     /**
+     * @var \DbBundle\Entity\Link
+     */
+    private $idLink;
+
+    /**
      * @var string
      */
     private $nom;
@@ -52,4 +57,22 @@ class MarkezTadrib
     {
         return $this->nom;
     }
+
+    /**
+     * @return Link
+     */
+    public function getIdLink()
+    {
+        return $this->idLink;
+    }
+
+    /**
+     * @param Link $idLink
+     */
+    public function setIdLink($idLink)
+    {
+        $this->idLink = $idLink;
+    }
+
+
 }

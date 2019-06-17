@@ -18,25 +18,27 @@ class adminInscritController extends Controller {
      * Lists all inscrit entities.
      *
      */
-    public function indexAction() {
+    public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
         $idUser = $this->getUser()->getId();
         $privilaige = $em->getRepository('DbBundle:Privilaige')->findOneById($idUser);
         $chefs = NULL;
         if ($privilaige->getIdJiha() == NULL) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findAll();
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idLink' => $link->getId()));
         } else {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idJiha' => $privilaige->getIdJiha()));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByJiha(array('idLink' => $link->getId(), 'idJiha' => $privilaige->getIdJiha()->getId()));
         }
-        //$inscrits = $em->getRepository('DbBundle:Inscrit')->findAll();
 
         return $this->render('DirasetBundle:adminInscrit:index.html.twig', array(
                     'inscrits' => $inscrits,
+                    'link' => $link,
         ));
     }
 
     public function finalResultAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=>$request->get('id')));
         $condition = "";
         $J = "";
         $D = "";
@@ -80,38 +82,32 @@ class adminInscritController extends Controller {
                     'J' => $J,
                     'D' => $D,
                     'kesms' => $kesms,
+                    'link' => $link,
                     'jihas' => $jihas,
             ));
     }
 
     public function aceptResultAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $condition = "";
-        $J = "";
-        $D = "";
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
+        $J = null ;
+        $D = null;
 
-        if ($request->get('jiha') != NULL && $request->get('Dirassa') != NULL) {
+        if ($request->get('jiha') != NULL){
             $J = $request->get('jiha');
+        }
+        if ($request->get('Dirassa') != NULL){
             $D = $request->get('Dirassa');
-            $condition = $condition . "  AND p.idJiha ='" . $request->get('jiha') . "' AND p.idDirassa ='" . $request->get('Dirassa') . "' ";
-        } elseif ($request->get('jiha') != NULL) {
-            $J = $request->get('jiha');
-            $condition = $condition . "  AND p.idJiha ='" . $request->get('jiha') . "'";
-        } elseif ($request->get('Dirassa') != NULL) {
-            $D = $request->get('Dirassa');
-            $condition = $condition . "  AND p.idDirassa ='" . $request->get('Dirassa') . "'";
         }
 
-
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where  p.accepteW = 1 " . $condition);
-        $inscrit = $query->getResult();
-
+            $inscrit = $em->getRepository('DbBundle:Inscrit')->findByAcceptWatani(array('jiha' => $J , 'dirassa' => $D , 'idLink' => $link->getId()));
         $jihas = $em->getRepository('DbBundle:Jiha')->findAll();
         return $this->render('DirasetBundle:adminInscrit:accepterResultW.html.twig', array(
                     'inscrits' => $inscrit,
                     'J' => $J,
                     'D' => $D,
+                    'link' => $link,
                     'jihas' => $jihas));
     }
 
@@ -302,10 +298,9 @@ class adminInscritController extends Controller {
     public function accepterWAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
-        $condition = "";
-        $J = "";
-        $D = "";
-
+        $J = null;
+        $D = null;
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
         if ($request->get('id')) {
             $Ins = $em->getRepository('DbBundle:Inscrit')->findOneBy(array('id' => $request->get('id')));
             if ($request->get('etat') == 'oui') {
@@ -317,25 +312,18 @@ class adminInscritController extends Controller {
             $em->merge($Ins);
             $em->flush();
         }
-        if ($request->get('jiha') != NULL && $request->get('Dirassa') != NULL) {
+
+        if ($request->get('jiha') != NULL ) {
             $J = $request->get('jiha');
-            $D = $request->get('Dirassa');
-            $condition = $condition . " where p.idJiha ='" . $request->get('jiha') . "' AND p.idDirassa ='" . $request->get('Dirassa') . "' ";
-        } elseif ($request->get('jiha') != NULL) {
-            $J = $request->get('jiha');
-            $condition = $condition . " where p.idJiha ='" . $request->get('jiha') . "'";
-        } elseif ($request->get('Dirassa') != NULL) {
-            $D = $request->get('Dirassa');
-            $condition = $condition . " where p.idDirassa ='" . $request->get('Dirassa') . "'";
         }
-
-
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p " . $condition);
-        $inscrit = $query->getResult();
-
+        if ($request->get('Dirassa') != NULL ) {
+            $D = $request->get('Dirassa');
+        }
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findByWatani(array('idLink' => $link->getId() , 'jiha' => $J, 'dirassa'=>$D));
         $jihas = $em->getRepository('DbBundle:Jiha')->findAll();
         return $this->render('DirasetBundle:adminInscrit:accepterW.html.twig', array(
                     'inscrits' => $inscrit,
+                    'link' => $link,
                     'J' => $J,
                     'D' => $D,
                     'jihas' => $jihas));
@@ -344,6 +332,7 @@ class adminInscritController extends Controller {
     public function statWAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
         $stats = array();
         $statsK = array();
@@ -355,7 +344,7 @@ class adminInscritController extends Controller {
 
 
         foreach ($kesms as $kesm) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idKesm' => $kesm->getId(), 'accepteW' => 1, 'paye' => 1));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByKesmAcceptF(array('idKesm' => $kesm->getId(),'idLink' => $link->getId()));
             $statsK[$kesm->getId()]['total'] = count($inscrits);
             $statsK[$kesm->getId()]['tamhidiya'] = 0;
             $statsK[$kesm->getId()]['chara'] = 0;
@@ -370,7 +359,7 @@ class adminInscritController extends Controller {
             }
         }
         foreach ($jihas as $jiha) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idJiha' => $jiha->getId(), 'accepteW' => 1, 'paye' => 1));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByJihaAcceptF(array('idJiha' => $jiha->getId(),'idLink' => $link->getId()));
             $stats[$jiha->getId()]['total'] = count($inscrits);
             $stats[$jiha->getId()]['tamhidiya'] = 0;
             $stats[$jiha->getId()]['TA'] = 0;
@@ -395,45 +384,45 @@ class adminInscritController extends Controller {
             foreach ($inscrits as $inscrit) {
                 if ($inscrit->getidDirassa()->getId() == 2) {
                     $stats[$jiha->getId()]['tamhidiya'] = $stats[$jiha->getId()]['tamhidiya'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getidKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['TA'] = $stats[$jiha->getId()]['TA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['TACH'] = $stats[$jiha->getId()]['TACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['TZ'] = $stats[$jiha->getId()]['TZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['TK'] = $stats[$jiha->getId()]['TK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['TM'] = $stats[$jiha->getId()]['TM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['TJ'] = $stats[$jiha->getId()]['TJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['TD'] = $stats[$jiha->getId()]['TD'] + 1;
                     } else {
                         
                     }
                 } else {
                     $stats[$jiha->getId()]['chara'] = $stats[$jiha->getId()]['chara'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getidKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['CHA'] = $stats[$jiha->getId()]['CHA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['CHACH'] = $stats[$jiha->getId()]['CHACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['CHZ'] = $stats[$jiha->getId()]['CHZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['CHK'] = $stats[$jiha->getId()]['CHK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['CHM'] = $stats[$jiha->getId()]['CHM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['CHJ'] = $stats[$jiha->getId()]['CHJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getidKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['CHD'] = $stats[$jiha->getId()]['CHD'] + 1;
                     } else {
                         
                     }
                 }
 
-                if ($inscrit->getSex() == 2) {
+                if ($inscrit->getIdChef()->getSex() == 2) {
                     $stats[$jiha->getId()]['femme'] = $stats[$jiha->getId()]['femme'] + 1;
                 } else {
                     $stats[$jiha->getId()]['home'] = $stats[$jiha->getId()]['home'] + 1;
@@ -446,12 +435,14 @@ class adminInscritController extends Controller {
         return $this->render('DirasetBundle:adminInscrit:statW.html.twig', array(
                     'stats' => $stats,
                     'statsK' => $statsK,
+            'link' => $link,
         ));
     }
     
     public function statAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
         $stats = array();
         $statsK = array();
@@ -461,9 +452,8 @@ class adminInscritController extends Controller {
         $query = $em->createQuery("select p from DbBundle\Entity\Kesm p where p.id <8 ");
         $kesms = $query->getResult();
 
-
         foreach ($kesms as $kesm) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idKesm' => $kesm->getId()));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByKesm(array('idKesm' => $kesm->getId(),'idLink' => $link->getId()));
             $statsK[$kesm->getId()]['total'] = count($inscrits);
             $statsK[$kesm->getId()]['tamhidiya'] = 0;
             $statsK[$kesm->getId()]['chara'] = 0;
@@ -477,8 +467,9 @@ class adminInscritController extends Controller {
                 }
             }
         }
+
         foreach ($jihas as $jiha) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idJiha' => $jiha->getId()));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByJiha(array('idJiha' => $jiha->getId(), 'idLink' => $link->getId()));
             $stats[$jiha->getId()]['total'] = count($inscrits);
             $stats[$jiha->getId()]['tamhidiya'] = 0;
             $stats[$jiha->getId()]['TA'] = 0;
@@ -503,45 +494,45 @@ class adminInscritController extends Controller {
             foreach ($inscrits as $inscrit) {
                 if ($inscrit->getidDirassa()->getId() == 2) {
                     $stats[$jiha->getId()]['tamhidiya'] = $stats[$jiha->getId()]['tamhidiya'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getIdKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['TA'] = $stats[$jiha->getId()]['TA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['TACH'] = $stats[$jiha->getId()]['TACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['TZ'] = $stats[$jiha->getId()]['TZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['TK'] = $stats[$jiha->getId()]['TK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['TM'] = $stats[$jiha->getId()]['TM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['TJ'] = $stats[$jiha->getId()]['TJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['TD'] = $stats[$jiha->getId()]['TD'] + 1;
                     } else {
                         
                     }
                 } else {
                     $stats[$jiha->getId()]['chara'] = $stats[$jiha->getId()]['chara'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getIdKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['CHA'] = $stats[$jiha->getId()]['CHA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['CHACH'] = $stats[$jiha->getId()]['CHACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['CHZ'] = $stats[$jiha->getId()]['CHZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['CHK'] = $stats[$jiha->getId()]['CHK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['CHM'] = $stats[$jiha->getId()]['CHM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['CHJ'] = $stats[$jiha->getId()]['CHJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['CHD'] = $stats[$jiha->getId()]['CHD'] + 1;
                     } else {
                         
                     }
                 }
 
-                if ($inscrit->getSex() == 2) {
+                if ($inscrit->getIdChef()->getSex() == 2) {
                     $stats[$jiha->getId()]['femme'] = $stats[$jiha->getId()]['femme'] + 1;
                 } else {
                     $stats[$jiha->getId()]['home'] = $stats[$jiha->getId()]['home'] + 1;
@@ -554,12 +545,14 @@ class adminInscritController extends Controller {
         return $this->render('DirasetBundle:adminInscrit:statW.html.twig', array(
                     'stats' => $stats,
                     'statsK' => $statsK,
+                    'link' => $link,
         ));
     }
 
     public function stat2WAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
         $stats = array();
         $statsK = array();
@@ -571,7 +564,7 @@ class adminInscritController extends Controller {
 
 
         foreach ($kesms as $kesm) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idKesm' => $kesm->getId(), 'accepteW' => 1));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByKesmAccept(array('idKesm' => $kesm->getId(), 'accepteW' => 1,'idLink' => $link->getId()));
             $statsK[$kesm->getId()]['total'] = count($inscrits);
             $statsK[$kesm->getId()]['tamhidiya'] = 0;
             $statsK[$kesm->getId()]['chara'] = 0;
@@ -586,7 +579,7 @@ class adminInscritController extends Controller {
             }
         }
         foreach ($jihas as $jiha) {
-            $inscrits = $em->getRepository('DbBundle:Inscrit')->findBy(array('idJiha' => $jiha->getId(), 'accepteW' => 1));
+            $inscrits = $em->getRepository('DbBundle:Inscrit')->findByJihaAccept(array('idJiha' => $jiha->getId(), 'accepteW' => 1,'idLink' => $link->getId()));
             $stats[$jiha->getId()]['total'] = count($inscrits);
             $stats[$jiha->getId()]['tamhidiya'] = 0;
             $stats[$jiha->getId()]['TA'] = 0;
@@ -611,45 +604,45 @@ class adminInscritController extends Controller {
             foreach ($inscrits as $inscrit) {
                 if ($inscrit->getidDirassa()->getId() == 2) {
                     $stats[$jiha->getId()]['tamhidiya'] = $stats[$jiha->getId()]['tamhidiya'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getIdKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['TA'] = $stats[$jiha->getId()]['TA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['TACH'] = $stats[$jiha->getId()]['TACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['TZ'] = $stats[$jiha->getId()]['TZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['TK'] = $stats[$jiha->getId()]['TK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['TM'] = $stats[$jiha->getId()]['TM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['TJ'] = $stats[$jiha->getId()]['TJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['TD'] = $stats[$jiha->getId()]['TD'] + 1;
                     } else {
                         
                     }
                 } else {
                     $stats[$jiha->getId()]['chara'] = $stats[$jiha->getId()]['chara'] + 1;
-                    if ($inscrit->getidKesm()->getId() == 1) {
+                    if ($inscrit->getIdChef()->getIdKesm()->getId() == 1) {
                         $stats[$jiha->getId()]['CHA'] = $stats[$jiha->getId()]['CHA'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 2) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 2) {
                         $stats[$jiha->getId()]['CHACH'] = $stats[$jiha->getId()]['CHACH'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 3) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 3) {
                         $stats[$jiha->getId()]['CHZ'] = $stats[$jiha->getId()]['CHZ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 4) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 4) {
                         $stats[$jiha->getId()]['CHK'] = $stats[$jiha->getId()]['CHK'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 5) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 5) {
                         $stats[$jiha->getId()]['CHM'] = $stats[$jiha->getId()]['CHM'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 6) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 6) {
                         $stats[$jiha->getId()]['CHJ'] = $stats[$jiha->getId()]['CHJ'] + 1;
-                    } elseif ($inscrit->getidKesm()->getId() == 7) {
+                    } elseif ($inscrit->getIdChef()->getIdKesm()->getId() == 7) {
                         $stats[$jiha->getId()]['CHD'] = $stats[$jiha->getId()]['CHD'] + 1;
                     } else {
                         
                     }
                 }
 
-                if ($inscrit->getSex() == 2) {
+                if ($inscrit->getIdChef()->getSex() == 2) {
                     $stats[$jiha->getId()]['femme'] = $stats[$jiha->getId()]['femme'] + 1;
                 } else {
                     $stats[$jiha->getId()]['home'] = $stats[$jiha->getId()]['home'] + 1;
@@ -662,6 +655,7 @@ class adminInscritController extends Controller {
         return $this->render('DirasetBundle:adminInscrit:statW.html.twig', array(
                     'stats' => $stats,
                     'statsK' => $statsK,
+                    'link' => $link,
         ));
     }
 
@@ -669,8 +663,9 @@ class adminInscritController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $privilege = $em->getRepository('DbBundle:Privilaige')->findOneBy(array("actif" => 1, "idUser" => $this->get('security.context')->getToken()->getUser()->getId()));
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
-        $inscrit = $em->getRepository('DbBundle:Inscrit')->findBy(array("idJiha" => $privilege->getIdJiha()->getId()));
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findByJiha(array("idJiha" => $privilege->getIdJiha()->getId(),'idLink' => $link->getId() ));
 
         if ($request->getMethod() == 'POST' || $request->get('id')) {
             $Ins = $em->getRepository('DbBundle:Inscrit')->findOneBy(array('id' => $request->get('id')));
@@ -684,18 +679,23 @@ class adminInscritController extends Controller {
             $em->merge($Ins);
             $em->flush();
             return $this->render('DirasetBundle:adminInscrit:accepterJ.html.twig', array(
-                        'inscrits' => $inscrit));
+                        'inscrits' => $inscrit,
+                        'link' => $link
+            ));
         }
 
 
 
         return $this->render('DirasetBundle:adminInscrit:accepterJ.html.twig', array(
-                    'inscrits' => $inscrit));
+                    'inscrits' => $inscrit,
+                    'link' => $link
+            ));
     }
 
     public function payeAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
 
         $Ins = $em->getRepository('DbBundle:Inscrit')->findOneBy(array('id' => $request->get('id')));
         if ($request->get('etat') == 'oui') {
@@ -707,10 +707,10 @@ class adminInscritController extends Controller {
         $em->flush();
         
         if($request->get('Jiha') != NULL && $request->get('Jiha') == 'oui'){
-                    return $this->redirectToRoute('adminInscrit_accepterJ');
+                    return $this->redirectToRoute('adminInscrit_accepterJ',array('id' => $link->getId()));
 
         }else{
-                    return $this->redirectToRoute('adminInscrit_accepterW',array('jiha'=>$request->get('J'), 'Dirassa'=>$request->get('D')));
+                    return $this->redirectToRoute('adminInscrit_accepterW',array('jiha'=>$request->get('J'), 'Dirassa'=>$request->get('D'), 'idLink' =>$link->getId()));
 
         }
     }
@@ -763,38 +763,28 @@ class adminInscritController extends Controller {
     public function attribCharaAction(Request $request) {
 
         $em = $this->getDoctrine()->getManager();
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
 
-        $condition = "";
-        $J = "";
-        $D = "";
+        $J = null;
+        $D = null;
 
         if ($request->get('jiha') != NULL) {
             $J = $request->get('jiha');
-            $condition = $condition . " AND p.idJiha ='" . $request->get('jiha') . "'";
         }
-        if ($request->get('kesm') != NULL) {
+        if ($request->get('kesm') != NULL ) {
             $D = $request->get('kesm');
-            $condition = $condition . " AND p.idKesm ='" . $request->get('kesm') . "'";
         }
 
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findByAcceptWatani2(array('jiha'=>$J, 'kesm'=>$D,'idLink' =>$link->getId()));
+        $dawrat = $em->getRepository('DbBundle:DawraTadrib')->findBy(array("idLink" => $link->getId()));
 
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where p.idDirassa = 3 AND p.accepteW = 1  AND p.paye = 1 " . $condition);
-        $inscrit = $query->getResult();
-        $dawrat = $em->getRepository('DbBundle:DawraTadrib')->findBy(array("idAtributType" => 3));
-
-
-        $jihas = $em->getRepository('DbBundle:Jiha')->findAll();
-
-        $query2 = $em->createQuery("select p from DbBundle\Entity\Kesm p where p.id > 1 AND p.id < 8");
-        $kesms = $query2->getResult();
 
         return $this->render('DirasetBundle:adminInscrit:attribChara.html.twig', array(
                     'inscrits' => $inscrit,
                     'dawrats' => $dawrat,
-                    'kesms' => $kesms,
+                    'link' => $link,
                     'J' => $J,
                     'D' => $D,
-                    'jihas' => $jihas,
         ));
     }
 
@@ -849,9 +839,9 @@ class adminInscritController extends Controller {
         $em->flush();
 
         if ($request->get('type') == 'CH') {
-            return $this->redirectToRoute('adminInscrit_attribChara', array('kesm' => $request->get('kesm'), 'jiha' => $request->get('jiha')));
+            return $this->redirectToRoute('adminInscrit_attribChara', array('kesm' => $request->get('kesm'), 'jiha' => $request->get('jiha'),'id' => $request->get('idLink')));
         } else {
-            return $this->redirectToRoute('adminInscrit_attribTamhidiya', array('kesm' => $request->get('kesm'), 'jiha' => $request->get('jiha')));
+            return $this->redirectToRoute('adminInscrit_attribTamhidiya', array('kesm' => $request->get('kesm'), 'jiha' => $request->get('jiha'),'id' => $request->get('idLink')));
         }
     }
 

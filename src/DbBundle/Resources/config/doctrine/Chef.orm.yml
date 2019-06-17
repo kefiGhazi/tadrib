@@ -42,6 +42,16 @@ DbBundle\Entity\Chef:
             nullable: false
             length: 255
             fixed: false
+        imageCinPile:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+        imageCinFace:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
         inscrit:
             type: string
             nullable: false
@@ -56,8 +66,18 @@ DbBundle\Entity\Chef:
             nullable: true
             length: 255
             fixed: false
+        wehda:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
         tel:
             type: string
+            nullable: true
+            length: 255
+            fixed: false
+        adresse:
+            type: text
             nullable: true
             length: 255
             fixed: false
@@ -86,6 +106,24 @@ DbBundle\Entity\Chef:
             length: 255
             fixed: false
             column: last_dirasa
+        chefLastDirassa:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: chef_last_dirassa
+        lieuxLastDirassa:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: lieux_last_dirassa
+        dateLastDirassa:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            column: date_last_dirassa
         valide:
             type: string
             nullable: true

@@ -32,6 +32,16 @@ class Chef
     /**
      * @var string
      */
+    private $imageCinFace;
+
+    /**
+     * @var string
+     */
+    private $imageCinPile;
+
+    /**
+     * @var string
+     */
     private $inscrit;
 
     /**
@@ -44,12 +54,33 @@ class Chef
      */
     private $fawej;
 
+    /**
+     * @var string
+     */
+    private $wehda;
+
     
 
     /**
      * @var string
      */
     private $lastDirasa;
+
+    /**
+     * @var string
+     */
+    private $chefLastDirassa;
+
+    /**
+     * @var string
+     */
+    private $lieuxLastDirassa;
+
+
+    /**
+     * @var string
+     */
+    private $dateLastDirassa;
     
     /**
      * @var string
@@ -63,6 +94,11 @@ class Chef
      * @var string
      */
     private $tel;
+
+    /**
+     * @var text
+     */
+    private $adresse;
     
     /**
      * @var string
@@ -433,6 +469,121 @@ class Chef
     function setValideDateFin($valideDateFin) {
         $this->valideDateFin = $valideDateFin;
     }
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageCinFace()
+    {
+        return $this->imageCinFace;
+    }
+
+    /**
+     * @param string $imageCinFace
+     */
+    public function setImageCinFace($imageCinFace)
+    {
+        $this->imageCinFace = $imageCinFace;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageCinPile()
+    {
+        return $this->imageCinPile;
+    }
+
+    /**
+     * @param string $imageCinPile
+     */
+    public function setImageCinPile($imageCinPile)
+    {
+        $this->imageCinPile = $imageCinPile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChefLastDirassa()
+    {
+        return $this->chefLastDirassa;
+    }
+
+    /**
+     * @param string $chefLastDirassa
+     */
+    public function setChefLastDirassa($chefLastDirassa)
+    {
+        $this->chefLastDirassa = $chefLastDirassa;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLieuxLastDirassa()
+    {
+        return $this->lieuxLastDirassa;
+    }
+
+    /**
+     * @param string $lieuxLastDirassa
+     */
+    public function setLieuxLastDirassa($lieuxLastDirassa)
+    {
+        $this->lieuxLastDirassa = $lieuxLastDirassa;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDateLastDirassa()
+    {
+        return $this->dateLastDirassa;
+    }
+
+    /**
+     * @param string $dateLastDirassa
+     */
+    public function setDateLastDirassa($dateLastDirassa)
+    {
+        $this->dateLastDirassa = $dateLastDirassa;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWehda()
+    {
+        return $this->wehda;
+    }
+
+    /**
+     * @param string $wehda
+     */
+    public function setWehda($wehda)
+    {
+        $this->wehda = $wehda;
+    }
+
+
+
 
 
 

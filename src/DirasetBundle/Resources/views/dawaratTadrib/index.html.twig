@@ -1,15 +1,24 @@
 {% extends 'HomeBundle:Default:layout.html.twig' %}
-
 {% block body %}
-    <div class="container-fluid">
-        <!-- Page Heading -->
-
-        <!-- /.row -->
-        <!-- Page Content -->
-        <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
-                <div class="row">
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">{{link.nom}} </h1>
+                        <h5 class="text-center plan-title">
+                            {% set first = true %}
+                            {% for jiha in link.jihas %}
+                                {% if first == false %} | {%endif%} {{ jiha.name }}
+                                {% set first = false %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                    <div class="card-box">
+                        {{ include('DawraBundle:link:_menu.html.twig') }}
+                    </div>
                     <div class="col-sm-12 col-lg-12 col-xs-12">
                         <div class="card-box"> 
                             <h1>قائمة الدورات و المراكز</h1>
@@ -20,6 +29,7 @@
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
                                                 <form action="{{path('adminInscrit_dawra_new')}}" method="POST">
+                                                    <input type="hidden" value="{{ link.id }}" name="idLink">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     <h4 class="modal-title">إنشاء دورة تدريبية </h4>
@@ -42,7 +52,7 @@
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">صنف الدورة</label>
                                                                 <select name="dirassa" class="form-control" required="" >
-                                                                    {%for dirassa in dirassas%}
+                                                                    {%for dirassa in link.mostawaTadribis%}
                                                                         <option value="{{dirassa.id}}">{{dirassa.nom}}</option>
                                                                     {%endfor%}
                                                                 </select>
@@ -62,7 +72,7 @@
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">القسم</label>
                                                                 <select name="kesm" class="form-control" required="" >
-                                                                    {%for kesm in kesms%}
+                                                                    {%for kesm in link.kesms%}
                                                                         <option value="{{kesm.id}}">{{kesm.nom}}</option>
                                                                     {%endfor%}
                                                                 </select>
@@ -108,6 +118,7 @@
                                                             <div class="form-group">
                                                                 <label for="field-1" class="control-label">اسم المركز</label>
                                                                 <input type="text" name="nom" class="form-control" required="" />
+                                                                <input type="hidden" name="idLink" value="{{ link.id }}">
                                                             </div>
                                                         </div>
                                                         
@@ -151,6 +162,7 @@
                                                                 <label for="field-1" class="control-label">اسم المركز</label>
                                                                 <input type="text" name="nom" value="{{markez.nom}}" class="form-control" required="" />
                                                                 <input type="hidden" name="id" value="{{markez.id}}" class="form-control" required="" />
+                                                                <input type="hidden" name="idLink" value="{{link.id}}" class="form-control" required="" />
                                                             </div>
                                                         </div>
                                                         
@@ -286,6 +298,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+
     {% endblock %}
 
 

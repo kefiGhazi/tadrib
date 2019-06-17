@@ -1,0 +1,76 @@
+{% extends 'HomeBundle:Default:verticalLayout.html.twig' %}
+
+{% block body %}
+    <div class="card-box col-lg-12">
+        <h3 class="titre text-center">مطالب التسجيل</h3>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>الدورة</th>
+                    <th>التاريخ</th>
+                    <th>المكان</th>
+                    <th>قرار اللجنة الجهوية</th>
+                    <th>قرار اللجنة الوطنية</th>
+                    <th>الحوالة البريدية</th>
+                    <th>النتيجة</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for inscrit in inscritList %}
+                <tr>
+                    <td>{{ inscrit.idLink.nom }} ( {{ inscrit.idDirassa.nom }} )</td>
+                    <td>{{ inscrit.idLink.dateDeb | date('d/m/Y') }} => {{ inscrit.idLink.dateFin | date('d/m/Y') }}</td>
+                    <td>{{ inscrit.idLink.markez }}</td>
+                    <td>
+                        {%if inscrit.accepteJ == 1%}
+                            <span class="label label-success">مقبول</span>
+                        {%elseif inscrit.accepteJ == 2%}
+                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if inscrit.accepteW == 1%}
+                            <span class="label label-success">مقبول</span>
+                        {%elseif inscrit.accepteW == 2%}
+                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if inscrit.accepteJ == 1 and inscrit.accepteW == 1%}
+                            {%if inscrit.paye == 1 %}
+                                <span class="label label-success">دفع الاشتراك</span>
+                            {%elseif inscrit.paye == 2%}
+                                <span class="label label-danger">لم يدفع الإشتراك</span>
+                            {%else%}
+                                <span class="label label-default">في طور الإنجاز</span>
+                            {%endif%}
+                        {%elseif inscrit.accepteJ == 2 and inscrit.accepteW == 1%}
+                            <span class="label label-danger">غير مؤهل  </span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+                    </td>
+                    <td> {%if inscrit.result == 1%}
+                            <span class="label label-success">مقبول</span>
+                        {%elseif inscrit.result == 2%}
+                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+                    </td>
+                    <td>
+                        <a  class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="تفاصيل" data-original-title="تفاصيل"><i class="fa fa-eye"></i></a>
+                        <a  class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="تعديل" data-original-title="تعديل"><i class="fa fa-pencil"></i></a>
+                        <a  class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="تحميل الدعوة" data-original-title="تحميل الدعوة"><i class="fa fa-file-pdf-o"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends 'HomeBundle:Default:verticalLayout.html.twig' %}
+
+{% block body %}
+
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert-success alert-dismissible ">
+            <h4 class="text-center">{{ message }}</h4>
+        </div>
+        <br />
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+            {{ form_start(form) }}
+            <div class="col-lg-12 card-box">
+                <div class="row">
+                    <div class="plan-header text-center">
+                        <h2 class="plan-price">{{ dirasa.nom }}</h2>
+                        <h3 class="plan-title">
+                            {%set x = 1 %}
+                            {% for jiha in dirasa.jihas %}
+                                {% if x != 1 %} | {% endif %}
+                                {{jiha.name}}
+
+                                {% set x = x+1 %}
+                            {% endfor %}
+                        </h3>
+                        <div class="plan-duration">
+                            {%set x = 1 %}
+                            {% for kesem in dirasa.kesms %}
+                                {% if x != 1 %} | {% endif %}
+                                {{kesem.nom}}
+
+                                {% set x = x+1 %}
+                            {% endfor %}
+                        </div>
+                        <div class="plan-duration">{{dirasa.markez}}</div>
+                        <br />
+                        <div class="form-group col-lg-6 col-lg-offset-3">
+                            <label for="field-1" class="control-label">الدورة التدريبية</label>
+                            <select name="idDirasa" class="form-control">
+                                {% for dirasa in diraset %}
+                                    <option value="{{ dirasa.id }}" {% if inscrit.idDirassa.id == dirasa.id %} selected {% endif %}>{{ dirasa.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row ">
+                    <div class="col-lg-6">
+                        <div class="card-box col-lg-12">
+                            <div class="row">
+                                <h3 class="titre text-center">المعلومات الشخصية</h3>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">الاسم</label>
+                                        {{ form_widget(form.idChef.nom,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">اللقب</label>
+                                        {{ form_widget(form.idChef.prenom,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">تاريخ الولادة</label>
+                                        {{ form_widget(form.idChef.dateNaissance,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">المستوى العلمي</label>
+                                        {{ form_widget(form.idChef.etude,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">المهنة</label>
+                                        {{ form_widget(form.idChef.travail,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">الهاتف</label>
+                                        {{ form_widget(form.idChef.tel,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">الجنس</label>
+                                        {{ form_widget(form.idChef.sex,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">العنوان</label>
+                                        {{ form_widget(form.idChef.adresse,{'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card-box col-lg-12">
+                            <div class="row">
+                                <h1 class="titre text-center">بطاقة التعريف الوطنية</h1>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">رقم بطاقة التعريف الوطنية</label>
+                                        {{ form_widget(form.idChef.cin,{'attr': {'class': 'form-control','readonly': 'readonly'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">الوجه الأول بطاقة التعريف الوطنية</label>
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                {% if inscrit.idChef.imageCinFace != null  %}
+                                                    <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinFace)}}" target="_blank"><i class="fa fa-eye text-success"></i></a>
+                                                {% else %}
+                                                    <a href="#"><i class="fa fa-close text-danger"></i></a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-lg-11">{{ form_widget(form.idChef.imageCinFace,{'attr': {'class': 'form-control'}}) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label"> الوجه الثاني بطاقة التعريف الوطنية</label>
+                                        <div class="row">
+                                            <div class="col-lg-1">
+                                                {% if inscrit.idChef.imageCinPile != null  %}
+                                                    <a href="{{ asset('bundles/home/images/cin/'~inscrit.idChef.imageCinPile)}}" target="_blank"><i class="fa fa-eye text-success"></i></a>
+                                                {% else %}
+                                                    <a href="#"><i class="fa fa-close text-danger"></i></a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-lg-11">{{ form_widget(form.idChef.imageCinPile,{'attr': {'class': 'form-control'}}) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-box col-lg-12">
+                        <div class="row">
+                            <h3 class="titre text-center">المعلومات الكشفية</h3>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">المعرف الكشقي</label>
+                                    {{ form_widget(form.idChef.inscrit,{'attr': {'class': 'form-control','readonly': 'readonly'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">الجهة</label>
+                                    {{ form_widget(form.idChef.idJiha,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label"> القسم</label>
+                                    {{ form_widget(form.idChef.idKesm,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">الفوج</label>
+                                    {{ form_widget(form.idChef.fawej,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label"> الوحدة</label>
+                                    {{ form_widget(form.idChef.wehda,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card-box col-lg-12">
+                        <div class="row">
+                            <h3 class="titre text-center">أخر دراسة تدريبية</h3>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">الدراسة</label>
+                                    {{ form_widget(form.idChef.lastDirasa,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">قائدها</label>
+                                    {{ form_widget(form.idChef.chefLastDirassa,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">مكانها</label>
+                                    {{ form_widget(form.idChef.lieuxLastDirassa,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">السنة</label>
+                                    {{ form_widget(form.idChef.dateLastDirassa,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-md-offset-5">
+                                <input type="submit" value="تسجيل" class="btn btn-danger btn-bordred btn-rounded waves-effect waves-light ">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

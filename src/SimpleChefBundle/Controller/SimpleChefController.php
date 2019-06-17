@@ -3,9 +3,12 @@
 namespace SimpleChefBundle\Controller;
 
 use DbBundle\Entity\Chef;
+use DbBundle\Entity\Inscrit;
+use DbBundle\Entity\Link;
 use DbBundle\Entity\SimpleChef;
 use DbBundle\Entity\Raport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -68,7 +71,8 @@ class SimpleChefController extends Controller {
             $listeDiraset = $em->getRepository('DbBundle:Link')->findByIdJiha($chef->getIdJiha()->getId(), $this->ktCode);
         }
         return $this->render('SimpleChefBundle:chef:listNewDiraset.html.twig', array(
-                    'ListeDiraset' => $listeDiraset
+                    'ListeDiraset' => $listeDiraset,
+                    'chef' => $chef
         ));
     }
 
@@ -130,5 +134,97 @@ class SimpleChefController extends Controller {
                     'edit_form' => $editForm->createView(),
         ));
     }
+
+    /**
+     * @param Request $request
+     * @param Link $link
+     * @param Chef $chef
+     */
+    public function inscritAction(Request $request, Link $link , Chef $chef)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findOneBy(array('idLink' => $link->getId(), 'idChef'=> $chef->getId()));
+        if(!$inscrit){
+            $inscrit = new Inscrit();
+            $inscrit->setIdChef($chef);
+            $inscrit->setIdLink($link);
+        }
+        $fileName = $inscrit->getIdChef()->getImageCinFace();
+        $fileName2 = $inscrit->getIdChef()->getImageCinPile();
+        if($fileName != null ){
+            $inscrit->getIdChef()->setImageCinFace(
+                new File($this->getParameter('cin_directory').'/'.$inscrit->getIdChef()->getImageCinFace())
+            );
+        }
+        if($fileName2 != null ){
+            $inscrit->getIdChef()->setImageCinPile(
+                new File($this->getParameter('cin_directory').'/'.$inscrit->getIdChef()->getImageCinPile())
+            );
+        }
+        $form = $this->createForm('DbBundle\Form\InscritType', $inscrit);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $inscrit->setIdDirassa($em->getRepository('DbBundle:AtributType')->findOneBy(array('id'=>$request->get('idDirasa'))));
+            //  ulpoad image
+            $file = $inscrit->getIdChef()->getImageCinFace();
+            if($file && $file != null){
+                dump('aa');
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('cin_directory'),
+                    $fileName
+                );
+                // end upload
+            }
+            $inscrit->getIdChef()->setImageCinFace($fileName);
+
+            //  ulpoad image
+            $file2 = $inscrit->getIdChef()->getImageCinPile();
+            if($file2 && $file2 != null ){
+                dump('bb');
+                $fileName2 = md5(uniqid()).'.'.$file2->guessExtension();
+                $file2->move(
+                    $this->getParameter('cin_directory'),
+                    $fileName2
+                );
+                // end upload
+            }
+            $inscrit->getIdChef()->setImageCinPile($fileName2);
+            $em->persist($inscrit);
+            $em->persist($inscrit->getIdChef());
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'تم التسجيل بنجاح'
+            );
+        }
+        return $this->render( 'SimpleChefBundle:chef:inscrit.html.twig',array(
+            'form' => $form->createView(),
+            'diraset' => $link->getMostawaTadribis()->getValues(),
+            'dirasa' => $link,
+            'inscrit' => $inscrit,
+        ));
+
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function inscritListAction(Request $request )
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (isset($_SESSION['userId']) === false) {
+            return $this->redirectToRoute('simple_chef_index');
+        }
+        $chefId = $_SESSION['userId'];
+        $chef = $em->getRepository('DbBundle:Chef')->findOneById($chefId);
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findBy(array('idChef' => $chef->getId()));
+        return $this->render( 'SimpleChefBundle:chef:listInscrit.html.twig', array(
+            'inscritList' => $inscrit
+        ));
+    }
+
 
 }

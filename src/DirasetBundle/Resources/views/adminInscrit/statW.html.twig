@@ -1,23 +1,32 @@
 {% extends 'HomeBundle:Default:layout.html.twig' %}
-
 {% block body %}
-    <div class="container-fluid">
-        <!-- Page Heading -->
-
-        <!-- /.row -->
-        <!-- Page Content -->
-        <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
-                
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12 col-xs-12">
-                        <div class="card-box"> 
-                            <div class="row">
-                                <h1>إحصائيات حسب الجهات</h1>
-                                <div class="col-sm-12 col-lg-12 col-xs-12">
-                                    <table class="table table table-hover m-0 dataTables_empty" id="datatable">
-                                        <thead>
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1 class="text-center">{{link.nom}} </h1>
+                        <h5 class="text-center plan-title">
+                            {% set first = true %}
+                            {% for jiha in link.jihas %}
+                                {% if first == false %} | {%endif%} {{ jiha.name }}
+                                {% set first = false %}
+                            {% endfor %}
+                        </h5>
+                    </div>
+                    <div class="card-box">
+                        {{ include('DawraBundle:link:_menu.html.twig') }}
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                            <div class="card-box">
+                                <div class="row">
+                                    <h1>إحصائيات حسب الجهات</h1>
+                                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                                        <table class="table table table-hover m-0 dataTables_empty" >
+                                            <thead>
                                             <tr>
                                                 <th>الجهة</th>
                                                 <th>التمهيدية</th>
@@ -40,9 +49,9 @@
                                                 <th>ذكور</th>
                                                 <th >المجموع</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                             
+                                            </thead>
+                                            <tbody>
+
                                             {% for stat in stats%}
                                                 <tr>
                                                     <th scope="row">{{stat.name}}</th>
@@ -67,36 +76,36 @@
                                                     <td data-order="{{stat.total}}"><b>{{stat.total}}</b></td>
                                                 </tr>
                                             {%endfor%}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-sm-12 col-lg-12 col-xs-12">
-                                    <div class="bar-chart" dir="ltr">
-                                        <svg style="height:400px;width:100%"></svg>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-12 col-xs-12">
+                                        <div class="bar-chart" dir="ltr">
+                                            <svg style="height:400px;width:100%"></svg>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-lg-12 col-xs-12">
-                        <div class="card-box"> 
-                            <div class="row">
-                            <h1>إحصائيات حسب الأقسام الفنية</h1>
-                            <div class="card-box col-sm-4 col-lg-4 col-xs-12"> 
-                                <h4>المجموع</h4>
-                                <table class="table table table-hover m-0">
-                                        <thead>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                            <div class="card-box">
+                                <div class="row">
+                                    <h1>إحصائيات حسب الأقسام الفنية</h1>
+                                    <div class="card-box col-sm-4 col-lg-4 col-xs-12">
+                                        <h4>المجموع</h4>
+                                        <table class="table table table-hover m-0">
+                                            <thead>
                                             <tr>
                                                 <th>القسم</th>
                                                 <th>التمهيدية</th>
                                                 <th>الشارة الخشبية</th>
                                                 <th>المجموع</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                            </thead>
+                                            <tbody>
                                             {% set TotalT = 0%}
                                             {% set TotalCH = 0%}
                                             {% set Total = 0%}
@@ -113,44 +122,51 @@
                                             {%endfor%}
                                             <tr>
                                                 <th scope="row">المجموع</th>
-                                                    <td>{{TotalT}}</td>
-                                                    <td>{{TotalCH}}</td>
-                                                    <td>{{Total}}</td>
+                                                <td>{{TotalT}}</td>
+                                                <td>{{TotalCH}}</td>
+                                                <td>{{Total}}</td>
                                             </tr>
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="card-box col-sm-4 col-lg-4 col-xs-12">
+                                        <h4>شارة خشبية</h4>
+                                        <div id="chart1" dir="ltr">
+                                            <svg style="height:500px;width:100%"></svg>
+                                        </div>
+                                    </div>
+                                    <div class="card-box  col-sm-4 col-lg-4 col-xs-12">
+
+                                        <h4>تمهيدية</h4>
+                                        <div id="chart2" dir="ltr">
+                                            <svg style="height:500px;width:100%"></svg>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-box col-sm-4 col-lg-4 col-xs-12"> 
-                                <h4>شارة خشبية</h4>
-                                <div id="chart1" dir="ltr">
-                                <svg style="height:500px;width:100%"></svg>
-                            </div>
-                            </div>
-                            <div class="card-box  col-sm-4 col-lg-4 col-xs-12"> 
-                                
-                                <h4>تمهيدية</h4>
-                                 <div id="chart2" dir="ltr">
-                                <svg style="height:500px;width:100%"></svg>
-                            </div>
-                            </div>
-                            </div>
+
                         </div>
-                        
                     </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('#datatable').DataTable( {
+                                "paging":   false,
+                                "ordering": false,
+                                "info":     false
+                            } );
+                        } );
+                    </script>
                 </div>
             </div>
         </div>
     </div>
-                                                    <script>
-                                                        $(document).ready(function() {
-    $('#datatable').DataTable( {
-        "paging":   false,
-        "ordering": false,
-        "info":     false
-    } );
-} );
-                                                    </script>
-{% endblock %}
+    {% endblock %}
+
+
+                
+
+
 
 
 

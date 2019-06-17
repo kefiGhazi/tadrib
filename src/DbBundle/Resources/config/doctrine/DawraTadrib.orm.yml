@@ -22,6 +22,15 @@ DbBundle\Entity\DawraTadrib:
             type: string
             length: 255
     manyToOne:
+        idLink:
+            targetEntity: Link
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_link:
+                    referencedColumnName: id
+            orphanRemoval: false
         idMarkez:
             targetEntity: MarkezTadrib
             cascade: {  }
