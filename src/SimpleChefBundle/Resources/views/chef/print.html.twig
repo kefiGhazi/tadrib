@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+    <title>دعوة</title>
+    <link rel="shortcut icon" href="{{ asset('bundles/home/images/favicon_1.png')}}">
+</head>
+<body onload="window.print()">
+<div style="margin: auto" >
+    <table style="margin: auto"  cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td width="597"><img src="{{ asset('bundles/home/images/entete.jpg') }}" alt="titre"/></td>
+        </tr>
+    </table>
+    <table style="margin: auto"  cellspacing="0" cellpadding="0" border="0">
+        <tr>
+
+            <td width="180" align="center">
+                <strong><font COLOR=#BBBBDD SIZE=1>
+                        <div style="font-family: Arial Black; background-color:#E6E6E6; font-size: 24px; color: black">
+                            {{ inscrit.idDirassaA.idKesm.nom }}
+                        </div>
+                    </font>
+                </strong>
+            </td>
+            <td width="400" align="left"></td>
+        </tr>
+    </table>
+    <table style="margin: auto"  width="597" border="0">
+        <tr>
+            <td width="597">
+                <p>
+                    <strong style="color:#E11A1A">
+                        <em>
+                            <h1 align="center"><FONT COLOR=#E11A1ASIZE=1>
+                                    <div style="font-family: Arial Black;font-size: 20px; color: black">
+                                        دعوة للدورة التدريبية <br>
+                                        {{ inscrit.idLink.nom }} <br>  {{ inscrit.idLink.dateDeb|date('d/m/Y') }} --> {{ inscrit.idLink.dateFin|date('d/m/Y') }}
+                                    </div>
+                                </FONT>
+                            </h1>
+                        </em></strong></p>
+            </td>
+        </tr>
+    </table>
+    <table style="margin: auto" cellspacing="0" cellpadding="0" border="1" width="597">
+        <tr>
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            اللقب: {{ inscrit.idChef.prenom }}
+                        </DIV>
+                    </FONT></strong></td>
+
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            الاسم: {{ inscrit.idChef.nom }}
+                        </DIV>
+                    </FONT></strong></td>
+
+        </tr>
+        <tr>
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            المعرف الكشفي: {{ inscrit.idChef.inscrit }}
+                        </DIV>
+                    </FONT></strong></td>
+
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            بطاقة التعريف الوطنية: {{ inscrit.idChef.cin }}
+                        </DIV>
+                    </FONT></strong></td>
+
+        </tr>
+        <tr>
+
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            الفوج: {{ inscrit.idChef.fawej }}
+                        </DIV>
+                    </FONT></strong></td>
+            <td width="250" align="center"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 16px; color: black">
+                            الجهة: {{ inscrit.idChef.idJiha.name }}
+                        </DIV>
+                    </FONT></strong></td>
+        </tr>
+        <tr>
+            <td width="490" align="right" colspan="2">
+                <strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+font-size: 14px; color: black">
+                            بعد استكمالك لفترة تربصك و استجابة لطلبك و بناءا على موافقة رئيس لجنتك الجهوية و قائد جهتك
+                            ندعوك للمشاركة في الدورة التدريبة وفق المعطيات التالية:
+                        </DIV>
+                    </FONT></strong>
+            </td>
+        </tr>
+        <tr>
+            <td width="107" align="center" colspan="2"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+background-color:#E6E6E6;
+font-size:18px; color: black">
+                            {{ inscrit.idDirassaA.nom }}
+                        </DIV>
+                    </FONT></strong></td>
+        </tr>
+        <tr>
+            <td width="107" align="center" colspan="2"><strong><FONT COLOR=#BBBBDD SIZE=1>
+                        <DIV STYLE="font-family: Arial Black;
+background-color:#E6E6E6;
+font-size:18px; color: black">
+                             مكان الدراسة: {{ inscrit.idMarkez.nom }}
+                        </DIV>
+                    </FONT></strong></td>
+        </tr>
+    </table>
+
+    <table style="margin: auto" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td width="597"><img src="{{ asset('bundles/home/images/pied2.jpg') }}" alt="titre"/></td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

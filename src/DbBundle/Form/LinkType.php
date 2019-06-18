@@ -23,10 +23,6 @@ class LinkType extends AbstractType {
                     'attr' => ['class' => 'form-control'],
                     'required' => false,
                 ])
-                ->add('annee', TextType::class, [
-                    'attr' => ['class' => 'form-control'],
-                    'required' => false,
-                ])
                 ->add('markez', TextType::class, [
                     'attr' => ['class' => 'form-control'],
                     'required' => false,

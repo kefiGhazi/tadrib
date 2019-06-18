@@ -12,9 +12,6 @@ DbBundle\Entity\Link:
         nom:
             type: string
             length: 255
-        annee:
-            type: string
-            length: 255
         markez:
             type: string
             length: 255

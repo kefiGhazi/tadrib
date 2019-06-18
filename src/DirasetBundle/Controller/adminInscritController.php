@@ -663,7 +663,7 @@ class adminInscritController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $privilege = $em->getRepository('DbBundle:Privilaige')->findOneBy(array("actif" => 1, "idUser" => $this->get('security.context')->getToken()->getUser()->getId()));
-        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('id')));
+        $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=> $request->get('idLink')));
 
         $inscrit = $em->getRepository('DbBundle:Inscrit')->findByJiha(array("idJiha" => $privilege->getIdJiha()->getId(),'idLink' => $link->getId() ));
 

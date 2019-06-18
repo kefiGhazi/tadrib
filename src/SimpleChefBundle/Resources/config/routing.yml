@@ -23,6 +23,11 @@ simple_chef_inscrit:
     defaults: { _controller: "SimpleChefBundle:SimpleChef:inscrit" }
     methods:  [GET, POST]
 
+simple_chef_print_invit:
+    path:     /print/{id}
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:print" }
+    methods:  [GET, POST]
+
 simple_chef_inscrit_list:
     path:     /inscrit/list
     defaults: { _controller: "SimpleChefBundle:SimpleChef:inscritList" }

@@ -12,12 +12,7 @@
             {{ form_widget(form.markez) }}
         </div>
     </div> 
-    <div class="col-sm-3 col-lg-3 col-xs-12">
-        <div class="form-group col-sm-10 col-lg-10 col-xs-10">
-            <label>السنة الكشفية</label>
-            {{ form_widget(form.annee) }}
-        </div>
-    </div> 
+
     <div class="col-sm-3 col-lg-3 col-xs-12">
         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
             <label>تاريخ البداية</label>
@@ -41,25 +36,26 @@
             <label>تاريخ نهاية التسجيل</label>
             {{ form_widget(form.dateFinInscrit) }}
         </div>
-    </div> 
-    <div class="col-sm-3 col-lg-3 col-xs-12">
+    </div>
+
+    <div class="col-sm-4 col-lg-4 col-xs-12">
         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
             <label>الجهة</label>
             {{ form_widget(form.jihas) }}
         </div>
-    </div> 
-    <div class="col-sm-3 col-lg-3 col-xs-12">
+    </div>
+    <div class="col-sm-4 col-lg-4 col-xs-12">
         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
             <label>القسم الفني</label>
             {{ form_widget(form.kesms) }}
         </div>
-    </div> 
-    <div class="col-sm-3 col-lg-3 col-xs-12">
+    </div>
+    <div class="col-sm-4 col-lg-4 col-xs-12">
         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
-            <label>المستوى التدريبي</label>
+            <label>بنوع الدورة</label>
             {{ form_widget(form.mostawaTadribis) }}
         </div>
-    </div> 
+    </div>
 </div>
         {{ form_widget(form) }}
 {% if show is defined %}

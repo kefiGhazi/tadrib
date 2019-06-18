@@ -15,11 +15,12 @@
                                     <tr>
                                         <th>إسم الدورة</th>
                                         <th>مركز التدريب</th>
-                                        <th>السنة الكشفية</th>
                                         <th>تاريخ البداية</th>
                                         <th>تاريخ النهاية</th>
                                         <th> بداية االتسجيل</th>
                                         <th> نهاية التسجيل</th>
+                                        <th> الجهة</th>
+                                        <th> القسم</th>
                                         <th>---</th>
                                     </tr>
                                 </thead>
@@ -28,18 +29,27 @@
                                         <tr>
                                             <td>{{ link.nom }}</td>
                                             <td>{{ link.markez }}</td>
-                                            <td>{{ link.annee }}</td>
                                             <td>{% if link.dateDeb %}{{ link.dateDeb|date('Y-m-d') }}{% endif %}</td>
                                             <td>{% if link.dateFin %}{{ link.dateFin|date('Y-m-d') }}{% endif %}</td>
                                             <td>{% if link.dateDebInscrit %}{{ link.dateDebInscrit|date('Y-m-d') }}{% endif %}</td>
                                             <td>{% if link.dateFinInscrit %}{{ link.dateFinInscrit|date('Y-m-d') }}{% endif %}</td>
                                             <td>
+                                                {% for jiha in link.jihas %}
+                                                    <div class="badge badge-xs"> {{ jiha.name }}</div>
+                                                {% endfor %}
+                                            </td>
+                                            <td> {% for kesem in link.kesms %}
+                                                    <div class="badge badge-xs">{{ kesem.nom }}</div>
+                                                {% endfor %}</td>
+                                            <td>
                                                 <div class="btn-group dropup">
                                                     <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">الخيارات <span class="caret"></span></button>
                                                     <div class="dropdown-menu" x-placement="top-start" >
                                                         <a class="dropdown-item" href="{{ path('link_show', { 'id': link.id }) }}"><i class="fa fa-eye" style="color: blue;"></i>  مشاهدة</a><br>
+                                                        {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
                                                         <a class="dropdown-item" href="{{ path('link_edit', { 'id': link.id }) }}"><i class="fa fa-pencil" style="color: orange;"></i>  تعدبل</a><br>
                                                         <a class="dropdown-item" href="{{ path('link_delete', { 'id': link.id }) }}" onclick="return confirm('مسح الدورة ؟')"><i class="fa fa-trash" style="color: red;"></i>  مسح</a>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </td>

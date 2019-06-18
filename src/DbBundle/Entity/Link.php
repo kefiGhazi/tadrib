@@ -18,10 +18,7 @@ class Link
      * @var string
      */
     private $nom;
-    /**
-     * @var string
-     */
-    private $annee;
+
     /**
      * @var string
      */
@@ -237,13 +234,7 @@ class Link
     function setMostawaTadribis($mostawaTadribis) {
         $this->mostawaTadribis = $mostawaTadribis;
     }
-    function getAnnee() {
-        return $this->annee;
-    }
 
-    function setAnnee($annee) {
-        $this->annee = $annee;
-    }
 
     function getMarkez() {
         return $this->markez;

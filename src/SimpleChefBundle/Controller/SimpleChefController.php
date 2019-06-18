@@ -120,10 +120,49 @@ class SimpleChefController extends Controller {
         }
         $chefId = $_SESSION['userId'];
         $chef = $em->getRepository('DbBundle:Chef')->findOneById($chefId);
+
+            $imageA = $chef->getImageCinFace();
+            if($chef->getImageCinFace() != null ){
+                $chef->setImageCinFace( new File($this->getParameter('cin_directory').'/'.$chef->getImageCinFace()));
+            }
+
+            $imageA2 = $chef->getImageCinPile();
+            if($chef->getImageCinPile() != null ){
+                $chef->setImageCinPile( new File($this->getParameter('cin_directory').'/'.$chef->getImageCinPile()));
+            }
+
         $editForm = $this->createForm('DbBundle\Form\ChefEditeSimpleType', $chef);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            //$img = file_get_contents($editForm->get('imageCinFace')->getData());
+
+            if($chef->getImageCinFace()){
+                $file = $chef->getImageCinFace();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('cin_directory'),
+                    $fileName
+                );
+                // end upload
+                $chef->setImageCinFace($fileName);}
+            else {
+                $chef->setImageCinFace($imageA);
+            }
+
+            if($chef->getImageCinPile()){
+                $file2 = $chef->getImageCinPile();
+                $fileName2 = md5(uniqid()).'.'.$file2->guessExtension();
+                $file2->move(
+                    $this->getParameter('cin_directory'),
+                    $fileName2
+                );
+                // end upload
+                $chef->setImageCinPile($fileName2);}
+            else {
+                $chef->setImageCinPile($imageA2);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('simple_chef_show');
@@ -169,7 +208,6 @@ class SimpleChefController extends Controller {
             //  ulpoad image
             $file = $inscrit->getIdChef()->getImageCinFace();
             if($file && $file != null){
-                dump('aa');
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
                     $this->getParameter('cin_directory'),
@@ -182,7 +220,6 @@ class SimpleChefController extends Controller {
             //  ulpoad image
             $file2 = $inscrit->getIdChef()->getImageCinPile();
             if($file2 && $file2 != null ){
-                dump('bb');
                 $fileName2 = md5(uniqid()).'.'.$file2->guessExtension();
                 $file2->move(
                     $this->getParameter('cin_directory'),
@@ -222,7 +259,15 @@ class SimpleChefController extends Controller {
         $chef = $em->getRepository('DbBundle:Chef')->findOneById($chefId);
         $inscrit = $em->getRepository('DbBundle:Inscrit')->findBy(array('idChef' => $chef->getId()));
         return $this->render( 'SimpleChefBundle:chef:listInscrit.html.twig', array(
-            'inscritList' => $inscrit
+            'inscritList' => $inscrit,
+            'chef' => $chef
+        ));
+    }
+
+
+    public function printAction(Request $request, Inscrit $inscrit){
+        return $this->render('SimpleChefBundle:chef:print.html.twig', array(
+            'inscrit' => $inscrit
         ));
     }
 

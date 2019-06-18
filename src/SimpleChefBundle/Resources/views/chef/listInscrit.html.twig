@@ -64,9 +64,13 @@
                         {%endif%}
                     </td>
                     <td>
-                        <a  class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="تفاصيل" data-original-title="تفاصيل"><i class="fa fa-eye"></i></a>
-                        <a  class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="تعديل" data-original-title="تعديل"><i class="fa fa-pencil"></i></a>
-                        <a  class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="تحميل الدعوة" data-original-title="تحميل الدعوة"><i class="fa fa-file-pdf-o"></i></a>
+{#                        <a  class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="تفاصيل" data-original-title="تفاصيل"><i class="fa fa-eye"></i></a>#}
+                        <a href="{{ path('simple_chef_inscrit',{'chef' : chef.id, 'link' : inscrit.idLink.id}) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="تعديل" data-original-title="تعديل"><i class="fa fa-pencil"></i></a>
+                        {% if inscrit.paye == 1 and inscrit.accepteW == 1 and inscrit.idDirassaA != null and inscrit.idMarkez != null %}
+                            <a href="{{path( 'simple_chef_print_invit', {'id': inscrit.id}) }}" target="_blank" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="تحميل الدعوة" data-original-title="تحميل الدعوة"><i class="fa fa-file-pdf-o"></i></a>
+                        {% else %}
+                            <a  class="btn btn-sm btn-info disabled" data-toggle="tooltip" data-placement="top" title="تحميل الدعوة" data-original-title="تحميل الدعوة"><i class="fa fa-file-pdf-o"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

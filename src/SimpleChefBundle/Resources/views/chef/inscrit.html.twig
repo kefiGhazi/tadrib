@@ -40,7 +40,7 @@
                             <label for="field-1" class="control-label">الدورة التدريبية</label>
                             <select name="idDirasa" class="form-control">
                                 {% for dirasa in diraset %}
-                                    <option value="{{ dirasa.id }}" {% if inscrit.idDirassa.id == dirasa.id %} selected {% endif %}>{{ dirasa.nom }}</option>
+                                    <option value="{{ dirasa.id }}" {% if inscrit.idDirassa and inscrit.idDirassa.id == dirasa.id %} selected {% endif %}>{{ dirasa.nom }}</option>
                                 {% endfor %}
                             </select>
                         </div>

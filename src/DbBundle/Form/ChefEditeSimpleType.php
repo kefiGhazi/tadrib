@@ -3,6 +3,7 @@
 namespace DbBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,17 +21,22 @@ class ChefEditeSimpleType extends AbstractType
                 ->add('cin')
                 ->add('inscrit')
                 ->add('dateNaissance', DateType::class, array('widget' => 'single_text'))
+            ->add('imageCinFace', FileType::class , array(
+                'required' => false
+            ))
+            ->add('imageCinPile', FileType::class , array(
+                'required' => false
+            ))
                 ->add('fawej')
+                ->add('wehda')
+                ->add('adresse')
                 ->add('etude')
                 ->add('travail')
                 ->add('tel')
-               ->add('lastDirasa', ChoiceType::class, array('choices'  => array(
-                                                    'بدون تدريب' => 'بدون تدريب',
-                                                    'ابتدائية' => 'ابتدائية',
-                                                    'تمهيدية' => 'تمهيدية',
-                                                    'شارة خشبية' => 'شارة خشبية',
-                                                    'مساعد قائد تدريب' => 'مساعد قائد تدريب',
-                                                    'قائد تدريب' => 'قائد تدريب',)))
+               ->add('lastDirasa')
+            ->add('chefLastDirassa')
+            ->add('lieuxLastDirassa')
+            ->add('dateLastDirassa')
                ->add('sex', ChoiceType::class, array('choices'  => array(
                                                     '1' => 'ذكر',
                                                     '2' => 'أنثى',)))
