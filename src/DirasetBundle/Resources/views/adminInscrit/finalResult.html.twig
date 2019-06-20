@@ -26,6 +26,7 @@
                         <div class="card-box"> 
                             <div class="col-lg-12">
                                 <form method="POST" action="{{path('adminInscrit_finalResult')}}">
+                                    <input type="hidden" value="{{ link.id}}" name="id">
                                     <div class="col-sm-3 col-lg-3 col-xs-12">
                                         <div class="form-group col-sm-10 col-lg-10 col-xs-10">
                                             <label>الجهة </label>
@@ -34,7 +35,7 @@
 
                                                     <option value="" selected="">جميع الجهات</option>
                                                 {%endif%}
-                                                {%for jiha in jihas %}
+                                                {%for jiha in link.jihas %}
                                                     <option value="{{jiha.id}}" {%if J == jiha.id %} selected="" {%endif%}>{{jiha.name}}</option>
                                                 {%endfor%}
                                             </select>
@@ -45,8 +46,9 @@
                                             <label>الدراسات </label>
                                             <select name="Dirassa" class="form-control">
                                                 <option value="">جميع الدراسات</option>
-                                                <option value="2"{%if D == "2" %} selected="" {%endif%}>تمهيدية</option>
-                                                <option value="3"{%if D == "3" %} selected="" {%endif%}>شارة خشبية</option>
+                                                {% for dirassa in link.mostawaTadribis %}
+                                                    <option value="{{ dirassa.id }}" {%if D == dirassa.id %} selected="" {%endif%}> {{ dirassa.nom }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div> 

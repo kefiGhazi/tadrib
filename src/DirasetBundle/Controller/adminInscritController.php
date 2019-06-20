@@ -39,30 +39,24 @@ class adminInscritController extends Controller {
     public function finalResultAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $link = $em->getRepository('DbBundle:Link')->findOneBy(array('id'=>$request->get('id')));
-        $condition = "";
-        $J = "";
-        $D = "";
+        $J = null;
+        $D = null;
 
         $idUser = $this->getUser()->getId();
         $privilaige = $em->getRepository('DbBundle:Privilaige')->findOneById($idUser);
         if ($privilaige->getIdJiha() == NULL) {
             if ($request->get('jiha') != NULL) {
                 $J = $request->get('jiha');
-                $condition = $condition . "  AND p.idJiha ='" . $request->get('jiha') . "'";
             }
         } else {
-            $J = $privilaige->getIdJiha();
-            $condition = $condition . "  AND p.idJiha ='" . $privilaige->getIdJiha()->getId() . "'";
+            $J = $privilaige->getIdJiha()->getId();
         }
         if ($request->get('Dirassa') != NULL) {
             $D = $request->get('Dirassa');
-            $condition = $condition . "  AND p.idDirassa ='" . $request->get('Dirassa') . "'";
         }
 
-        
-        $query = $em->createQuery("select p from DbBundle\Entity\Inscrit p where  p.accepteW = 1 AND p.paye = 1" . $condition);
-        $inscrit = $query->getResult();
-        
+        $inscrit = $em->getRepository('DbBundle:Inscrit')->findByFinal(array('idLink' => $link->getId() , 'jiha' => $J , 'dirassa' => $D));
+
         $query = $em->createQuery("select p from DbBundle\Entity\Kesm p where p.id <8 ");
         $kesms = $query->getResult();
         

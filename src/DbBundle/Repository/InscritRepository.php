@@ -200,4 +200,30 @@ class InscritRepository extends EntityRepository
             ->getResult();
         return $query;
     }
+
+    /**
+     * @return Inscrit[] Returns an array of Livre objects
+     */
+    public function findByFinal(array $option)
+    {
+        $query =  $this->createQueryBuilder('i')
+            ->where('i.idLink = :idLink')
+            ->innerJoin('DbBundle\Entity\Chef', 'c')
+            ->andWhere('i.idChef = c.id')
+            ->andWhere('i.accepteW = 1')
+            ->andWhere('i.paye = 1')
+            ->setParameter('idLink', $option['idLink']);
+
+        if($option['jiha'] != null ){
+            $query = $query->andWhere('c.idJiha = :idJiha')
+                ->setParameter('idJiha',  $option['jiha']);
+        }
+        if($option['dirassa'] != null ){
+            $query = $query->andWhere('i.idDirassa = :dirassa')
+                ->setParameter('dirassa',  $option['dirassa']);
+        }
+        $query = $query->getQuery()
+            ->getResult();
+        return $query;
+    }
 }
