@@ -77,9 +77,7 @@ class InscritRepository extends EntityRepository
 
       return $this->createQueryBuilder('i')
             ->where('i.idLink = :idLink')
-            ->innerJoin('DbBundle\Entity\Chef', 'c')
-            ->andWhere('i.idChef = c.id')
-            ->andWhere('c.idKesm = :idKesm')
+            ->andWhere('i.idKesm = :idKesm')
             ->setParameter('idLink', $option['idLink'])
             ->setParameter('idKesm',  $option['idKesm'])
             ->getQuery()
@@ -96,9 +94,7 @@ class InscritRepository extends EntityRepository
 
         return  $this->createQueryBuilder('i')
             ->where('i.idLink = :idLink')
-            ->innerJoin('DbBundle\Entity\Chef', 'c')
-            ->andWhere('i.idChef = c.id')
-            ->andWhere('c.idKesm = :idKesm')
+            ->andWhere('i.idKesm = :idKesm')
             ->setParameter('idLink', $option['idLink'])
             ->setParameter('idKesm',  $option['idKesm'])
             ->andWhere('i.accepteW = 1')
@@ -114,9 +110,7 @@ class InscritRepository extends EntityRepository
 
         return  $this->createQueryBuilder('i')
             ->where('i.idLink = :idLink')
-            ->innerJoin('DbBundle\Entity\Chef', 'c')
-            ->andWhere('i.idChef = c.id')
-            ->andWhere('c.idKesm = :idKesm')
+            ->andWhere('i.idKesm = :idKesm')
             ->setParameter('idLink', $option['idLink'])
             ->setParameter('idKesm',  $option['idKesm'])
             ->andWhere('i.accepteW = 1')
@@ -139,7 +133,7 @@ class InscritRepository extends EntityRepository
             ->setParameter('idLink', $option['idLink']);
 
             if($option['jiha'] != null ){
-                $query = $query->andWhere('c.idKesm = :idJiha')
+                $query = $query->andWhere('c.idJiha = :idJiha')
                       ->setParameter('idJiha',  $option['jiha']);
             }
             if($option['dirassa'] != null ){
@@ -169,7 +163,7 @@ class InscritRepository extends EntityRepository
                 ->setParameter('idJiha',  $option['jiha']);
         }
         if($option['kesm'] != null ){
-            $query = $query->andWhere('c.idKesm = :kesem')
+            $query = $query->andWhere('i.idKesm = :kesem')
                 ->setParameter('kesem',  $option['kesm']);
         }
         $query = $query->getQuery()

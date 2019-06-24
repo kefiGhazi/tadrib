@@ -228,6 +228,8 @@ class SimpleChefController extends Controller {
                 // end upload
             }
             $inscrit->getIdChef()->setImageCinPile($fileName2);
+            $kesem = $em->getRepository('DbBundle:Kesm')->findOneBy(array('id' => $request->get('idKesm')));
+            $inscrit->setIdKesm($kesem);
             $em->persist($inscrit);
             $em->persist($inscrit->getIdChef());
             $em->flush();

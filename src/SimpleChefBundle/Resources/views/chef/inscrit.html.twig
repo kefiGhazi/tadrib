@@ -36,11 +36,19 @@
                         </div>
                         <div class="plan-duration">{{dirasa.markez}}</div>
                         <br />
-                        <div class="form-group col-lg-6 col-lg-offset-3">
+                        <div class="form-group col-lg-6 ">
                             <label for="field-1" class="control-label">الدورة التدريبية</label>
                             <select name="idDirasa" class="form-control">
                                 {% for dirasa in diraset %}
                                     <option value="{{ dirasa.id }}" {% if inscrit.idDirassa and inscrit.idDirassa.id == dirasa.id %} selected {% endif %}>{{ dirasa.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6 ">
+                            <label for="field-1" class="control-label">القسم</label>
+                            <select name="idKesm" class="form-control">
+                                {% for kesm in dirasa.kesms %}
+                                    <option value="{{ kesm.id }}" {% if inscrit.idKesm and inscrit.idKesm.id == kesm.id %} selected {% endif %}>{{ kesm.nom }}</option>
                                 {% endfor %}
                             </select>
                         </div>

@@ -42,6 +42,15 @@ DbBundle\Entity\Inscrit:
                 id_dirassa:
                     referencedColumnName: id
             orphanRemoval: false
+        idKesm:
+            targetEntity: Kesm
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_kesm:
+                    referencedColumnName: id
+            orphanRemoval: false
         idLink:
             targetEntity: Link
             cascade: {  }

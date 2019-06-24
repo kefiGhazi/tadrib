@@ -81,7 +81,7 @@
                                             <td>{{i}}</td>
                                             <td>{{ inscrit.idChef.nom }} {{ inscrit.idChef.prenom }}</td>
                                             <td>{% if inscrit.idChef.dateNaissance %}{{ inscrit.idChef.dateNaissance|date('Y-m-d') }}{% endif %}</td>
-                                            <td>{{ inscrit.idChef.idKesm.nom }}</td>
+                                            <td>{{ inscrit.idKesm.nom }}</td>
                                             {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") %}
                                                 <td>{{ inscrit.idChef.idJiha.name }}</td>
                                             {%endif%}
@@ -301,7 +301,7 @@
                                             {% set chara = 0%}
                                             {% set C = 0%}
                                             {% for kesem in kesms%}
-                                                {% for inscrit in inscrits if inscrit.idChef.idKesm.id == kesem.id%}
+                                                {% for inscrit in inscrits if inscrit.idKesm.id == kesem.id%}
                                                     {% if inscrit.idDirassa.id == 2%}
                                                         {% set T = T + 1%}
                                                     {% else%}

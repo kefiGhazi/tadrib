@@ -25,6 +25,11 @@ class Inscrit
     private $idDirassa;
 
     /**
+     * @var \DbBundle\Entity\AtributType
+     */
+    private $idKesm;
+
+    /**
      * @var \DbBundle\Entity\Link
      */
     private $idLink;
@@ -203,6 +208,23 @@ class Inscrit
     {
         $this->idLink = $idLink;
     }
+
+    /**
+     * @return AtributType
+     */
+    public function getIdKesm()
+    {
+        return $this->idKesm;
+    }
+
+    /**
+     * @param AtributType $idKesm
+     */
+    public function setIdKesm($idKesm)
+    {
+        $this->idKesm = $idKesm;
+    }
+
 
 
 
