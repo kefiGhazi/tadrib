@@ -36,13 +36,14 @@ class ChefTypeInscrit extends AbstractType
                 ->add('chefLastDirassa')
                 ->add('lieuxLastDirassa')
                 ->add('dateLastDirassa')
-               ->add('lastDirasa', ChoiceType::class, array('choices'  => array(
-                                                    'بدون تدريب' => 'بدون تدريب',
-                                                    'ابتدائية' => 'ابتدائية',
-                                                    'تمهيدية' => 'تمهيدية',
-                                                    'شارة خشبية' => 'شارة خشبية',
-                                                    'مساعد قائد تدريب' => 'مساعد قائد تدريب',
-                                                    'قائد تدريب' => 'قائد تدريب',)))
+                ->add('lastDirasa')
+//               ->add('lastDirasa', ChoiceType::class, array('choices'  => array(
+//                                                    'بدون تدريب' => 'بدون تدريب',
+//                                                    'ابتدائية' => 'ابتدائية',
+//                                                    'تمهيدية' => 'تمهيدية',
+//                                                    'شارة خشبية' => 'شارة خشبية',
+//                                                    'مساعد قائد تدريب' => 'مساعد قائد تدريب',
+//                                                    'قائد تدريب' => 'قائد تدريب',)))
                ->add('sex', ChoiceType::class, array('choices'  => array(
                                                     '1' => 'ذكر',
                                                     '2' => 'أنثى',)))
