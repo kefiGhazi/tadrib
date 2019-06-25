@@ -20,11 +20,21 @@ class LinkController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
+        $linksNumber = array();
         $links = $em->getRepository('DbBundle:Link')->findByActif(1);
+        foreach ($links as $link){
+            $result = $em->getRepository('DbBundle:Inscrit')->findBy(array('idLink'=>$link->getId()));
+            if($result == null){
+                $result = 0;
+            }else{
+                $result = count($result);
+            }
+            $linksNumber[$link->getId()] = $result;
+        }
 
         return $this->render('DawraBundle:link:index.html.twig', array(
             'links' => $links,
+            'linksNumber' => $linksNumber,
         ));
     }
 

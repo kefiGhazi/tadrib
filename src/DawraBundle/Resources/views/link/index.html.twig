@@ -21,6 +21,7 @@
                                         <th> نهاية التسجيل</th>
                                         <th> الجهة</th>
                                         <th> القسم</th>
+                                        <th> عدد المسجلين</th>
                                         <th>---</th>
                                     </tr>
                                 </thead>
@@ -40,7 +41,11 @@
                                             </td>
                                             <td> {% for kesem in link.kesms %}
                                                     <div class="badge badge-xs">{{ kesem.nom }}</div>
-                                                {% endfor %}</td>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                {{  linksNumber[link.id] }}
+                                            </td>
                                             <td>
                                                 <div class="btn-group dropup">
                                                     <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">الخيارات <span class="caret"></span></button>
