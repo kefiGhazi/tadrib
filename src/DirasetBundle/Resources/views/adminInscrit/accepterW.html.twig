@@ -162,10 +162,13 @@
 
                                             </td>
                                             <td>
-                                                {%if inscrit.accepteJ == 1 %}
+
+                                                {%if inscrit.accepteW == 2 %}
+                                                    <span class="label label-danger">غير مؤهل</span>
+                                                {%else %}
                                                     {%if inscrit.paye == 1 %}
                                                         <span class="label label-success">دفع الاشتراك</span>
-                                                        <div class="btn-group"> 
+                                                        <div class="btn-group">
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
@@ -174,18 +177,16 @@
                                                         </div>
                                                     {%elseif inscrit.paye == 2%}
                                                         <span class="label label-danger">لم يدفع الإشتراك</span>
-                                                        <div class="btn-group"> 
+                                                        <div class="btn-group">
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
                                                                 <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
                                                             </ul>
                                                         </div>
-                                                    {%elseif inscrit.accepteJ == 1 and inscrit.accepteW == 2 %}
-                                                        <span class="label label-danger">غير مؤهل</span>
                                                     {%else%}
                                                         <span class="label label-default">في طور الإنجاز</span>
-                                                        <div class="btn-group"> 
+                                                        <div class="btn-group">
                                                             <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
                                                             <ul class="dropdown-menu" role="menu">
                                                                 <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
@@ -193,20 +194,52 @@
                                                             </ul>
                                                         </div>
                                                     {%endif%}
+                                                {% endif %}
+{#                                                {%if inscrit.accepteJ == 1 %}#}
+{#                                                    {%if inscrit.paye == 1 %}#}
+{#                                                        <span class="label label-success">دفع الاشتراك</span>#}
+{#                                                        <div class="btn-group"> #}
+{#                                                            <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>#}
+{#                                                            <ul class="dropdown-menu" role="menu">#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    {%elseif inscrit.paye == 2%}#}
+{#                                                        <span class="label label-danger">لم يدفع الإشتراك</span>#}
+{#                                                        <div class="btn-group"> #}
+{#                                                            <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>#}
+{#                                                            <ul class="dropdown-menu" role="menu">#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    {%elseif inscrit.accepteJ == 1 and inscrit.accepteW == 2 %}#}
+{#                                                        <span class="label label-danger">غير مؤهل</span>#}
+{#                                                    {%else%}#}
+{#                                                        <span class="label label-default">في طور الإنجاز</span>#}
+{#                                                        <div class="btn-group"> #}
+{#                                                            <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>#}
+{#                                                            <ul class="dropdown-menu" role="menu">#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>#}
+{#                                                                <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    {%endif%}#}
 
-                                                {%elseif inscrit.accepteJ == 2%}
-                                                    <span class="label label-danger">غير مؤهل  </span>
+{#                                                {%elseif inscrit.accepteJ == 2%}#}
+{#                                                    <span class="label label-default">في طور الإنجاز  </span>#}
 
-                                                {%else%}
-                                                    <span class="label label-default">في طور الإنجاز  </span>
-                                                    <div class="btn-group"> 
-                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>
-                                                        </ul>
-                                                    </div>
-                                                {%endif%}
+{#                                                {%else%}#}
+{#                                                    <span class="label label-default">في طور الإنجاز  </span>#}
+{#                                                    <div class="btn-group"> #}
+{#                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>#}
+{#                                                        <ul class="dropdown-menu" role="menu">#}
+{#                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','J':J,'D':D,'idLink' : link.id})}}">نعم</a></li>#}
+{#                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','J':J,'D':D,'idLink' : link.id})}}">لا</a></li>#}
+{#                                                        </ul>#}
+{#                                                    </div>#}
+{#                                                {%endif%}#}
 
 
                                             </td>

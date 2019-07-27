@@ -102,7 +102,7 @@ DbBundle\Entity\Chef:
             unsigned: false
         lastDirasa:
             type: string
-            nullable: false
+            nullable: true
             length: 255
             fixed: false
             column: last_dirasa

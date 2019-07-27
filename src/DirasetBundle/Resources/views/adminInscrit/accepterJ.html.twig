@@ -116,7 +116,9 @@
                                                 {%endif%}
                                             </td>
                                             <td>
-                                                {%if inscrit.accepteJ == 1 and inscrit.accepteW == 1%}
+                                                {%if inscrit.accepteW == 2%}
+                                                    <span class="label label-danger">غير مؤهل  </span>
+                                                {% elseif inscrit.accepteW == 1 %}
                                                     {%if inscrit.paye == 1 %}
                                                         <span class="label label-success">دفع الاشتراك</span>
                                                     {%elseif inscrit.paye == 2%}
@@ -124,18 +126,10 @@
                                                     {%else%}
                                                         <span class="label label-default">في طور الإنجاز</span>
                                                     {%endif%}
-                                                    {#<div class="btn-group"> 
-                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'oui','Jiha':'oui'})}}">نعم</a></li>
-                                                            <li><a href="{{path('adminInscrit_paye',{'id':inscrit.id,'etat':'non','Jiha':'oui'})}}">لا</a></li>
-                                                        </ul>
-                                                    </div>#}
-                                                {%elseif inscrit.accepteJ == 2 and inscrit.accepteW == 1%}
-                                                    <span class="label label-danger">غير مؤهل  </span>
-                                                {%else%}
+                                                {% else %}
                                                     <span class="label label-default">في طور الإنجاز</span>
-                                                {%endif%}
+                                                {% endif %}
+                                                
                                             </td>
 
                                             <td>

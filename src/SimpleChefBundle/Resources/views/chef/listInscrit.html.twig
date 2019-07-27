@@ -41,7 +41,7 @@
                         {%endif%}
                     </td>
                     <td>
-                        {%if inscrit.accepteJ == 1 and inscrit.accepteW == 1%}
+                        {%if inscrit.accepteW == 1%}
                             {%if inscrit.paye == 1 %}
                                 <span class="label label-success">دفع الاشتراك</span>
                             {%elseif inscrit.paye == 2%}
@@ -49,7 +49,7 @@
                             {%else%}
                                 <span class="label label-default">في طور الإنجاز</span>
                             {%endif%}
-                        {%elseif inscrit.accepteJ == 2 and inscrit.accepteW == 1%}
+                        {%elseif inscrit.accepteW == 2%}
                             <span class="label label-danger">غير مؤهل  </span>
                         {%else%}
                             <span class="label label-default">في طور الإنجاز</span>
