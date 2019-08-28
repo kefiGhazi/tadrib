@@ -209,6 +209,7 @@
                     <td>
                         <button class="btn btn-xs btn-warning btn-rounded" data-toggle="modal" data-target="#con-close-modal-edit-{{dawra.id}}"><i class="fa fa-pencil"></i> تعديل</button>
                         <a class="btn btn-xs btn-success btn-rounded" href="{{path('inscrit_Dawra',{'dawra':dawra.id,'psw':dawra.psw,'nom':dawra.login})}}" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-xs btn-warning btn-rounded" target="_blank" href="{{path('inscrit_Dawra_Print',{'dawra':dawra.id,'psw':dawra.psw,'nom':dawra.login})}}" ><i class="fa fa-print"></i></a>
                     </td>
                 </tr>
                 <div id="con-close-modal-edit-{{dawra.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

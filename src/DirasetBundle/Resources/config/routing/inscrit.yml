@@ -22,7 +22,12 @@ inscrit_Dawra:
     path:     /DawraList
     defaults: { _controller: "DirasetBundle:Inscrit:dawra" }
     methods:  [GET, POST]
-    
+
+inscrit_Dawra_Print:
+    path:     /DawraListPrint
+    defaults: { _controller: "DirasetBundle:Inscrit:dawraPrint" }
+    methods:  [GET, POST]
+
 adminInscrit_presence:
     path:     /presence
     defaults: { _controller: "DirasetBundle:adminInscrit:presence" }

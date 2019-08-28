@@ -25,7 +25,7 @@ class Inscrit
     private $idDirassa;
 
     /**
-     * @var \DbBundle\Entity\AtributType
+     * @var \DbBundle\Entity\Kesm
      */
     private $idKesm;
 
@@ -210,7 +210,7 @@ class Inscrit
     }
 
     /**
-     * @return AtributType
+     * @return Kesm
      */
     public function getIdKesm()
     {
@@ -218,7 +218,7 @@ class Inscrit
     }
 
     /**
-     * @param AtributType $idKesm
+     * @param Kesm $idKesm
      */
     public function setIdKesm($idKesm)
     {
@@ -226,7 +226,7 @@ class Inscrit
     }
 
 
-
+    
 
 
 

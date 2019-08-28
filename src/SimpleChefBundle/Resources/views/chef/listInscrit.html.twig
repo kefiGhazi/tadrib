@@ -9,7 +9,6 @@
                     <th>الدورة</th>
                     <th>التاريخ</th>
                     <th>المكان</th>
-                    <th>قرار اللجنة الجهوية</th>
                     <th>قرار اللجنة الوطنية</th>
                     <th>الحوالة البريدية</th>
                     <th>النتيجة</th>
@@ -23,19 +22,11 @@
                     <td>{{ inscrit.idLink.dateDeb | date('d/m/Y') }} => {{ inscrit.idLink.dateFin | date('d/m/Y') }}</td>
                     <td>{{ inscrit.idLink.markez }}</td>
                     <td>
-                        {%if inscrit.accepteJ == 1%}
-                            <span class="label label-success">مقبول</span>
-                        {%elseif inscrit.accepteJ == 2%}
-                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
-                        {%else%}
-                            <span class="label label-default">في طور الإنجاز</span>
-                        {%endif%}
-                    </td>
-                    <td>
                         {%if inscrit.accepteW == 1%}
                             <span class="label label-success">مقبول</span>
                         {%elseif inscrit.accepteW == 2%}
-                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{inscrit.accepteMessageJ}}">مرفوض</span>
+                            <span class="label label-danger" >مرفوض</span> 
+                            <span data-toggle="tooltip" data-placement="top" title="{{inscrit.accepteMessageW}}" data-original-title="{{inscrit.accepteMessageW}}"> <i class="fa fa-2x fa-question-circle"></i> </span>
                         {%else%}
                             <span class="label label-default">في طور الإنجاز</span>
                         {%endif%}
@@ -49,7 +40,7 @@
                             {%else%}
                                 <span class="label label-default">في طور الإنجاز</span>
                             {%endif%}
-                        {%elseif inscrit.accepteW == 2%}
+                        {% elseif inscrit.accepteW == 2 %}
                             <span class="label label-danger">غير مؤهل  </span>
                         {%else%}
                             <span class="label label-default">في طور الإنجاز</span>

@@ -49,6 +49,20 @@ class InscritController extends Controller
             'D' => $D,
         ));
     }
+
+    public function dawraPrintAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $D = $em->getRepository('DbBundle:DawraTadrib')->findOneBy(array('id'=>$request->get('dawra'),'psw'=>$request->get('psw'),'login'=>$request->get('nom')));
+        $query = $em->createQuery('SELECT s FROM DbBundle:Inscrit s WHERE s.idDirassaA = '.$request->get('dawra'));
+        $inscrits = $query->getResult();
+        return $this->render('HomeBundle:Default:DawraPrint.html.twig', array(
+            'inscrits' => $inscrits,
+            'D' => $D,
+        ));
+    }
+
     public function kesmAction(Request $request)
     {
         

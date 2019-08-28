@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f909277c-d3c9-4a01-8c52-157f71094fdb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/DawraPrint.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Chef.orm.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Resources/config/doctrine/Chef.orm.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterJ.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterJ.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterW.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/adminInscrit/accepterW.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DbBundle/Entity/Inscrit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DbBundle/Entity/Inscrit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Controller/InscritController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Controller/InscritController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/config/routing/inscrit.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/config/routing/inscrit.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/dawaratTadrib/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/DirasetBundle/Resources/views/dawaratTadrib/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/verticalLayout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default/verticalLayout.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/listInscrit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleChefBundle/Resources/views/chef/listInscrit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,7 +106,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -111,6 +114,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/HomeBundle/Resources/views/Default" />
       <recent name="$PROJECT_DIR$/src/DbBundle/Repository" />
       <recent name="$PROJECT_DIR$/src/DbBundle/Form" />
       <recent name="$PROJECT_DIR$/src/DbBundle/Entity" />
@@ -149,7 +153,11 @@
       <workItem from="1562084842053" duration="1240000" />
       <workItem from="1563832439227" duration="278000" />
       <workItem from="1564225051602" duration="255000" />
-      <workItem from="1564225471397" duration="1936000" />
+      <workItem from="1564225471397" duration="6109000" />
+      <workItem from="1564697498680" duration="648000" />
+      <workItem from="1566667542672" duration="4000" />
+      <workItem from="1566670107444" duration="3000" />
+      <workItem from="1567025583759" duration="5434000" />
     </task>
     <servers />
   </component>
@@ -161,7 +169,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
