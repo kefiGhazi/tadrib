@@ -7,3 +7,6 @@ home_login:
 home_loginDawra:
     path:     /loginDawra
     defaults: { _controller: HomeBundle:Default:loginDawra }
+home_DawraَAvencer:
+    path:     /loginDawraAvancer
+    defaults: { _controller: HomeBundle:Default:loginDawraAvancer }

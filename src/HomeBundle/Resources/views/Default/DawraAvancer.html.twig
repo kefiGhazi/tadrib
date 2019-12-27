@@ -1,0 +1,55 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+                        <h1>متابعة الدورات التدريبية المتقدمة</h1>
+                    </div>
+                    <div class="card-box">
+                        <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                            <thead>
+                            <tr>
+                                <th>الدورة</th>
+                                <th>السنة</th>
+                                <th>قائدها</th>
+                                <th>الرابط</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>قادة التدريب</td>
+                                    <td>2017/2018</td>
+                                    <td>فتحي السدراوي</td>
+                                    <td><a href="#" target="_blank" class="btn btn-bg btn-success"><i class="fa fa-plus"></i> الرابط </a></td>
+                                </tr>
+                                <tr>
+                                    <td>مساعدات قادة التدريب</td>
+                                    <td>2018/2019</td>
+                                    <td>هالة إلهام أورير</td>
+                                    <td><a href="#" target="_blank" class="btn btn-bg btn-success"><i class="fa fa-plus"></i> الرابط </a></td>
+                                </tr>
+                                <tr>
+                                    <td>مساعدين قادة التدريب 1</td>
+                                    <td>2019/2020</td>
+                                    <td>محمد نضال العرفاوي </td>
+                                    <td><a href="http://scouts-tunisiens.org/mouse3din" target="_blank" class="btn btn-bg btn-success"><i class="fa fa-plus"></i> الرابط </a></td>
+                                </tr>
+                                <tr>
+                                    <td>مساعدين قادة التدريب 2</td>
+                                    <td>2019/2020</td>
+                                    <td>محمد معز السرائري </td>
+                                    <td><a href="http://scouts-tunisiens.org/mouse3din_aout2019" target="_blank" class="btn btn-bg btn-success"><i class="fa fa-plus"></i> الرابط </a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

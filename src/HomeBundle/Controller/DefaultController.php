@@ -28,4 +28,9 @@ class DefaultController extends Controller
         
         return $this->render('HomeBundle:Default:loginDawra.html.twig',array('type'=>$request->get('target'),'kesms'=>$kesm,'dawrats'=>$dawraTadrib));
     }
+
+    public function loginDawraAvancerAction()
+    {
+        return $this->render('HomeBundle:Default:DawraAvancer.html.twig');
+    }
 }

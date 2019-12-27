@@ -103,12 +103,13 @@
                                         <li><a href="#"><i class="fa fa-bars"></i> ق تدريب </a></li>
                                     </ul>
                                 </li>
-                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
-                                    <li class="has_sub">
-                                        <a href="{{path('chef_erched_index')}}" ><i class="fa fa-users"></i> <span> تقارير الارشاد الفني </span></a>
-                                        {# <a href="#" ><i class="fa fa-users"></i> <span> التسجيل في التمهيدية و الشارة </span></a>#}
 
-                                    </li>
+                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                    <li class="has_sub"><a href="{{path('chef_erched_index')}}" ><i class="fa fa-users"></i> <span> تقارير الارشاد الفني </span></a></li>
+                                    <li class="has_sub"><a href="{{path('home_DawraَAvencer')}}" ><i class="fa fa-users"></i> <span> متابعة الدورات التدريبية المتقدمة </span></a></li>
+
+                                    {# <a href="#" ><i class="fa fa-users"></i> <span> التسجيل في التمهيدية و الشارة </span></a>#}
+
                                 {%endif%}
                             {%endif%}
 {#                            <li class="has_sub">#}
