@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new DemandeDawraBundle\DemandeDawraBundle(),
             new HomeBundle\HomeBundle(),
             new DirasetBundle\DirasetBundle(),
+            new TawsimBundle\TawsimBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

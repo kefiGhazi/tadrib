@@ -33,3 +33,12 @@ simple_chef_inscrit_list:
     defaults: { _controller: "SimpleChefBundle:SimpleChef:inscritList" }
     methods:  [GET, POST]
 
+simple_chef_tawsim:
+    path:     /tawsim
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:tawsim" }
+    methods:  [GET, POST]
+
+simple_chef_tawsim_new:
+    path:     /tawsim/new
+    defaults: { _controller: "SimpleChefBundle:SimpleChef:tawsimNew" }
+    methods:  [GET, POST]

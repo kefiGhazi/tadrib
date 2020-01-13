@@ -1,0 +1,67 @@
+{% extends 'HomeBundle:Default:verticalLayout.html.twig' %}
+
+{% block body %}
+    <div class="card-box col-lg-12">
+        <h3 class="titre text-center">مطالب التسجيل</h3>
+       <div class="col-lg-12">
+           {% if etat == null %}
+               <a href="{{ path('simple_chef_tawsim_new') }}" class="btn btn-success">مطلب توسيم بحبات الشارة الخشبية</a>
+           {% endif %}
+       </div>
+        <div class="col-lg-12 m-t-5">
+            <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                <thead>
+                <tr>
+                    <th>تاريخ المطلب</th>
+                    <th>الجهة</th>
+                    <th>الاسم و اللقب</th>
+                    <th>المعرف الكشفي</th>
+                    <th>تاريخ دراسة الشارة الخشبية</th>
+                    <th>مكانها</th>
+                    <th>قائدها</th>
+                    <th>إسم الوحدة الكشفيةالتي قادها</th>
+                    <th>تاريخ مخيم الوحدة </th>
+                    <th>رأي اللجنة الجهوية</th>
+                    <th>رأي اللجنة الوطنية</th>
+                    {#                                            <th>---</th>#}
+                </tr>
+                </thead>
+                <tbody>
+                {% for demande in demandes %}
+                <tr>
+                    <td>{{ demande.dateDemande|date('Y-m-d') }}</td>
+                    <td>{{ demande.idJiha.name }}</td>
+                    <td>{{ demande.idChef.nom }} {{  demande.idChef.prenom }}</td>
+                    <td>{{ demande.idChef.inscrit }}</td>
+                    <td>{{ demande.moisChara }} {{ demande.yearChara }}</td>
+                    <td>{{ demande.lieuxChara }}</td>
+                    <td>{{ demande.chefChara }}</td>
+                    <td>{{ demande.uniteName }}</td>
+                    <td>{{ demande.moisCamping }} {{ demande.yearCamping }}</td>
+                    <td>
+                        {%if demande.responseJiha == 1%}
+                            <span class="label label-success">مقبول</span>
+                        {%elseif demande.responseJiha == 2%}
+                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{demande.messageJiha}}"">مرفوض</span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if demande.responseWatani == 1%}
+                            <span class="label label-success">مقبول</span>
+                        {%elseif demande.responseWatani == 2%}
+                            <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="bababab {{demande.responseWatani}}">مرفوض</span>
+                        {%else%}
+                            <span class="label label-default">في طور الإنجاز</span>
+                        {%endif%}
+
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

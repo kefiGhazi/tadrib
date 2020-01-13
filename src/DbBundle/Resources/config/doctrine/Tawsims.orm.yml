@@ -1,0 +1,122 @@
+DbBundle\Entity\Tawsims:
+  type: entity
+  table: tawsim
+  indexes:
+    id_jiha:
+      columns:
+        - id_jiha
+    id_chef:
+      columns:
+        - id_chef
+  id:
+    id:
+      type: integer
+      nullable: false
+      unsigned: false
+      id: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    dateDemande:
+      type: date
+      nullable: false
+      column: date_demande
+    moisChara:
+      type: string
+      nullable: false
+      length: 255
+      fixed: false
+      column: mois_chara
+    yearChara:
+      type: string
+      nullable: false
+      length: 255
+      fixed: false
+      column: year_chara
+    lieuxChara:
+      type: string
+      nullable: false
+      length: 255
+      fixed: false
+      column: lieux_chara
+    chefChara:
+      type: string
+      nullable: false
+      length: 255
+      fixed: false
+      column: chef_chara
+    chefUnite:
+      type: string
+      nullable: false
+      length: 255
+      fixed: false
+      column: chef_unite
+    uniteName:
+      type: string
+      nullable: true
+      length: 255
+      fixed: false
+      column: unite_name
+    camping:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+    moisCamping:
+      type: string
+      nullable: true
+      length: 255
+      fixed: false
+      column: mois_camping
+    yearCamping:
+      type: string
+      nullable: true
+      length: 255
+      fixed: false
+      column: year_camping
+    etat:
+      type: integer
+      nullable: false
+      unsigned: false
+      default: '0'
+    responseJiha:
+      type: integer
+      nullable: true
+      column: response_jiha
+    responseWatani:
+      type: integer
+      nullable: true
+      column: response_watani
+    messageJiha:
+      type: text
+      nullable: true
+      column: message_jiha
+    messageWatani:
+      type: text
+      nullable: true
+      column: message_watani
+    actif:
+      type: integer
+      nullable: false
+      unsigned: false
+      default: '1'
+  manyToOne:
+    idChef:
+      targetEntity: Chef
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        id_chef:
+          referencedColumnName: id
+      orphanRemoval: false
+    idJiha:
+      targetEntity: Jiha
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        id_jiha:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

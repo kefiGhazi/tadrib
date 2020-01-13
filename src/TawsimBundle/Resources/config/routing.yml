@@ -1,0 +1,23 @@
+tawsim_homepage:
+    path:     /
+    defaults: { _controller: TawsimBundle:Default:index }
+
+tawsim_acceptWatani:
+    path:     /acceptWatani
+    defaults: { _controller: TawsimBundle:Default:acceptWatani }
+    methods:  [GET, POST]
+
+tawsim_acceptJiha:
+    path:     /acceptJiha
+    defaults: { _controller: TawsimBundle:Default:acceptJiha }
+    methods:  [GET, POST]
+
+tawsim_addDemannde:
+    path:     /addDemande
+    defaults: { _controller: TawsimBundle:Default:addDemande }
+    methods:  [GET, POST]
+
+tawsim_close:
+    path:     /close/{id}
+    defaults: { _controller: TawsimBundle:Default:close }
+    methods:  [GET, POST]

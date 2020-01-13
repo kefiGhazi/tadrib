@@ -2,11 +2,13 @@
 
 namespace SimpleChefBundle\Controller;
 
+use DateTime;
 use DbBundle\Entity\Chef;
 use DbBundle\Entity\Inscrit;
 use DbBundle\Entity\Link;
 use DbBundle\Entity\SimpleChef;
 use DbBundle\Entity\Raport;
+use DbBundle\Entity\Tawsims;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -272,6 +274,57 @@ class SimpleChefController extends Controller {
             'inscrit' => $inscrit
         ));
     }
+
+    public function tawsimAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        if (isset($_SESSION['userId']) === false) {
+            return $this->redirectToRoute('simple_chef_index');
+        }
+        $chefId = $_SESSION['userId'];
+        $chef = $em->getRepository('DbBundle:Chef')->findOneById($chefId);
+        $tawsim = $em->getRepository('DbBundle:Tawsims')->findBy(array('idChef' => $chef->getId(), 'actif' => 1));
+        $etat = $em->getRepository('DbBundle:Tawsims')->findBy(array('idChef' => $chef->getId(), 'actif' => 1, 'etat' => 0));
+
+        return $this->render( 'SimpleChefBundle:chef:tawsim.html.twig', array(
+            'demandes' => $tawsim,
+            'chef' => $chef,
+            'etat' => $etat
+        ));
+
+    }
+
+    public function tawsimNewAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if (isset($_SESSION['userId']) === false) {
+            return $this->redirectToRoute('simple_chef_index');
+        }
+        $chefId = $_SESSION['userId'];
+        $chef = $em->getRepository('DbBundle:Chef')->findOneById($chefId);
+
+        $tawsim = new Tawsims();
+        $tawsim->setIdChef($chef);
+        $form = $this->createForm('DbBundle\Form\TawsimsType', $tawsim);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $tawsim->setActif(1)
+                ->setDateDemande(new DateTime())
+                ->setEtat(0);
+            $em->persist($tawsim);
+            $em->flush();
+            $this->addFlash(
+                'success',
+                'لقد تمت الإضافة بنجاح'
+            );
+            return $this->redirectToRoute('simple_chef_tawsim_new');
+        }
+        return $this->render( 'SimpleChefBundle:chef:tawsimNew.html.twig',array(
+            'form' => $form->createView(),
+            'chef' => $chef
+        ));
+    }
+
+
 
 
 }

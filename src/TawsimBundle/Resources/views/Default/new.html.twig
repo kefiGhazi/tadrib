@@ -1,0 +1,144 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box text-center">
+                        <h1> مطالب توسيم</h1>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-offset-2">
+                                 المعرف الكشفي
+                            </div>
+                            <div class="col-lg-4 ">
+                                    <input type="text" class="form-control" id="chefNumber"  pattern="[0-9]{10}">
+                            </div>
+                            <div class="col-lg-1" id="searchChef">
+                                <button class="btn btn-success btn-sm" onclick="getChef()"> بحث </button>
+                            </div>
+                            <div class="col-lg-12" id="chefMessage"></div>
+                        </div>
+
+                    </div>
+                    <div class="card-box"  id="formDiv" hidden>
+                        <h1 id="chefName" class="text-center"></h1>
+                        {{ form_start(form) }}
+                        <input type="hidden" name="inscrit" id="inscritChef">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">تاريخ دراسة الشارة الخشبية (الشهر)</label>
+                                    {{ form_widget(form.moisChara,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">تاريخ دراسة الشارة الخشبية (السنة)</label>
+                                    {{ form_widget(form.yearChara,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">مكان الشارة</label>
+                                    {{ form_widget(form.lieuxChara,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">قائد دراسة الشارة</label>
+                                    {{ form_widget(form.chefChara,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">الجهة</label>
+                                    {{ form_widget(form.idJiha,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">هل قدت وحدة كشفية ل9 أشهر على الأقل بعد الشارة؟</label>
+                                    {{ form_widget(form.chefUnite,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">ما إسم الوحدة؟</label>
+                                    {{ form_widget(form.uniteName,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label"> هل قدت مخيم وحدة ب3 أيام على الأقل بعد الشارة؟</label>
+                                    {{ form_widget(form.camping,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">تاريخ المخيم (الشهر)</label>
+                                    {{ form_widget(form.moisCamping,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="field-1" class="control-label">تاريخ المخيم (السنة)</label>
+                                    {{ form_widget(form.yearCamping,{'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-lg-4 col-lg-offset-4">
+                                <input type="submit" value="حفظ" class="form-control btn btn-sm btn-success">
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script lang="js">
+        function getChef() {
+            var chefNumber = $('#chefNumber').val();
+            if (isNaN(chefNumber) || chefNumber.length !== 10) {
+                alert('المعرف الكشفي غير صحيح');
+                $('#chefNumber').val('');
+            } else {
+                $.ajax({
+                    type: "GET",
+                    url: "{{path('chef_verif')}}" + "?numInscrit=" + chefNumber,
+                    data: null,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.result == 'success') {
+                            var chef = data.chef;
+                            $('#formDiv').removeAttr('hidden');
+                            $('#chefName').append('القائد(ة) ' + chef.nom)
+                            $('#inscritChef').val(chef.numInscrit)
+                            $('#searchChef').attr("hidden", true);
+                            $('#chefNumber').attr('disabled', 'disabled')
+
+                        } else {
+                            $("#chefMessage").html("<h4 class='text-danger'>غير مسجل في قاعدة البيانات</h4>");
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown, data) {
+                        alert("xxxxxxxxxx");
+
+                    }
+                });
+            }
+        }
+    </script>
+{% endblock %}

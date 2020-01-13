@@ -1,0 +1,117 @@
+{% extends 'HomeBundle:Default:verticalLayout.html.twig' %}
+
+{% block body %}
+
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert-success alert-dismissible ">
+            <h4 class="text-center">{{ message }}</h4>
+        </div>
+        <br />
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+            <div class="card-box" >
+                <h1>مطلب توسيم</h1>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-12 col-xs-12">
+            <div class="card-box" >
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">المعرف الكشفي</label>
+                            <input type="text" class="form-control" disabled value="{{ chef.inscrit }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">الاسم و اللقب</label>
+                            <input type="text" class="form-control" disabled value="{{ chef.nom }} {{ chef.prenom}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">تاريخ دراسة الشارة الخشبية (الشهر)</label>
+                            {{ form_widget(form.moisChara,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">تاريخ دراسة الشارة الخشبية (السنة)</label>
+                            {{ form_widget(form.yearChara,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">مكان الشارة</label>
+                            {{ form_widget(form.lieuxChara,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">قائد دراسة الشارة</label>
+                            {{ form_widget(form.chefChara,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">الجهة</label>
+                            {{ form_widget(form.idJiha,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">هل قدت وحدة كشفية ل9 أشهر على الأقل بعد الشارة؟</label>
+                            {{ form_widget(form.chefUnite,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">ما إسم الوحدة؟</label>
+                            {{ form_widget(form.uniteName,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label"> هل قدت مخيم وحدة ب3 أيام على الأقل بعد الشارة؟</label>
+                            {{ form_widget(form.camping,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">تاريخ المخيم (الشهر)</label>
+                            {{ form_widget(form.moisCamping,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">تاريخ المخيم (السنة)</label>
+                            {{ form_widget(form.yearCamping,{'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <input type="submit" value="حفظ" class="form-control btn btn-sm btn-success">
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -92,18 +92,19 @@
                                         <li><a href="{{path('chef_new')}}"><i class="fa fa-plus"></i> اضافة قائد </a></li>
                                     </ul>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> الإحتياجات التدريبية </span>
-                                        <span class="menu-arrow"></span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="#"><i class="fa fa-bars"></i> الابتدائية </a></li>
-                                        <li><a href="#"><i class="fa fa-bars"></i> التمهيدية </a></li>
-                                        <li><a href="#"><i class="fa fa-bars"></i> الشارة الخشبية </a></li>
-                                        <li><a href="#"><i class="fa fa-bars"></i> م ق تدريب </a></li>
-                                        <li><a href="#"><i class="fa fa-bars"></i> ق تدريب </a></li>
-                                    </ul>
-                                </li>
+{#                                <li class="has_sub">#}
+{#                                    <a href="javascript:void(0);" class="waves-effect waves-primary"><i class="fa fa-users"></i> <span> الإحتياجات التدريبية </span>#}
+{#                                        <span class="menu-arrow"></span></a>#}
+{#                                    <ul class="list-unstyled">#}
+{#                                        <li><a href="#"><i class="fa fa-bars"></i> الابتدائية </a></li>#}
+{#                                        <li><a href="#"><i class="fa fa-bars"></i> التمهيدية </a></li>#}
+{#                                        <li><a href="#"><i class="fa fa-bars"></i> الشارة الخشبية </a></li>#}
+{#                                        <li><a href="#"><i class="fa fa-bars"></i> م ق تدريب </a></li>#}
+{#                                        <li><a href="#"><i class="fa fa-bars"></i> ق تدريب </a></li>#}
+{#                                    </ul>#}
+{#                                </li>#}
 
+                                <li class="has_sub"><a href="{{path('tawsim_homepage')}}"><i class="fa fa-users"></i> التوسبم بحبات الشارة</a></li>
                                 {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
                                     <li class="has_sub"><a href="{{path('chef_erched_index')}}" ><i class="fa fa-users"></i> <span> تقارير الارشاد الفني </span></a></li>
                                     <li class="has_sub"><a href="{{path('home_DawraَAvencer')}}" ><i class="fa fa-users"></i> <span> متابعة الدورات التدريبية المتقدمة </span></a></li>

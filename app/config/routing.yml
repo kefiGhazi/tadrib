@@ -1,3 +1,7 @@
+tawsim:
+    resource: "@TawsimBundle/Resources/config/routing.yml"
+    prefix:   /admin/tawsim
+
 diraset:
     resource: "@DirasetBundle/Resources/config/routing.yml"
     prefix:   /Diraset

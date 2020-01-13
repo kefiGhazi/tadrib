@@ -1,0 +1,192 @@
+{% extends 'HomeBundle:Default:layout.html.twig' %}
+{% block body %}
+    {% for message in app.session.flashBag.get('success') %}
+        <div class="alert-success alert-dismissible ">
+            <h4 class="text-center">{{ message }}</h4>
+        </div>
+        <br />
+    {% endfor %}
+<div class="container-fluid">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-xs-12">
+                    <div class="card-box">
+
+                        <h1>قائمة مطالب التوسيم</h1>
+                        <a class="btn btn-success" href="{{ path('tawsim_addDemannde') }}">إضافة مطلب</a>
+
+                    </div>
+
+
+                    <div class="card-box">
+                        <div class="row">
+                        <div class="col-lg-12 row">
+                            <form method="POST" action="{{path('tawsim_homepage')}}">
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <div class="form-group col-sm-10 col-lg-10 col-xs-10">
+                                        <label>الجهة </label>
+                                        <select name="jiha" class="form-control">
+                                            <option value="" selected="">جميع الجهات</option>
+                                            {%for jiha in jihas %}
+                                                <option value="{{jiha.id}}" {%if J == jiha.id %} selected="" {%endif%}>{{jiha.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-lg-3 col-xs-12">
+                                    <input type="submit" value="بحث" class="btn btn-lg btn-success">
+                                </div>
+                            </form>
+                        </div>
+                            <div class="col-lg-12">
+                                <table id="datatable" class="table table-striped table-bordered" role="grid" aria-describedby="datatable_info">
+                                    <thead>
+                                        <tr>
+                                            <th>تاريخ المطلب</th>
+                                            <th>الجهة</th>
+                                            <th>الاسم و اللقب</th>
+                                            <th>المعرف الكشفي</th>
+                                            <th>تاريخ دراسة الشارة الخشبية</th>
+                                            <th>مكانها</th>
+                                            <th>قائدها</th>
+                                            <th>إسم الوحدة الكشفيةالتي قادها</th>
+                                            <th>تاريخ مخيم الوحدة </th>
+                                            <th>رأي اللجنة الجهوية</th>
+                                            <th>رأي اللجنة الوطنية</th>
+                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                            <th>---</th>
+                                            {% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for demande in demandeList %}
+                                            <tr>
+                                                <td>{{ demande.dateDemande|date('Y-m-d') }}</td>
+                                                <td>{{ demande.idJiha.name }}</td>
+                                                <td>{{ demande.idChef.nom }} {{  demande.idChef.prenom }}</td>
+                                                <td>{{ demande.idChef.inscrit }}</td>
+                                                <td>{{ demande.moisChara }} {{ demande.yearChara }}</td>
+                                                <td>{{ demande.lieuxChara }}</td>
+                                                <td>{{ demande.chefChara }}</td>
+                                                <td>{{ demande.uniteName }}</td>
+                                                <td>{{ demande.moisCamping }} {{ demande.yearCamping }}</td>
+                                                <td>
+                                                    {%if demande.responseJiha == 1%}
+                                                        <span class="label label-success">مقبول</span>
+                                                    {%elseif demande.responseJiha == 2%}
+                                                        <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{demande.messageJiha}}">مرفوض</span>
+                                                    {%else%}
+                                                        <span class="label label-default">في طور الإنجاز</span>
+                                                    {%endif%}
+                                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or  app.security.getToken().getUser().hasRole("ROLE_ADMIN_JIHAWI") %}
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="{{path('tawsim_acceptJiha',{'id':demande.id,'etat':'oui','jiha':J})}}">نعم</a></li>
+                                                            <li><a data-toggle="modal" data-target="#con-close-modal-non-{{demande.id}}">لا</a></li>
+                                                        </ul>
+                                                        <div id="con-close-modal-non-{{demande.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <form action="{{path('tawsim_acceptJiha',{'id':demande.id,'etat':'non','jiha':J})}}" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                            <h4 class="modal-title">رفض مطلب القائد {{ demande.idChef.nom }} {{ demande.idChef.prenom }}</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="field-1" class="control-label">السبب</label>
+                                                                                        <textarea name="raison" class="form-control" required="" ></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                                                                            <button type="submit" class="btn btn-default waves-effect" >تسجيل</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {%if demande.responseWatani == 1%}
+                                                        <span class="label label-success">مقبول</span>
+                                                    {%elseif demande.responseWatani == 2%}
+                                                        <span class="label label-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{demande.responseWatani}}">مرفوض</span>
+                                                    {%else%}
+                                                        <span class="label label-default">في طور الإنجاز</span>
+                                                    {%endif%}
+
+                                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">نعم/لا <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="{{path('tawsim_acceptWatani',{'id':demande.id,'etat':'oui','jiha':J})}}">نعم</a></li>
+                                                            <li><a data-toggle="modal" data-target="#con-close-modal-non-{{demande.id}}">لا</a></li>
+                                                        </ul>
+                                                        <div id="con-close-modal-non-{{demande.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <form action="{{path('tawsim_acceptWatani',{'id':demande.id,'etat':'non','jiha':J})}}" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                            <h4 class="modal-title">رفض مطلب القائد {{ demande.idChef.nom }} {{ demande.idChef.prenom }}</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label for="field-1" class="control-label">السبب</label>
+                                                                                        <textarea name="raison" class="form-control" required="" ></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                                                                            <button type="submit" class="btn btn-default waves-effect" >تسجيل</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </td>
+                                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                <td>
+                                                    {% if demande.etat == 0 %}
+                                                        <a href="{{ path('tawsim_close', {'id' : demande.id, 'jiha': J }) }}" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                                                    {% elseif demande.etat == 1 %}
+                                                        <a class="btn btn-xs btn-danger"><i class="fa fa-lock"></i></a>
+                                                    {% endif %}
+                                                </td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
