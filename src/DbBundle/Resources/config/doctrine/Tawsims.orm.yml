@@ -21,6 +21,10 @@ DbBundle\Entity\Tawsims:
       type: date
       nullable: false
       column: date_demande
+    dateTawsim:
+      type: date
+      nullable: true
+      column: date_tawsim
     moisChara:
       type: string
       nullable: false

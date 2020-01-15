@@ -21,3 +21,13 @@ tawsim_close:
     path:     /close/{id}
     defaults: { _controller: TawsimBundle:Default:close }
     methods:  [GET, POST]
+
+tawsim_delete:
+    path:     /delete/{id}
+    defaults: { _controller: TawsimBundle:Default:delete }
+    methods:  GET
+
+tawsim_set_date_tawsim:
+    path:     /dateTawsim/{id}
+    defaults: { _controller: TawsimBundle:Default:dateTawsim }
+    methods:  [GET, POST]

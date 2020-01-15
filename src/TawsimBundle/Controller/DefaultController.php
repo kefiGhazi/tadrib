@@ -101,4 +101,22 @@ class DefaultController extends Controller
         $em->flush();
         return $this->redirectToRoute('tawsim_homepage', array('jiha' => $request->get('jiha')));
     }
+
+    public function deleteAction(Request $request, Tawsims $tawsims)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tawsims->setActif(0);
+        $em->merge($tawsims);
+        $em->flush();
+        return $this->redirectToRoute('tawsim_homepage', array('jiha' => $request->get('jiha')));
+    }
+
+    public function dateTawsimAction(Request $request, Tawsims $tawsims)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $tawsims->setDateTawsim(new \DateTime($request->get('tawsimDate')));
+        $em->merge($tawsims);
+        $em->flush();
+        return $this->redirectToRoute('tawsim_homepage', array('jiha' => $request->get('jiha')));
+    }
 }

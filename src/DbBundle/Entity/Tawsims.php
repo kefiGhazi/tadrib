@@ -2,6 +2,7 @@
 
 namespace DbBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,11 +23,18 @@ class Tawsims
     private $id;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="dateDemande", type="datetime")
      */
     private $dateDemande;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="dateTawsim", type="datetime", nullable=true)
+     */
+    private $dateTawsim;
 
     /**
      * @var \DbBundle\Entity\Jiha
@@ -161,7 +169,7 @@ class Tawsims
     /**
      * Set dateDemande
      *
-     * @param \DateTime $dateDemande
+     * @param DateTime $dateDemande
      * @return Tawsims
      */
     public function setDateDemande($dateDemande)
@@ -174,11 +182,34 @@ class Tawsims
     /**
      * Get dateDemande
      *
-     * @return \DateTime 
+     * @return DateTime
      */
     public function getDateDemande()
     {
         return $this->dateDemande;
+    }
+
+    /**
+     * Set dateTawsim
+     *
+     * @param DateTime $dateTawsim
+     * @return Tawsims
+     */
+    public function setDateTawsim($dateTawsim)
+    {
+        $this->dateTawsim = $dateTawsim;
+
+        return $this;
+    }
+
+    /**
+     * Get dateTawsim
+     *
+     * @return DateTime
+     */
+    public function getDateTawsim()
+    {
+        return $this->dateTawsim;
     }
 
     /**

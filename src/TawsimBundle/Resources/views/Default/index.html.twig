@@ -55,9 +55,8 @@
                                             <th>تاريخ مخيم الوحدة </th>
                                             <th>رأي اللجنة الجهوية</th>
                                             <th>رأي اللجنة الوطنية</th>
-                                            {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                            <th>تاريخ التوسيم</th>
                                             <th>---</th>
-                                            {% endif %}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -168,15 +167,59 @@
                                                     </div>
                                                     {% endif %}
                                                 </td>
-                                                {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
                                                 <td>
-                                                    {% if demande.etat == 0 %}
-                                                        <a href="{{ path('tawsim_close', {'id' : demande.id, 'jiha': J }) }}" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
-                                                    {% elseif demande.etat == 1 %}
-                                                        <a class="btn btn-xs btn-danger"><i class="fa fa-lock"></i></a>
-                                                    {% endif %}
+                                                    {% if null != demande.dateTawsim %}
+                                                        {{ demande.dateTawsim|date('Y-m-d')}}
+                                                    {% else %}
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">تم التوسيم؟ <span class="caret"></span></button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li><a href="#">لا</a></li>
+                                                            <li><a data-toggle="modal" data-target="#con-close-modal-tawsim-{{demande.id}}">نعم</a></li>
+                                                        </ul>
+                                                        <div id="con-close-modal-tawsim-{{demande.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <form action="{{path('tawsim_set_date_tawsim',{'id':demande.id, 'jiha':J})}}" method="POST">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                            <h4 class="modal-title">تاريخ التوسيم </h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <input type="date" name="tawsimDate" class="form-control" required="" >
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">غلق</button>
+                                                                            <button type="submit" class="btn btn-default waves-effect" >تسجيل</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                        {% endif %}
                                                 </td>
-                                                {% endif %}
+                                                <td>
+                                                    {% if app.security.getToken().getUser().hasRole("ROLE_SUPER_ADMIN") or app.security.getToken().getUser().hasRole("ROLE_ADMIN_WATANI") %}
+                                                        {% if demande.etat == 0 %}
+                                                            <a href="{{ path('tawsim_close', {'id' : demande.id, 'jiha': J }) }}" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                                                        {% elseif demande.etat == 1 %}
+                                                            <a class="btn btn-xs btn-danger"><i class="fa fa-lock"></i></a>
+                                                        {% endif %}
+                                                            <a href="{{ path('tawsim_delete', {'id' : demande.id, 'jiha': J }) }}" class="btn btn-xs btn-danger"><i class="fa fa-close"></i></a>
+                                                    {% endif %}
+
+
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
